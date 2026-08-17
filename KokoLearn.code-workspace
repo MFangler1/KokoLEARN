@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "KokoLearn (root)",
+      "path": "/Users/mark/Documents/001_AiConsultancy FILES/04_Projects/kokolearn"
+    },
+    {
+      "name": "Website (Next.js)",
+      "path": "/Users/mark/Documents/001_AiConsultancy FILES/04_Projects/kokolearn/02_Website"
+    }
+  ],
+  "settings": {
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.autoSave": "onFocusChange",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "tailwindCSS.experimental.classRegex": [],
+    "files.exclude": {
+      "02_Website/.next": true,
+      "02_Website/node_modules": true,
+      "**/.DS_Store": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "christian-kohler.npm-intellisense"
+    ]
+  }
+}

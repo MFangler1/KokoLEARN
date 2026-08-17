@@ -1,0 +1,12 @@
+diff --git a/node_modules/kysely/dist/index.js b/node_modules/kysely/dist/index.js
+index 702f0e2..e007a0a 100644
+--- a/node_modules/kysely/dist/index.js
++++ b/node_modules/kysely/dist/index.js
+@@ -198,3 +198,7 @@ export * from './util/compilable.js';
+ export * from './util/log.js';
+ export { logOnce } from './util/log-once.js';
+ export { createQueryId } from './util/query-id.js';
++
++// Patch: re-export migration constants needed by @better-auth/kysely-adapter
++export { DEFAULT_MIGRATION_LOCK_TABLE, DEFAULT_MIGRATION_TABLE } from "./migration/migrator.js";
++
