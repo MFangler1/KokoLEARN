@@ -21,8 +21,9 @@ export function ReferralTracker({ userId }: { userId?: string }) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code: storedRef, newUserId: userId }),
+        }).then((response) => {
+          if (response.ok) localStorage.removeItem("kokolearn_referral");
         }).catch(() => {});
-        localStorage.removeItem("kokolearn_referral");
       }
     }
   }, [userId]);

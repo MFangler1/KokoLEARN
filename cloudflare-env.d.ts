@@ -3,7 +3,7 @@ interface CloudflareEnv {
   DB: D1Database;
   KV: KVNamespace;
   ASSETS: Fetcher;
-  IMAGES: any;
+  IMAGES: ImagesBinding;
   WORKER_SELF_REFERENCE: Fetcher;
 
   // Better Auth env vars
@@ -18,11 +18,22 @@ interface CloudflareEnv {
   SUPABASE_SERVICE_ROLE_KEY: string;
 
   // Stripe
+  STRIPE_MODE: "test" | "live";
   STRIPE_SECRET_KEY: string;
+  STRIPE_PRICE_PREMIUM_MONTHLY: string;
+  STRIPE_PRICE_PREMIUM_ANNUAL: string;
+  STRIPE_PRICE_FAMILY_MONTHLY: string;
+  STRIPE_PRICE_FAMILY_ANNUAL: string;
+  STRIPE_PRICE_EXTENDED_QUESTIONS_MONTHLY: string;
 
   // Email
   SEND_EMAIL: SendEmail;
   STRIPE_WEBHOOK_SECRET: string;
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
   NEXT_PUBLIC_SITE_URL: string;
+
+  // AI and text-to-speech providers
+  DEEPSEEK_API_KEY: string;
+  ELEVENLABS_API_KEY: string;
+  GATHOS_TTS_KEY: string;
 }

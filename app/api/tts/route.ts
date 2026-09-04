@@ -2,6 +2,8 @@
 // High-quality TTS using ElevenLabs (primary) with Gathos fallback
 
 import { NextResponse } from "next/server";
+import { initAuth } from "@/lib/auth/server";
+import { hasTrustedOrigin } from "@/lib/security/origin";
 
 // Professor Koko voice - "Drew" (British male, warm and authoritative)
 // Optimised settings for a wise, older, professor-like delivery
@@ -11,6 +13,10 @@ const GATHOS_BASE = "https://gathos.com/api/v1";
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+    const auth = await initAuth();
+    const session = await auth.api.getSession({ headers: new Headers(req.headers) });
+    if (!session?.user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     const body = await req.json();
     const { text } = body;
 
@@ -53,7 +59,7 @@ export async function POST(req: Request) {
             headers: {
               "Content-Type": "audio/mpeg",
               "Content-Length": audioBuffer.byteLength.toString(),
-              "Cache-Control": "public, max-age=86400",
+              "Cache-Control": "private, no-store",
             },
           });
         }
@@ -99,7 +105,7 @@ export async function POST(req: Request) {
                   const audioBuffer = Buffer.from(audioB64, "base64");
                   return new NextResponse(audioBuffer, {
                     status: 200,
-                    headers: { "Content-Type": "audio/wav", "Cache-Control": "public, max-age=86400" },
+                    headers: { "Content-Type": "audio/wav", "Cache-Control": "private, no-store" },
                   });
                 }
               }

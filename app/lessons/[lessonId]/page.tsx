@@ -43,6 +43,13 @@ interface AnswerState {
   isCorrect: boolean;
 }
 
+interface EarnedAchievement {
+  type: string;
+  label: string;
+  description: string;
+  icon: string;
+}
+
 type Phase = "generating" | "learning" | "questions" | "results";
 
 export default function LessonPage({ params }: { params: { lessonId: string } }) {
@@ -51,6 +58,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
   const { data: session, isPending: sessionLoading } = useSession();
 
   const childName = searchParams.get("child") || "Alex";
+  const childId = searchParams.get("childId") || "";
   const childAge = parseInt(searchParams.get("age") || "7");
   const subject = (searchParams.get("subject") || "Maths") as Subject;
   const interestsStr = searchParams.get("interests") || "Dinosaurs,Space";
@@ -69,7 +77,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
   const [score, setScore] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [stars, setStars] = useState(0);
-  const [newAchievements, setNewAchievements] = useState<any[]>([]);
+  const [newAchievements, setNewAchievements] = useState<EarnedAchievement[]>([]);
   const [showReward, setShowReward] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [generated, setGenerated] = useState(false);
@@ -109,6 +117,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          childId,
           childName,
           childAge,
           interests: interestsStr.split(",").filter(Boolean),
@@ -136,7 +145,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
       setError(err instanceof Error ? err.message : "Something went wrong");
       setPhase("learning"); // Show error state
     }
-  }, [childName, childAge, interestsStr, subject, sessionUserId, sessionLoading, questionCount]);
+  }, [childId, childName, childAge, interestsStr, subject, sessionUserId, sessionLoading, questionCount]);
 
   const retryGeneration = () => {
     hasGenerated.current = false;
@@ -496,7 +505,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
   // ── Results Phase ──
   if (phase === "results") {
     const passed = score >= 60;
-    const nextLink = `/lessons/new?child=${childName}&age=${childAge}&subject=${subject}&interests=${interestsStr}`;
+    const nextLink = `/lessons/new?childId=${childId}&child=${childName}&age=${childAge}&subject=${subject}&interests=${interestsStr}`;
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50">
@@ -615,7 +624,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
               ].filter(s => s.subject !== subject).map(s => (
                 <Link
                   key={s.subject}
-                  href={`/lessons/new?child=${childName}&age=${childAge}&subject=${s.subject}&interests=${interestsStr}`}
+                  href={`/lessons/new?childId=${childId}&child=${childName}&age=${childAge}&subject=${s.subject}&interests=${interestsStr}`}
                   className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:border-primary/30 hover:text-primary hover:bg-primary-50 transition-all shadow-sm"
                 >
                   <span>{s.emoji}</span>

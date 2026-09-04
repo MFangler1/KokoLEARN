@@ -1,6 +1,28 @@
 import { NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { initAuth } from "@/lib/auth/server";
+import { hasTrustedOrigin } from "@/lib/security/origin";
+
+type Testimonial = {
+  id: string;
+  name: string;
+  childName: string;
+  quote: string;
+  rating: number;
+  status: "pending" | "approved";
+  createdAt: string;
+  approvedAt?: string;
+};
+
+function parseTestimonials(raw: string | null): Testimonial[] {
+  if (!raw) return [];
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed as Testimonial[] : [];
+  } catch {
+    return [];
+  }
+}
 
 async function requireAdmin(req: Request, env: CloudflareEnv) {
   const auth = await initAuth();
@@ -17,10 +39,14 @@ async function requireAdmin(req: Request, env: CloudflareEnv) {
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
     const body = await req.json();
-    const { name, childName, quote, rating } = body;
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const childName = typeof body.childName === "string" ? body.childName.trim() : "";
+    const quote = typeof body.quote === "string" ? body.quote.trim() : "";
+    const rating = Number(body.rating);
 
-    if (!name || !quote || !rating) {
+    if (!name || name.length > 80 || childName.length > 50 || !quote || quote.length > 1000 || !Number.isInteger(rating) || rating < 1 || rating > 5) {
       return NextResponse.json(
         { error: "Name, quote, and rating are required" },
         { status: 400 }
@@ -32,22 +58,17 @@ export async function POST(req: Request) {
       name,
       childName: childName || "",
       quote,
-      rating: Math.min(5, Math.max(1, Number(rating))),
-      status: "pending",
+      rating,
+      status: "pending" as const,
       createdAt: new Date().toISOString(),
     };
 
     // Store in KV
-    let { env } = await getCloudflareContext({ async: true });
+    const { env } = await getCloudflareContext({ async: true });
 
     // Get existing testimonials
-    let existing = [];
-    try {
-      const raw = await env.KV.get("testimonials:pending", "text");
-      if (raw) existing = JSON.parse(raw);
-    } catch {
-      existing = [];
-    }
+    const raw = await env.KV.get("testimonials:pending", "text");
+    const existing = parseTestimonials(raw);
 
     existing.push(testimonial);
     await env.KV.put("testimonials:pending", JSON.stringify(existing));
@@ -75,7 +96,7 @@ export async function GET(req: Request) {
     if (admin.error) return admin.error;
 
     const raw = await env.KV.get("testimonials:pending", "text");
-    const pending = raw ? JSON.parse(raw) : [];
+    const pending = parseTestimonials(raw);
 
     return NextResponse.json({ testimonials: pending });
   } catch (err) {
@@ -89,6 +110,7 @@ export async function GET(req: Request) {
 
 export async function PATCH(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
     const body = await req.json();
     const { id, action } = body;
 
@@ -105,9 +127,9 @@ export async function PATCH(req: Request) {
 
     // Get pending
     const raw = await env.KV.get("testimonials:pending", "text");
-    let pending = raw ? JSON.parse(raw) : [];
+    let pending = parseTestimonials(raw);
 
-    const testimonial = pending.find((t: any) => t.id === id);
+    const testimonial = pending.find((item) => item.id === id);
     if (!testimonial) {
       return NextResponse.json(
         { error: "Testimonial not found" },
@@ -116,7 +138,7 @@ export async function PATCH(req: Request) {
     }
 
     // Remove from pending
-    pending = pending.filter((t: any) => t.id !== id);
+    pending = pending.filter((item) => item.id !== id);
     await env.KV.put("testimonials:pending", JSON.stringify(pending));
 
     if (action === "approve") {
@@ -125,7 +147,7 @@ export async function PATCH(req: Request) {
 
       // Add to approved list
       const approvedRaw = await env.KV.get("testimonials:approved", "text");
-      let approved = approvedRaw ? JSON.parse(approvedRaw) : [];
+      const approved = parseTestimonials(approvedRaw);
       approved.unshift(testimonial);
       await env.KV.put("testimonials:approved", JSON.stringify(approved));
     }

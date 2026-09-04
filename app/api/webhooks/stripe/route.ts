@@ -1,199 +1,113 @@
-// ── Stripe Webhook Handler ──
-// Processes checkout completed, subscription updates/cancellations
-
 import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe/server";
+import type Stripe from "stripe";
+import { getStripe, isExpectedLivemode, isPlan } from "@/lib/stripe/server";
 import { getDb } from "@/lib/db";
 import { subscriptions } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
+const ACCESS_STATUSES = new Set<Stripe.Subscription.Status>(["active", "trialing"]);
+
+function periodEnd(subscription: Stripe.Subscription): Date | null {
+  const timestamp = subscription.items.data[0]?.current_period_end;
+  return timestamp ? new Date(timestamp * 1000) : null;
+}
+
+async function syncPlanSubscription(
+  db: NonNullable<Awaited<ReturnType<typeof getDb>>>,
+  subscription: Stripe.Subscription,
+  fallbackUserId?: string,
+  fallbackPlan?: string
+) {
+  const userId = subscription.metadata.user_id || fallbackUserId;
+  const plan = subscription.metadata.plan || fallbackPlan;
+  if (!userId || !isPlan(plan)) throw new Error("Subscription is missing valid user or plan metadata");
+
+  const existing = await db.select().from(subscriptions).where(eq(subscriptions.userId, userId)).get();
+  const values = {
+    plan,
+    status: subscription.status,
+    stripeSubscriptionId: subscription.id,
+    stripePriceId: subscription.items.data[0]?.price.id ?? null,
+    stripeCustomerId: typeof subscription.customer === "string" ? subscription.customer : subscription.customer.id,
+    currentPeriodEnd: periodEnd(subscription),
+    cancelAtPeriodEnd: subscription.cancel_at_period_end,
+    updatedAt: new Date(),
+  };
+  if (existing) {
+    await db.update(subscriptions).set(values).where(eq(subscriptions.userId, userId));
+  } else {
+    await db.insert(subscriptions).values({ id: crypto.randomUUID(), userId, createdAt: new Date(), ...values });
+  }
+}
+
+async function syncAddonSubscription(
+  db: NonNullable<Awaited<ReturnType<typeof getDb>>>,
+  subscription: Stripe.Subscription,
+  fallbackUserId?: string
+) {
+  const userId = subscription.metadata.user_id || fallbackUserId;
+  if (!userId) throw new Error("Add-on subscription is missing user metadata");
+  const existing = await db.select().from(subscriptions).where(eq(subscriptions.userId, userId)).get();
+  if (!existing) throw new Error("Add-on subscription has no parent plan record");
+  const enabled = ACCESS_STATUSES.has(subscription.status);
+  await db.update(subscriptions).set({
+    extendedQuestions: enabled ? 1 : 0,
+    stripeAddonSubscriptionId: subscription.id,
+    addonStatus: subscription.status,
+    updatedAt: new Date(),
+  }).where(eq(subscriptions.userId, userId));
+}
+
 export async function POST(req: Request) {
   try {
-    const body = await req.text();
     const signature = req.headers.get("stripe-signature");
-
-    if (!signature) {
-      return NextResponse.json(
-        { error: "No signature header" },
-        { status: 400 }
-      );
-    }
-
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-    if (!webhookSecret) {
-      return NextResponse.json(
-        { error: "Webhook secret not configured" },
-        { status: 500 }
-      );
-    }
+    if (!signature) return NextResponse.json({ error: "No signature header" }, { status: 400 });
+    if (!webhookSecret) return NextResponse.json({ error: "Webhook secret not configured" }, { status: 503 });
 
-    let event;
+    const stripe = getStripe();
+    let event: Stripe.Event;
     try {
-      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Signature verification failed";
-      console.error("Webhook signature verification failed:", message);
-      return NextResponse.json({ error: message }, { status: 400 });
+      event = stripe.webhooks.constructEvent(await req.text(), signature, webhookSecret);
+    } catch (error) {
+      console.error("Stripe webhook signature verification failed", error);
+      return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+    }
+    if (!isExpectedLivemode(event.livemode)) {
+      return NextResponse.json({ error: "Webhook mode does not match STRIPE_MODE" }, { status: 400 });
     }
 
     const db = await getDb();
+    if (!db) throw new Error("Billing database is unavailable");
 
-    switch (event.type) {
-      case "checkout.session.completed": {
-        const session = event.data.object;
-        const userId = session.metadata?.user_id;
-        const addon = session.metadata?.addon;
-
-        if (!userId) break;
-
-        // Handle Extended Questions add-on
-        if (addon === "extended_questions") {
-          if (db) {
-            try {
-              const existing = await db
-                .select()
-                .from(subscriptions)
-                .where(eq(subscriptions.userId, userId))
-                .get();
-
-              if (existing) {
-                await db
-                  .update(subscriptions)
-                  .set({ extendedQuestions: 1, updatedAt: new Date() })
-                  .where(eq(subscriptions.userId, userId));
-              } else {
-                await db.insert(subscriptions).values({
-                  id: crypto.randomUUID(),
-                  userId,
-                  plan: "free_trial",
-                  status: "active",
-                  extendedQuestions: 1,
-                  stripeCustomerId: typeof session.customer === "string" ? session.customer : null,
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
-                });
-              }
-              console.log(`✅ Extended Questions add-on activated for user ${userId}`);
-            } catch (err) {
-              console.error("Failed to set extended_questions:", err);
-            }
-          }
-          break;
-        }
-
-        // Handle regular plan subscription
-        const plan = session.metadata?.plan || "premium";
-        if (db) {
-          try {
-            const existing = await db
-              .select()
-              .from(subscriptions)
-              .where(eq(subscriptions.userId, userId))
-              .get();
-
-            const now = new Date();
-            if (existing) {
-              await db
-                .update(subscriptions)
-                .set({
-                  plan,
-                  status: "active",
-                  stripeSubscriptionId:
-                    typeof session.subscription === "string"
-                      ? session.subscription
-                      : existing.stripeSubscriptionId,
-                  stripeCustomerId:
-                    typeof session.customer === "string"
-                      ? session.customer
-                      : existing.stripeCustomerId,
-                  updatedAt: now,
-                })
-                .where(eq(subscriptions.userId, userId));
-            } else {
-              await db.insert(subscriptions).values({
-                id: crypto.randomUUID(),
-                userId,
-                plan,
-                status: "active",
-                stripeSubscriptionId:
-                  typeof session.subscription === "string"
-                    ? session.subscription
-                    : null,
-                stripeCustomerId:
-                  typeof session.customer === "string"
-                    ? session.customer
-                    : null,
-                createdAt: now,
-                updatedAt: now,
-              });
-            }
-          } catch (err) {
-            console.error("Failed to upsert subscription in D1:", err);
-          }
-        }
-
-        console.log(`✅ Subscription activated for user ${userId}: ${plan}`);
-        break;
+    if (event.type === "checkout.session.completed") {
+      const checkout = event.data.object;
+      if (typeof checkout.subscription !== "string") throw new Error("Checkout has no subscription ID");
+      const subscription = await stripe.subscriptions.retrieve(checkout.subscription);
+      if (checkout.metadata?.addon === "extended_questions") {
+        await syncAddonSubscription(db, subscription, checkout.metadata.user_id);
+      } else {
+        await syncPlanSubscription(db, subscription, checkout.metadata?.user_id, checkout.metadata?.plan);
       }
+    }
 
-      case "customer.subscription.updated":
-      case "customer.subscription.deleted": {
-        const subscription = event.data.object;
-        const stripeSubId = subscription.id;
-        const status = subscription.status;
-
-        // Check if this is the add-on subscription being cancelled
-        const productId = subscription.items?.data?.[0]?.price?.product;
-        if (typeof productId === "string" && db) {
-          const addonPriceId = process.env.EXTENDED_QUESTIONS_PRICE_ID;
-          if (addonPriceId) {
-            try {
-              const price = await stripe.prices.retrieve(addonPriceId);
-              if (price.product === productId && status !== "active") {
-                const sub = await db
-                  .select()
-                  .from(subscriptions)
-                  .where(eq(subscriptions.stripeSubscriptionId, stripeSubId))
-                  .get();
-                if (sub) {
-                  await db
-                    .update(subscriptions)
-                    .set({ extendedQuestions: 0, updatedAt: new Date() })
-                    .where(eq(subscriptions.stripeSubscriptionId, stripeSubId));
-                  console.log(`📦 Extended Questions add-on removed for user ${sub.userId}`);
-                  break;
-                }
-              }
-            } catch {}
-          }
-        }
-
-        if (db) {
-          try {
-            await db
-              .update(subscriptions)
-              .set({
-                status: status === "active" ? "active" : "canceled",
-                updatedAt: new Date(),
-              })
-              .where(eq(subscriptions.stripeSubscriptionId, stripeSubId));
-          } catch (err) {
-            console.error("Failed to update subscription in D1:", err);
-          }
-        }
-
-        console.log(`📦 Subscription ${stripeSubId} updated: ${status}`);
-        break;
+    if (event.type === "customer.subscription.updated" || event.type === "customer.subscription.deleted") {
+      const subscription = event.data.object;
+      const existingAddon = await db.select().from(subscriptions)
+        .where(eq(subscriptions.stripeAddonSubscriptionId, subscription.id)).get();
+      if (subscription.metadata.addon === "extended_questions" || existingAddon) {
+        await syncAddonSubscription(db, subscription, existingAddon?.userId);
+      } else {
+        const existingPlan = await db.select().from(subscriptions)
+          .where(eq(subscriptions.stripeSubscriptionId, subscription.id)).get();
+        await syncPlanSubscription(db, subscription, existingPlan?.userId, existingPlan?.plan);
       }
     }
 
     return NextResponse.json({ received: true });
-  } catch (err) {
-    console.error("Stripe webhook error:", err);
-    return NextResponse.json(
-      { error: "Webhook handler failed" },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error("Stripe webhook processing failed", error);
+    // A non-2xx response makes Stripe retry instead of silently losing billing state.
+    return NextResponse.json({ error: "Webhook processing failed" }, { status: 500 });
   }
 }

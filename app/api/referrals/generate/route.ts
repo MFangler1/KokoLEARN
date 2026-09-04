@@ -3,10 +3,12 @@ import { NextResponse } from "next/server";
 import { initAuth } from "@/lib/auth/server";
 import { getDb } from "@/lib/db";
 import { referrals } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
+import { hasTrustedOrigin } from "@/lib/security/origin";
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
     const auth = await initAuth();
     const session = await auth.api.getSession({ headers: new Headers(req.headers) });
     if (!session?.user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
@@ -17,7 +19,7 @@ export async function POST(req: Request) {
     const existing = await db
       .select()
       .from(referrals)
-      .where(eq(referrals.referrerUserId, session.user.id))
+      .where(and(eq(referrals.referrerUserId, session.user.id), isNull(referrals.referredUserId)))
       .get();
 
     if (existing) {

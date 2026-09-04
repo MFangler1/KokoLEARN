@@ -6,7 +6,7 @@ import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
   title: "UK National Curriculum — KokoLearn.org",
-  description: "KokoLearn.org is fully aligned to the UK National Curriculum (KS1-KS2). Personalised learning across all core subjects for ages 5-11.",
+  description: "KokoLearn.org provides UK National Curriculum-aligned learning for KS1-KS3 and ages 5-14.",
 };
 
 export default function CurriculumPage() {
@@ -38,8 +38,8 @@ export default function CurriculumPage() {
             </span>
             <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Education you can trust, mapped to what matters</h1>
             <p className="mt-4 text-base leading-relaxed text-gray-600">
-              Every lesson, quiz, and activity on KokoLearn is aligned to the UK National Curriculum (KS1-KS2). 
-              Your child learns exactly what they need to know — no gaps, no guesswork.
+              Lessons and quizzes are mapped to selected UK National Curriculum objectives across KS1-KS3.
+              Your child receives age-appropriate practice linked to their learning stage.
             </p>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function CurriculumPage() {
         {/* Key selling points */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-12">
           {[
-            { title: "Full KS1-KS2 coverage", desc: "Years 1-6 covered across Maths, English, Science, History, and Geography.", icon: "📚" },
+            { title: "KS1-KS3 learning", desc: "Selected objectives for ages 5-14 across Maths, English, Science, History, and Geography.", icon: "📚" },
             { title: "SATs & 11+ preparation", desc: "Targeted lessons that build confidence for key exams.", icon: "🎯" },
             { title: "Curriculum-aligned progress", desc: "Every lesson mapped to official National Curriculum objectives.", icon: "📊" },
             { title: "Multi-subject approach", desc: "Cross-curricular lessons that connect subjects through your child's interests.", icon: "🔗" },
@@ -67,11 +67,11 @@ export default function CurriculumPage() {
           <h2 className="text-xl font-bold text-gray-900">Core subjects covered</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {[
-              { subject: "Mathematics", topics: "Number, algebra, geometry, statistics, ratio, measurement", years: "KS1-KS2" },
-              { subject: "English", topics: "Reading, writing, grammar, punctuation, spelling, comprehension", years: "KS1-KS2" },
-              { subject: "Science", topics: "Biology, chemistry, physics, scientific enquiry, working scientifically", years: "KS1-KS2" },
-              { subject: "History", topics: "British history, world history, chronological awareness", years: "KS1-KS2" },
-              { subject: "Geography", topics: "Physical geography, human geography, map skills", years: "KS1-KS2" },
+              { subject: "Mathematics", topics: "Number, algebra, geometry, statistics, ratio, measurement", years: "KS1-KS3" },
+              { subject: "English", topics: "Reading, writing, grammar, punctuation, spelling, comprehension", years: "KS1-KS3" },
+              { subject: "Science", topics: "Biology, chemistry, physics, scientific enquiry, working scientifically", years: "KS1-KS3" },
+              { subject: "History", topics: "British history, world history, chronological awareness", years: "KS1-KS3" },
+              { subject: "Geography", topics: "Physical geography, human geography, map skills", years: "KS1-KS3" },
             ].map((subj) => (
               <div key={subj.subject} className="rounded-xl bg-white p-4 border border-primary-100/20">
                 <div className="flex items-center justify-between">

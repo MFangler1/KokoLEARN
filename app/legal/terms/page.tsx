@@ -88,11 +88,12 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold text-gray-900">7. Payments &amp; Lifetime Access</h2>
+              <h2 className="text-xl font-semibold text-gray-900">7. Payments &amp; Subscriptions</h2>
               <ul className="mt-2 list-disc pl-6 space-y-1">
-                <li>KokoLearn.org offers various subscription plans and a one-time lifetime access option at the stated price</li>
+                <li>KokoLearn.org offers recurring subscription plans at the stated price and billing interval</li>
                 <li>Payment is processed securely through our payment partner</li>
-                <li>A free trial is available for new users (limited per IP address)</li>
+                <li>A free trial is available for eligible new users</li>
+                <li>You can manage or cancel a paid subscription from the billing portal; access continues as shown there</li>
                 <li>Refunds are subject to our <Link href="/legal/refund" className="text-secondary hover:underline">Refund Policy</Link></li>
               </ul>
             </section>

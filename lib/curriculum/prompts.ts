@@ -54,10 +54,9 @@ function getAgeGuidelines(age: number): string {
 }
 
 export function buildLessonPrompt(input: LessonGenerationInput): string {
-  return `You are an expert UK primary school teacher creating a personalised lesson.
+  return `You are an expert UK teacher creating a personalised lesson for a learner aged 5-14.
 
 STUDENT PROFILE:
-- Name: ${input.childName}
 - Age: ${input.childAge} (${input.keyStage})
 - Interests: ${input.interests.join(", ")}
 
@@ -66,6 +65,13 @@ ${input.objective} (ID: ${input.objectiveId})
 
 AGE-APPROPRIATE LANGUAGE GUIDELINES:
 ${getAgeGuidelines(input.childAge)}
+
+CHILD SAFETY REQUIREMENTS:
+- Do not ask for or include personal details, contact information or precise location
+- Do not include sexual, violent, hateful, self-harm, illegal or dangerous material
+- Do not provide medical, legal or mental-health diagnosis or advice
+- Use inclusive language and avoid stereotypes
+- If the subject touches a sensitive topic, keep it factual, age-appropriate and encourage speaking with a trusted adult
 
 FORMAT REQUIREMENTS:
 Generate a COMPLETE lesson in valid JSON format with NO additional text outside the JSON:

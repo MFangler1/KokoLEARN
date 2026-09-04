@@ -8,9 +8,11 @@ import { achievements, referrals, subscriptions } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { ACHIEVEMENTS, getStarsForScore } from "@/lib/achievements";
 import { initAuth } from "@/lib/auth/server";
+import { hasTrustedOrigin } from "@/lib/security/origin";
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
     const body = await req.json();
     const { lessonId, answers, childName, objectiveId, subject, durationSeconds } = body;
 
@@ -21,14 +23,15 @@ export async function POST(req: Request) {
     }
     const userId = session.user.id;
 
-    if (!lessonId || !Array.isArray(answers) || answers.length === 0) {
+    if (typeof lessonId !== "string" || lessonId.length > 100 || !Array.isArray(answers) || answers.length === 0 || answers.length > 10 ||
+        !Number.isFinite(Number(durationSeconds)) || Number(durationSeconds) < 0 || Number(durationSeconds) > 86400) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    const supabase = getSupabase() as any;
+    const supabase = getSupabase();
     if (!supabase) {
       return NextResponse.json(
         { error: "Lesson storage is not configured. Please try again later." },
@@ -172,7 +175,7 @@ export async function POST(req: Request) {
           .from(achievements)
           .where(eq(achievements.userId, userId))
           .all();
-        const earnedTypes = new Set(earned.map((e: any) => e.type));
+        const earnedTypes = new Set(earned.map((e) => e.type));
 
         const checkAchievement = (type: string) => {
           if (!earnedTypes.has(type) && ACHIEVEMENTS[type as keyof typeof ACHIEVEMENTS]) {
@@ -206,7 +209,7 @@ export async function POST(req: Request) {
             .eq("completed", true)
             .order("created_at", { ascending: false });
           if (recent?.data) {
-            const dates = [...new Set(recent.data.map((l: any) => l.created_at?.slice(0, 10)).filter(Boolean))];
+            const dates = [...new Set(recent.data.map((lesson: { created_at?: string }) => lesson.created_at?.slice(0, 10)).filter((date): date is string => Boolean(date)))];
             // Check consecutive days from today
             let streak = 0;
             for (let i = 0; i < dates.length; i++) {
@@ -241,7 +244,7 @@ export async function POST(req: Request) {
             .eq("user_id", userId)
             .eq("completed", true);
           if (subjectsResult?.data) {
-            const uniqueSubjects = new Set(subjectsResult.data.map((l: any) => l.subject));
+            const uniqueSubjects = new Set(subjectsResult.data.map((lesson: { subject: string }) => lesson.subject));
             if (uniqueSubjects.size >= 5) checkAchievement("all_subjects");
           }
         }
@@ -277,7 +280,7 @@ export async function POST(req: Request) {
             if (referrerSub) {
               await db
                 .update(subscriptions)
-                .set({ extendedQuestions: 1, updatedAt: new Date() })
+                .set({ extendedQuestions: 1, addonStatus: "granted", updatedAt: new Date() })
                 .where(eq(subscriptions.userId, referralEntry.referrerUserId));
               console.log(`🎉 Referral reward: ${referralEntry.referrerUserId} got Extended Questions free!`);
             } else {
@@ -287,6 +290,7 @@ export async function POST(req: Request) {
                 plan: "free_trial",
                 status: "active",
                 extendedQuestions: 1,
+                addonStatus: "granted",
                 createdAt: new Date(),
                 updatedAt: new Date(),
               });

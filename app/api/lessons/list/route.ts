@@ -3,11 +3,14 @@
 import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase/server";
 import { initAuth } from "@/lib/auth/server";
+import { hasTrustedOrigin } from "@/lib/security/origin";
+import { parseChildName } from "@/lib/validation/child";
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
     const body = await req.json();
-    const { childName } = body;
+    const childName = parseChildName(body.childName);
 
     const auth = await initAuth();
     const session = await auth.api.getSession({ headers: new Headers(req.headers) });
@@ -22,7 +25,7 @@ export async function POST(req: Request) {
 
     const supabase = getSupabase();
     if (!supabase) {
-      return NextResponse.json({ lessons: [] });
+      return NextResponse.json({ error: "Lesson storage is unavailable" }, { status: 503 });
     }
 
     const { data: lessons, error } = await supabase
@@ -35,12 +38,12 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error("Failed to fetch lessons:", error);
-      return NextResponse.json({ lessons: [] });
+      return NextResponse.json({ error: "Unable to load lessons" }, { status: 500 });
     }
 
     return NextResponse.json({ lessons: lessons || [] });
   } catch (err) {
     console.error("Lessons list error:", err);
-    return NextResponse.json({ lessons: [] });
+    return NextResponse.json({ error: "Unable to load lessons" }, { status: 500 });
   }
 }

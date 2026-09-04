@@ -11,7 +11,7 @@ function hasSessionCookie(request: NextRequest): boolean {
   return cookies.includes(SESSION_COOKIE) || cookies.includes(SESSION_COOKIE_FALLBACK);
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const protectedPaths = ["/dashboard", "/onboarding", "/lessons"];

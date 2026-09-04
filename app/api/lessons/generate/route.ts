@@ -6,6 +6,12 @@ import { getSupabase } from "@/lib/supabase/server";
 import { buildLessonPrompt, parseLessonResponse, type GeneratedLesson } from "@/lib/curriculum/prompts";
 import { getNextObjective, getKeyStage, type Subject } from "@/lib/curriculum/data";
 import { initAuth } from "@/lib/auth/server";
+import { getDb } from "@/lib/db";
+import { children, subscriptions } from "@/lib/db/schema";
+import { users } from "@/lib/db/auth.schema";
+import { and, eq } from "drizzle-orm";
+import { hasTrustedOrigin } from "@/lib/security/origin";
+import { parseChildAge, parseChildName, parseInterests, parseSubject } from "@/lib/validation/child";
 
 function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: number): GeneratedLesson | null {
   if (!lesson.title || !lesson.subject || !lesson.objective || !lesson.explanation) return null;
@@ -41,8 +47,12 @@ function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: nu
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) {
+      return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+    }
     const body = await req.json();
-    const { childName, childAge, interests, subject, questionCount } = body;
+    const subject = parseSubject(body.subject);
+    const childId = typeof body.childId === "string" ? body.childId : "";
 
     const auth = await initAuth();
     const session = await auth.api.getSession({ headers: new Headers(req.headers) });
@@ -51,24 +61,55 @@ export async function POST(req: Request) {
     }
     const userId = session.user.id;
 
-    // Validate inputs
-    if (!childName || !childAge || !interests?.length || !subject) {
+    if (!childId || !subject) {
       return NextResponse.json(
-        { error: "Missing required fields: childName, childAge, interests, subject" },
+        { error: "Invalid child profile or subject" },
         { status: 400 }
       );
     }
 
-    const age = parseInt(childAge);
+    const db = await getDb();
+    if (!db) {
+      return NextResponse.json({ error: "Subscription service is unavailable" }, { status: 503 });
+    }
+    const child = await db.select().from(children)
+      .where(and(eq(children.id, childId), eq(children.userId, userId))).get();
+    if (!child) return NextResponse.json({ error: "Child profile not found" }, { status: 404 });
+    const childName = parseChildName(child.name);
+    const age = parseChildAge(child.age);
+    let interests: string[] | null = null;
+    try { interests = parseInterests(JSON.parse(child.interests)); } catch {}
+    if (!childName || age === null || !interests) {
+      return NextResponse.json({ error: "Stored child profile is invalid" }, { status: 500 });
+    }
     const keyStage = getKeyStage(age);
+    const subscription = await db.select().from(subscriptions)
+      .where(eq(subscriptions.userId, userId)).get();
+    const hasPaidAccess = Boolean(subscription && subscription.plan !== "free_trial" && ["active", "trialing"].includes(subscription.status));
+    const hasExtendedQuestions = Boolean(subscription?.extendedQuestions === 1 && ["active", "trialing", "granted"].includes(subscription.addonStatus));
+    const questionCount = hasExtendedQuestions ? 10 : 5;
 
     // Get the next uncompleted objective for this child
-    const supabase = getSupabase() as any;
+    const supabase = getSupabase();
     if (!supabase) {
       return NextResponse.json(
         { error: "Lesson storage is not configured. Please try again later." },
         { status: 503 }
       );
+    }
+
+    if (!hasPaidAccess) {
+      const user = await db.select({ createdAt: users.createdAt }).from(users).where(eq(users.id, userId)).get();
+      const trialEndsAt = user ? user.createdAt.getTime() + 24 * 60 * 60 * 1000 : 0;
+      if (!user || Date.now() >= trialEndsAt) {
+        return NextResponse.json({ error: "Your free trial has ended. Choose a plan to continue." }, { status: 402 });
+      }
+      const lessonCount = await supabase.from("lessons")
+        .select("id", { count: "exact", head: true }).eq("user_id", userId);
+      if (lessonCount.error) throw lessonCount.error;
+      if ((lessonCount.count ?? 0) >= 3) {
+        return NextResponse.json({ error: "Your three free lessons have been used. Choose a plan to continue." }, { status: 402 });
+      }
     }
 
     let completedIds: string[] = [];
@@ -85,7 +126,7 @@ export async function POST(req: Request) {
     }
 
     if (progress) {
-      completedIds = progress.map((p: any) => p.objective_id);
+      completedIds = progress.map((p: { objective_id: string }) => p.objective_id);
     }
 
     const objective = getNextObjective(completedIds, age, subject as Subject);
@@ -105,7 +146,7 @@ export async function POST(req: Request) {
       objective: objective.objective,
       objectiveId: objective.id,
       keyStage,
-      questionCount: questionCount || 5,
+      questionCount,
     });
 
     // Call DeepSeek API
@@ -128,7 +169,7 @@ export async function POST(req: Request) {
         messages: [
           {
             role: "system",
-            content: "You are an expert UK primary school teacher. You create personalised, curriculum-aligned lessons. Always respond with valid JSON only.",
+            content: "You are an expert UK teacher for ages 5-14. Create safe, personalised, curriculum-aligned lessons and respond with valid JSON only.",
           },
           {
             role: "user",
@@ -162,7 +203,7 @@ export async function POST(req: Request) {
 
     // Parse the generated lesson
     const parsedLesson = parseLessonResponse(lessonRaw);
-    const expectedQuestions = questionCount === 10 ? 10 : 5;
+    const expectedQuestions = questionCount;
     const lesson = parsedLesson && validateAndShuffleLesson(parsedLesson, expectedQuestions);
     if (!lesson) {
       return NextResponse.json(

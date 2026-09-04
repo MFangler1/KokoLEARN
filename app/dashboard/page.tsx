@@ -23,12 +23,14 @@ import {
 } from "lucide-react";
 import { useSession, signOut } from "@/lib/auth/client";
 import ReferAFriend from "@/components/ReferAFriend";
+import { ReferralTracker } from "@/components/ReferralTracker";
 
 // ── Types ──
 type Child = {
   id: string;
   name: string;
   age: number;
+  interests: string[];
   avatar: string;
   stats: {
     lessonsCompleted: number;
@@ -54,6 +56,26 @@ type Child = {
   }[];
 };
 
+type StoredLesson = {
+  id: string;
+  title: string;
+  subject: string;
+  score: number;
+  completed: boolean;
+  created_at: string;
+  duration_seconds?: number | null;
+};
+
+type QuickAction = {
+  icon: React.ReactNode;
+  label: string;
+  desc: string;
+  href?: string;
+  color: string;
+  bg: string;
+  onClick?: (() => void) | undefined;
+};
+
 // ── Sync with localStorage ──
 // ── Zero-state (used when no lessons exist yet) ──
 const zeroChild: Child = {
@@ -61,6 +83,7 @@ const zeroChild: Child = {
   name: "Your Child",
   age: 5,
   avatar: "👶",
+  interests: [],
   stats: { lessonsCompleted: 0, learningHours: "0h 0m", avgProgress: 0, currentStreak: 0 },
   subjectProgress: [],
   weeklyProgress: [],
@@ -168,7 +191,7 @@ function ProgressBar({ value, color = "#F97316", height = 8, showLabel = true }:
 
 // ── Testimonial Welcome Banner ──
 function TestimonialWelcome() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -176,11 +199,12 @@ function TestimonialWelcome() {
     // Check if user just signed in
     const params = new URLSearchParams(window.location.search);
     if (params.get("welcome") === "1" && !sessionStorage.getItem("testimonial_asked")) {
-      setVisible(true);
+      const timer = window.setTimeout(() => setVisible(true), 0);
       // Clean up URL
       const url = new URL(window.location.href);
       url.searchParams.delete("welcome");
       window.history.replaceState({}, "", url.toString());
+      return () => window.clearTimeout(timer);
     }
   }, []);
 
@@ -273,7 +297,7 @@ function formatLearningTime(totalSeconds: number): string {
   return `${hours}h ${minutes}m`;
 }
 
-function countCurrentStreak(lessons: any[]): number {
+function countCurrentStreak(lessons: StoredLesson[]): number {
   const dates = new Set(
     lessons
       .map((lesson) => lesson.created_at?.slice(0, 10))
@@ -295,32 +319,36 @@ export default function Dashboard() {
   const router = useRouter();
   const { data: session, isPending: loading } = useSession();
   const [activeChild, setActiveChild] = useState(childrenData[0]);
-  // Load real child data from onboarding if available
+  // Load account-scoped child data from the server.
   const [realChildren, setRealChildren] = useState<Child[] | null>(null);
   const [showSubjectPicker, setShowSubjectPicker] = useState(false);
   
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("kokolearn_children");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.length > 0) {
-          const mapped = parsed.map((c: any) => ({
+    if (!session?.user?.id) return;
+    fetch("/api/children")
+      .then((response) => {
+        if (!response.ok) throw new Error("Unable to load child profiles");
+        return response.json();
+      })
+      .then((data) => {
+        if (data.children?.length > 0) {
+          const mapped = data.children.map((c: { id: string; name: string; age: number; interests: string[] }) => ({
             ...childrenData[0],
             id: c.id,
             name: c.name,
             age: c.age,
+            interests: c.interests,
             avatar: c.age <= 7 ? "👦" : "👧",
           }));
           setRealChildren(mapped);
-          setActiveChild({...childrenData[0], id: mapped[0].id, name: mapped[0].name, age: mapped[0].age});
+          setActiveChild(mapped[0]);
         }
-      }
-    } catch {}
-  }, []);
+      })
+      .catch((error) => console.error("Child profiles unavailable", error));
+  }, [session]);
   
   // Fetch real recent lessons from the API
-  const [realLessons, setRealLessons] = useState<any[] | null>(null);
+  const [realLessons, setRealLessons] = useState<StoredLesson[] | null>(null);
   
   useEffect(() => {
     const child = typeof activeChild === "object" ? activeChild : null;
@@ -348,15 +376,32 @@ export default function Dashboard() {
   const [timeView, setTimeView] = useState<"weekly" | "monthly">("weekly");
   const [hasExtendedQuestions, setHasExtendedQuestions] = useState(false);
   const [questionCount, setQuestionCount] = useState(5);
+  const [addonAvailable, setAddonAvailable] = useState(false);
+  const [subscriptionState, setSubscriptionState] = useState({
+    plan: "free_trial",
+    status: "inactive",
+    hasPaidAccess: false,
+    cancelAtPeriodEnd: false,
+  });
 
   // Check subscription status for extended questions
   useEffect(() => {
     if (!session?.user?.id) return;
     fetch("/api/subscription/status")
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error("Subscription status unavailable");
+        return r.json();
+      })
       .then(data => {
         setHasExtendedQuestions(data.extendedQuestions);
         setQuestionCount(data.questionCount);
+        setAddonAvailable(data.addonAvailable);
+        setSubscriptionState({
+          plan: data.plan,
+          status: data.status,
+          hasPaidAccess: data.hasPaidAccess,
+          cancelAtPeriodEnd: data.cancelAtPeriodEnd,
+        });
       })
       .catch(() => {});
   }, [session]);
@@ -383,6 +428,16 @@ export default function Dashboard() {
     }
   };
 
+  const handleManageBilling = async () => {
+    try {
+      const res = await fetch("/api/billing-portal", { method: "POST" });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch (err) {
+      console.error("Billing portal failed:", err);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -395,12 +450,8 @@ export default function Dashboard() {
 
   const authUser = session.user;
   const fullName = authUser.name || authUser.email || "User";
-  const email = authUser.email || "";
   const user = {
-    email,
     name: fullName,
-    plan: (authUser as any).plan || "free_trial",
-    subscription_status: (authUser as any).subscriptionStatus || "active",
     initials: fullName
       .split(" ")
       .map((n: string) => n[0])
@@ -409,11 +460,10 @@ export default function Dashboard() {
       .slice(0, 2),
   };
 
-  const isPremium =
-    user.plan !== "free_trial" && user.subscription_status === "active";
+  const isPremium = subscriptionState.hasPaidAccess;
 
   // ── Compute stats from real lesson data ──
-  const completedLessons = realLessons?.filter((l: any) => l.completed) || [];
+  const completedLessons = realLessons?.filter((lesson) => lesson.completed) || [];
   const hasRealData = completedLessons.length > 0;
   const lessonsLoaded = realLessons !== null;
 
@@ -425,9 +475,9 @@ export default function Dashboard() {
 
   if (hasRealData) {
     const lessonCount = completedLessons.length;
-    const totalDurationSeconds = completedLessons.reduce((s: number, l: any) => s + (l.duration_seconds || 0), 0);
+    const totalDurationSeconds = completedLessons.reduce((sum, lesson) => sum + (lesson.duration_seconds || 0), 0);
     const avgScore = lessonCount > 0
-      ? Math.round(completedLessons.reduce((s: number, l: any) => s + (l.score || 0), 0) / lessonCount)
+      ? Math.round(completedLessons.reduce((sum, lesson) => sum + (lesson.score || 0), 0) / lessonCount)
       : 0;
 
     computedStats = {
@@ -438,12 +488,12 @@ export default function Dashboard() {
     };
 
     // Subject progress from real lessons
-    const subjects = [...new Set(completedLessons.map((l: any) => l.subject))];
+    const subjects = [...new Set(completedLessons.map((lesson) => lesson.subject))];
     const colors = ["#F97316", "#EA580C", "#F59E0B", "#3B82F6", "#10B981", "#8B5CF6"];
     computedSubjectProgress = subjects.map((s, i) => {
-      const subLessons = completedLessons.filter((l: any) => l.subject === s);
+      const subLessons = completedLessons.filter((lesson) => lesson.subject === s);
       const pct = subLessons.length > 0
-        ? Math.round(subLessons.reduce((acc: number, l: any) => acc + (l.score || 0), 0) / subLessons.length)
+        ? Math.round(subLessons.reduce((sum, lesson) => sum + (lesson.score || 0), 0) / subLessons.length)
         : 0;
       return { subject: s as string, progress: pct, color: colors[i % colors.length] };
     });
@@ -458,11 +508,11 @@ export default function Dashboard() {
     });
     computedWeeklyProgress = weekDays.map(d => {
       const dayStr = d.toISOString().slice(0, 10);
-      const dayLessons = completedLessons.filter((l: any) =>
-        l.created_at && l.created_at.startsWith(dayStr)
+      const dayLessons = completedLessons.filter((lesson) =>
+        lesson.created_at && lesson.created_at.startsWith(dayStr)
       );
       const avg = dayLessons.length > 0
-        ? Math.round(dayLessons.reduce((s: number, l: any) => s + (l.score || 0), 0) / dayLessons.length)
+        ? Math.round(dayLessons.reduce((sum, lesson) => sum + (lesson.score || 0), 0) / dayLessons.length)
         : 0;
       return { week: dayNames[d.getDay()], progress: avg };
     });
@@ -475,22 +525,22 @@ export default function Dashboard() {
     });
     computedMonthlyProgress = months.map(d => {
       const prefix = d.toISOString().slice(0, 7);
-      const monthLessons = completedLessons.filter((l: any) =>
-        l.created_at && l.created_at.startsWith(prefix)
+      const monthLessons = completedLessons.filter((lesson) =>
+        lesson.created_at && lesson.created_at.startsWith(prefix)
       );
       const avg = monthLessons.length > 0
-        ? Math.round(monthLessons.reduce((s: number, l: any) => s + (l.score || 0), 0) / monthLessons.length)
+        ? Math.round(monthLessons.reduce((sum, lesson) => sum + (lesson.score || 0), 0) / monthLessons.length)
         : 0;
       return { month: monthNames[d.getMonth()], progress: avg };
     });
 
     // Curriculum objectives
-    const subjectGroups = [...new Set(completedLessons.map((l: any) => l.subject))];
+    const subjectGroups = [...new Set(completedLessons.map((lesson) => lesson.subject))];
     computedCurriculumObjectives = subjectGroups.map(s => ({
       stage: "KS1",
       subject: s as string,
       total: 10,
-      completed: completedLessons.filter((l: any) => l.subject === s).length,
+      completed: completedLessons.filter((lesson) => lesson.subject === s).length,
     }));
   }
 
@@ -503,7 +553,7 @@ export default function Dashboard() {
       : (hasRealData ? computedMonthlyProgress.map(d => ({ label: d.month, value: d.progress })) : []);
 
   const child = showEmptyState
-    ? { ...zeroChild, ...activeChild, stats: computedStats, recentLessons: [] as any[], subjectProgress: [], weeklyProgress: [], monthlyProgress: [], curriculumObjectives: [] }
+    ? { ...zeroChild, ...activeChild, stats: computedStats, recentLessons: [], subjectProgress: [], weeklyProgress: [], monthlyProgress: [], curriculumObjectives: [] }
     : activeChild;
 
   const displayStats = hasRealData ? computedStats : child.stats;
@@ -520,6 +570,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ReferralTracker userId={session.user.id} />
       {/* ── Header ── */}
       <header className="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1 sm:px-4 lg:px-6">
@@ -539,8 +590,16 @@ export default function Dashboard() {
             {isPremium && (
               <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary-50 px-4 py-1.5 text-sm font-medium text-primary">
                 <Star className="h-4 w-4 fill-primary" />
-                {user.plan === "family" ? "Family" : "Premium"}
+                {subscriptionState.plan === "family" ? "Family" : "Premium"}
               </span>
+            )}
+            {isPremium && (
+              <button
+                onClick={handleManageBilling}
+                className="hidden sm:inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 hover:border-primary/30 hover:text-primary transition-all"
+              >
+                Manage Billing{subscriptionState.cancelAtPeriodEnd ? " (cancelling)" : ""}
+              </button>
             )}
             <Link
               href="/dashboard/reports"
@@ -639,8 +698,8 @@ export default function Dashboard() {
                     }]
                 ),
                 { icon: <LogOut className="h-5 w-5" />, label: "Sign Out", desc: "End your session", onClick: handleSignOut, color: "text-gray-500", bg: "bg-gray-100" },
-              ] as const
-            ).map((action: any) => {
+              ] as QuickAction[]
+            ).map((action) => {
               const content = (
                 <>
                   <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${action.bg}`}>
@@ -669,7 +728,7 @@ export default function Dashboard() {
               return (
                 <Link
                   key={action.label}
-                  href={action.href}
+                  href={action.href || "/"}
                   className="group flex items-center gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:shadow-md hover:border-primary/20 transition-all"
                 >
                   {content}
@@ -753,7 +812,7 @@ export default function Dashboard() {
           </div>
 
           {/* ── Extended Questions Add-on ── */}
-          {!hasExtendedQuestions && session && (
+          {!hasExtendedQuestions && addonAvailable && isPremium && session && (
             <div className="lg:col-span-2 rounded-2xl border border-dashed border-primary-200 bg-primary-50/30 p-6 shadow-sm">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
@@ -877,8 +936,8 @@ export default function Dashboard() {
                     }]
                 ),
                 { icon: <LogOut className="h-5 w-5" />, label: "Sign Out", desc: "End your session", onClick: handleSignOut, color: "text-gray-500", bg: "bg-gray-100" },
-              ] as const
-            ).map((action: any) => {
+              ] as QuickAction[]
+            ).map((action) => {
               const content = (
                 <>
                   <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${action.bg}`}>
@@ -907,7 +966,7 @@ export default function Dashboard() {
               return (
                 <Link
                   key={action.label}
-                  href={action.href}
+                  href={action.href || "/"}
                   className="group flex items-center gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:shadow-md hover:border-primary/20 transition-all"
                 >
                   {content}
@@ -964,8 +1023,8 @@ export default function Dashboard() {
                 <button
                   key={s.subject}
                   onClick={() => {
-                    const interests = ["Dinosaurs", "Space", "Animals", "Science", "Reading"];
-                    window.location.href = "/lessons/new?child=" + encodeURIComponent(activeChild?.name || "Alex") + "&age=" + (activeChild?.age || 7) + "&subject=" + s.subject + "&interests=" + encodeURIComponent(interests.join(","));
+                    const interests = activeChild?.interests?.length ? activeChild.interests : ["Reading"];
+                    router.push("/lessons/new?childId=" + encodeURIComponent(activeChild?.id || "") + "&child=" + encodeURIComponent(activeChild?.name || "") + "&age=" + (activeChild?.age || 5) + "&subject=" + s.subject + "&interests=" + encodeURIComponent(interests.join(",")));
                   }}
                   className="flex flex-col items-center gap-2 rounded-xl border border-gray-200 p-5 hover:border-primary/30 hover:bg-primary-50 hover:shadow-sm transition-all group"
                 >

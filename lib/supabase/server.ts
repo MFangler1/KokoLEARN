@@ -1,8 +1,8 @@
 // ── Supabase Server Client (for API routes) ──
 
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-let supabaseInstance: ReturnType<typeof createClient> | null = null;
+let supabaseInstance: SupabaseClient | null = null;
 
 export function getSupabase() {
   if (supabaseInstance) return supabaseInstance;
@@ -36,7 +36,7 @@ export interface LessonRecord {
   objective: string;
   key_stage: string;
   title: string;
-  content: any;
+  content: unknown;
   score: number;
   total_questions: number;
   completed: boolean;

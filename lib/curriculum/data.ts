@@ -1,8 +1,9 @@
 // ── UK National Curriculum Objectives (KS1 & KS2) ──
 
-export type KeyStage = "KS1" | "KS2";
+export type KeyStage = "KS1" | "KS2" | "KS3";
 export type Subject = "Maths" | "English" | "Science" | "Geography" | "History" | "Art" | "Computing" | "AI";
-export type YearGroup = 1 | 2 | 3 | 4 | 5 | 6;
+export const SUBJECTS: readonly Subject[] = ["Maths", "English", "Science", "Geography", "History", "Art", "Computing", "AI"];
+export type YearGroup = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export interface CurriculumObjective {
   id: string;
@@ -124,10 +125,29 @@ const curriculum: CurriculumObjective[] = [
   { id: "KS1-AI-02", keyStage: "KS1", yearGroup: 2, subject: "AI", topic: "AI in Daily Life", objective: "Identify examples of AI in everyday life like voice assistants and smart toys", difficulty: 1, ageRange: [5, 7] },
   { id: "KS2-AI-01", keyStage: "KS2", yearGroup: 4, subject: "AI", topic: "How AI Learns", objective: "Understand how AI learns from data and patterns in simple terms", difficulty: 2, ageRange: [7, 11] },
   { id: "KS2-AI-02", keyStage: "KS2", yearGroup: 5, subject: "AI", topic: "AI Safety", objective: "Learn how to use AI tools safely and understand they are created by humans", difficulty: 2, ageRange: [7, 11] },
+
+  // ════════════ KS3 — Ages 12-14 ════════════
+  { id: "KS3-M-01", keyStage: "KS3", yearGroup: 7, subject: "Maths", topic: "Number", objective: "Use the four operations with integers, decimals and fractions in multi-step problems", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-M-02", keyStage: "KS3", yearGroup: 8, subject: "Maths", topic: "Algebra", objective: "Simplify algebraic expressions and solve linear equations in one variable", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-E-01", keyStage: "KS3", yearGroup: 7, subject: "English", topic: "Reading", objective: "Analyse how a writer uses language, structure and evidence to shape meaning", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-E-02", keyStage: "KS3", yearGroup: 8, subject: "English", topic: "Writing", objective: "Write accurately and persuasively for different audiences and purposes", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-S-01", keyStage: "KS3", yearGroup: 7, subject: "Science", topic: "Working Scientifically", objective: "Plan a fair investigation, identify variables and evaluate the quality of evidence", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-S-02", keyStage: "KS3", yearGroup: 8, subject: "Science", topic: "Energy", objective: "Describe energy transfers and calculate simple changes in energy stores", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-G-01", keyStage: "KS3", yearGroup: 7, subject: "Geography", topic: "Place and Space", objective: "Interpret maps and data to explain physical and human features of places", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-G-02", keyStage: "KS3", yearGroup: 8, subject: "Geography", topic: "Climate", objective: "Explain causes and impacts of climate change and evaluate possible responses", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-H-01", keyStage: "KS3", yearGroup: 7, subject: "History", topic: "Historical Enquiry", objective: "Use primary and secondary sources to form and support a historical interpretation", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-H-02", keyStage: "KS3", yearGroup: 8, subject: "History", topic: "British History", objective: "Explain causes and consequences of major changes in Britain after 1745", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-A-01", keyStage: "KS3", yearGroup: 7, subject: "Art", topic: "Creative Practice", objective: "Develop and refine ideas through observation, experimentation and critical review", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-A-02", keyStage: "KS3", yearGroup: 8, subject: "Art", topic: "Art History", objective: "Analyse how artists use visual language in historical and cultural contexts", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-C-01", keyStage: "KS3", yearGroup: 7, subject: "Computing", topic: "Programming", objective: "Design and debug programs using sequence, selection, iteration and variables", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-C-02", keyStage: "KS3", yearGroup: 8, subject: "Computing", topic: "Data and Networks", objective: "Explain how data is represented and transmitted securely across computer networks", difficulty: 2, ageRange: [12, 14] },
+  { id: "KS3-AI-01", keyStage: "KS3", yearGroup: 7, subject: "AI", topic: "AI Literacy", objective: "Explain how training data influences an AI system's outputs and limitations", difficulty: 1, ageRange: [12, 14] },
+  { id: "KS3-AI-02", keyStage: "KS3", yearGroup: 8, subject: "AI", topic: "Responsible AI", objective: "Evaluate bias, privacy and reliability risks when using AI systems", difficulty: 2, ageRange: [12, 14] },
 ];
 
 export function getObjectivesForAge(age: number): CurriculumObjective[] {
-  return curriculum.filter(o => age >= o.ageRange[0] && age <= o.ageRange[1]);
+  const keyStage = getKeyStage(age);
+  return curriculum.filter(o => o.keyStage === keyStage && age >= o.ageRange[0] && age <= o.ageRange[1]);
 }
 
 export function getObjectivesForSubject(age: number, subject: Subject): CurriculumObjective[] {
@@ -147,8 +167,9 @@ export function getNextObjective(
 
 export function getKeyStage(age: number): KeyStage {
   if (age >= 5 && age <= 7) return "KS1";
-  if (age >= 7 && age <= 11) return "KS2";
-  return "KS1";
+  if (age >= 8 && age <= 11) return "KS2";
+  if (age >= 12 && age <= 14) return "KS3";
+  throw new RangeError("Child age must be between 5 and 14");
 }
 
 export default curriculum;

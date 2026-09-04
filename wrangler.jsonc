@@ -31,7 +31,8 @@
     {
       "binding": "DB",
       "database_name": "kokolearn-db",
-      "database_id": "662b8f30-14e9-42af-9d51-8f352155ffdb"
+      "database_id": "662b8f30-14e9-42af-9d51-8f352155ffdb",
+      "migrations_dir": "drizzle"
     }
   ],
   "images": {

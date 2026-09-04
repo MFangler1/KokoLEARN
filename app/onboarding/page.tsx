@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Brain, ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import { Brain, ArrowLeft, ArrowRight, Sparkles, Loader2 } from "lucide-react";
 
 const interests = [
   { emoji: "🦕", label: "Dinosaurs", category: "Science" },
@@ -27,15 +28,37 @@ const interests = [
 const learningPaths = [
   { id: "ks1", title: "KS1 Child (Ages 5-7)", desc: "Early primary — building foundational skills in reading, writing, and maths.", icon: "🌱", color: "from-emerald-400 to-emerald-600" },
   { id: "ks2", title: "KS2 Child (Ages 7-11)", desc: "Upper primary — deepening knowledge across all curriculum subjects.", icon: "🌳", color: "from-primary to-secondary" },
+  { id: "ks3", title: "KS3 Child (Ages 12-14)", desc: "Early secondary — building confidence with more advanced concepts.", icon: "🌲", color: "from-blue-400 to-blue-600" },
   { id: "send", title: "SEND Learner", desc: "Personalised pathways that adapt to individual learning needs, pace and interests.", icon: "🌈", color: "from-purple-400 to-purple-600" },
 ];
 
 export default function Onboarding() {
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const [learningPath, setLearningPath] = useState<string | null>(null);
   const [childName, setChildName] = useState("");
   const [childAge, setChildAge] = useState("5");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  const saveChildProfile = async () => {
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const response = await fetch("/api/children", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: childName, age: Number(childAge), interests: selectedInterests }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Unable to save the child profile");
+      router.push("/dashboard");
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : "Unable to save the child profile");
+      setSaving(false);
+    }
+  };
 
   const toggleInterest = (label: string) => {
     setSelectedInterests((prev) =>
@@ -161,7 +184,7 @@ export default function Onboarding() {
                     onChange={(e) => setChildAge(e.target.value)}
                     className="mt-1 block w-full rounded-xl border border-gray-200 px-4 py-3 text-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
                   >
-                    {Array.from({ length: 7 }, (_, i) => i + 5).map((age) => (
+                    {Array.from({ length: 10 }, (_, i) => i + 5).map((age) => (
                       <option key={age} value={age}>
                         {age} years old
                       </option>
@@ -279,24 +302,14 @@ export default function Onboarding() {
             </div>
 
             <button
-              onClick={() => {
-                // Save child data to localStorage
-                const existing = JSON.parse(localStorage.getItem("kokolearn_children") || "[]");
-                existing.push({
-                  id: crypto.randomUUID(),
-                  name: childName,
-                  age: parseInt(childAge),
-                  interests: selectedInterests,
-                  createdAt: new Date().toISOString(),
-                });
-                localStorage.setItem("kokolearn_children", JSON.stringify(existing));
-                window.location.href = "/dashboard";
-              }}
+              onClick={saveChildProfile}
+              disabled={saving}
               className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl transition-all hover:-translate-y-0.5"
             >
-              Go to Dashboard
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              {saving ? <Loader2 className="h-5 w-5 animate-spin" /> : <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />}
+              {saving ? "Saving..." : "Go to Dashboard"}
             </button>
+            {saveError && <p className="mt-3 text-sm text-red-600" role="alert">{saveError}</p>}
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ReferralTracker } from "@/components/ReferralTracker";
 import {
   Sparkles,
   BookOpen,
@@ -65,6 +66,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-full flex-col bg-gradient-to-b from-primary-50 via-white to-primary-50/30">
+      <ReferralTracker />
       {/* ── HEADER ── */}
       <header className="sticky top-0 z-50 w-full border-b border-primary-100/30 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -119,7 +121,7 @@ export default function Home() {
                   KS1 & KS2 Curriculum Aligned
                 </Link>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700">
-                  👶 Ages 5–11
+                  👶 Ages 5–14
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-purple-50 px-4 py-1.5 text-sm font-medium text-purple-700">
                   🌈 SEND Friendly
@@ -132,7 +134,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-gray-600 max-w-xl">
-                Supporting ages 5–11 and SEND learners with curriculum-aligned lessons 
+                Supporting ages 5–14 and SEND learners with curriculum-aligned lessons
                 that adapt to every child&apos;s unique learning journey. Building confidence, 
                 progress, and a love of learning.
               </p>
@@ -154,7 +156,7 @@ export default function Home() {
               <div className="relative mx-auto w-full max-w-lg">
                 <Image
                   src="/images/hero-pixar.png"
-                  alt="Children learning with KokoLearn — personalised education for ages 5-11"
+                  alt="Children learning with KokoLearn — personalised education for ages 5-14"
                   width={768}
                   height={512}
                   className="rounded-2xl shadow-2xl"
@@ -249,7 +251,7 @@ export default function Home() {
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Aligned To The UK National Curriculum</h2>
               <p className="mt-2 text-base text-gray-600">
                 Learning activities and assessments are designed to reinforce key curriculum 
-                objectives for KS1 and KS2 learners.
+                objectives for KS1, KS2 and KS3 learners.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -271,7 +273,7 @@ export default function Home() {
               ))}
             </div>
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-500">Covers KS1 and KS2 (ages 5-11). Future subjects can be added through platform expansion.</p>
+              <p className="text-sm text-gray-500">Covers selected KS1, KS2 and KS3 objectives for ages 5-14.</p>
               <Link href="/curriculum" className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-secondary hover:text-primary transition-colors">
                 View full curriculum details <ArrowRight className="h-3 w-3" />
               </Link>

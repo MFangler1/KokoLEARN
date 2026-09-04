@@ -47,7 +47,7 @@ export default function FAQPage() {
                 <div className="rounded-xl border border-primary-100/30 p-4">
                   <h3 className="font-semibold text-gray-900">Who is KokoLearn.org for?</h3>
                   <p className="mt-1">
-                    KokoLearn.org is designed for children aged 5-11 (KS1 and KS2) and is also suitable for SEND learners who may benefit from personalised, adaptive learning pathways. Parents create and manage accounts, and children access their learning through parent-controlled profiles.
+                    KokoLearn.org is designed for children aged 5-14 (KS1 to KS3) and is also suitable for SEND learners who may benefit from personalised, adaptive learning pathways. Parents create and manage accounts and child profiles.
                   </p>
                 </div>
 
@@ -75,7 +75,7 @@ export default function FAQPage() {
                 <div className="rounded-xl border border-primary-100/30 p-4">
                   <h3 className="font-semibold text-gray-900">What age groups is KokoLearn.org designed for?</h3>
                   <p className="mt-1">
-                    KokoLearn.org is designed for children aged 5-11, covering Key Stages 1 and 2 of the UK National Curriculum. We also support SEND learners who may benefit from personalised, adaptive learning within this age range.
+                    KokoLearn.org is designed for children aged 5-14, with selected learning objectives across Key Stages 1, 2 and 3. We also support SEND learners who may benefit from personalised, adaptive learning within this age range.
                   </p>
                 </div>
 
@@ -117,7 +117,7 @@ export default function FAQPage() {
                 <div className="rounded-xl border border-primary-100/30 p-4">
                   <h3 className="font-semibold text-gray-900">How do I create a child profile?</h3>
                   <p className="mt-1">
-                    After signing in, go to your parent dashboard and click &ldquo;Add Child.&rdquo; You&apos;ll set their name, year group, interests, and a 4-digit PIN they&apos;ll use to access their lessons.
+                    After signing in, complete onboarding to create an account-scoped child profile with their name, age and selected interests.
                   </p>
                 </div>
 
@@ -180,14 +180,14 @@ export default function FAQPage() {
                 <div className="rounded-xl border border-primary-100/30 p-4">
                   <h3 className="font-semibold text-gray-900">How do you protect my child&apos;s privacy?</h3>
                   <p className="mt-1">
-                    We take child privacy extremely seriously. Parents control all data, children access the platform through PIN-protected profiles, and we never collect data directly from children. See our <Link href="/legal/privacy" className="text-secondary hover:underline">Privacy Policy</Link> for full details.
+                    We take child privacy seriously. Parents control child profiles, and the service minimises the information sent to its AI provider. See our <Link href="/legal/privacy" className="text-secondary hover:underline">Privacy Policy</Link> for full details.
                   </p>
                 </div>
 
                 <div className="rounded-xl border border-primary-100/30 p-4">
                   <h3 className="font-semibold text-gray-900">Is KokoLearn.org safe for my child?</h3>
                   <p className="mt-1">
-                    Yes. We have a strict <Link href="/legal/child-safety" className="text-secondary hover:underline">Child Safety Policy</Link>. There are no social features, no messaging, no advertising to children, and all AI-generated content is filtered for age-appropriateness.
+                    We have a strict <Link href="/legal/child-safety" className="text-secondary hover:underline">Child Safety Policy</Link>. There are no social features or advertising to children, and the AI tutor is instructed to refuse unsafe requests and direct children to a trusted adult when needed. AI can still make mistakes, so parent oversight remains important.
                   </p>
                 </div>
 

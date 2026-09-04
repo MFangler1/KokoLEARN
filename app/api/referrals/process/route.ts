@@ -2,13 +2,20 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { referrals } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
+import { initAuth } from "@/lib/auth/server";
+import { hasTrustedOrigin } from "@/lib/security/origin";
 
 export async function POST(req: Request) {
   try {
+    if (!hasTrustedOrigin(req)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+    const auth = await initAuth();
+    const session = await auth.api.getSession({ headers: new Headers(req.headers) });
+    if (!session?.user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     const body = await req.json();
-    const { code, newUserId } = body;
-    if (!code || !newUserId) {
+    const code = typeof body.code === "string" ? body.code.trim().toUpperCase() : "";
+    const newUserId = session.user.id;
+    if (!code) {
       return NextResponse.json({ error: "Missing code or userId" }, { status: 400 });
     }
 
@@ -19,7 +26,7 @@ export async function POST(req: Request) {
     const ref = await db
       .select()
       .from(referrals)
-      .where(eq(referrals.referralCode, code))
+      .where(and(eq(referrals.referralCode, code), isNull(referrals.referredUserId)))
       .get();
 
     if (!ref) {
@@ -30,6 +37,8 @@ export async function POST(req: Request) {
     if (ref.referrerUserId === newUserId) {
       return NextResponse.json({ error: "Cannot refer yourself" }, { status: 400 });
     }
+    const prior = await db.select().from(referrals).where(eq(referrals.referredUserId, newUserId)).get();
+    if (prior) return NextResponse.json({ status: "already_tracked" });
 
     // Create a new referral tracking record for this specific invite
     await db.insert(referrals).values({

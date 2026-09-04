@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KokoLearn — Personalised Learning for UK Children (Ages 5-11)",
+  title: "KokoLearn — Personalised Learning for UK Children (Ages 5-14)",
   description:
-    "Helping children thrive through personalised learning. Curriculum-aligned lessons for KS1, KS2 and SEND learners that adapt to every child's unique learning journey.",
+    "Helping children thrive through personalised learning. Curriculum-aligned lessons for KS1, KS2, KS3 and SEND learners that adapt to every child's unique learning journey.",
   openGraph: {
-    title: "KokoLearn — Personalised Learning for Ages 5-11",
+    title: "KokoLearn — Personalised Learning for Ages 5-14",
     description:
-      "Helping children thrive through personalised learning. Curriculum-aligned lessons for KS1, KS2 and SEND learners.",
+      "Helping children thrive through personalised learning. Curriculum-aligned lessons for KS1, KS2, KS3 and SEND learners.",
     type: "website",
   },
 };

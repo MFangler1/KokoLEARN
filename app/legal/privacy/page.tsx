@@ -28,7 +28,7 @@ export default function PrivacyPage() {
       <main className="mx-auto w-full max-w-3xl px-4 pt-24 pb-10 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-primary-100/30 bg-white p-8 shadow-sm sm:p-12">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Privacy Policy</h1>
-          <p className="mt-2 text-sm text-gray-500">Last updated: May 2026</p>
+          <p className="mt-2 text-sm text-gray-500">Last updated: September 2026</p>
 
           <div className="mt-8 space-y-8 text-sm leading-relaxed text-gray-700">
             
@@ -51,14 +51,13 @@ export default function PrivacyPage() {
                 <li>Full name, email address</li>
                 <li>Password (hashed, never stored in plain text)</li>
                 <li>Payment information (processed securely via our payment partner — we never store card numbers)</li>
-                <li>IP address at registration (for trial abuse prevention)</li>
+                <li>We do not store IP address or precise geolocation in account session records</li>
               </ul>
 
               <h3 className="mt-4 font-semibold text-gray-900">Child Profiles</h3>
               <ul className="mt-2 list-disc pl-6 space-y-1">
                 <li>Child&apos;s name, grade, age, avatar (set by the parent)</li>
                 <li>Learning preferences, interests, weak subjects (set by the parent)</li>
-                <li>4-digit PIN (stored securely as a one-way hash)</li>
               </ul>
               <p className="mt-1">We do not knowingly collect personal data directly from children. All child data is provided and managed by the parent or guardian.</p>
 
@@ -68,11 +67,6 @@ export default function PrivacyPage() {
                 <li>Log files for debugging, analytics, and performance improvement</li>
               </ul>
 
-              <h3 className="mt-4 font-semibold text-gray-900">Uploaded Content</h3>
-              <ul className="mt-2 list-disc pl-6 space-y-1">
-                <li>PDF textbooks, worksheet images, and other educational materials uploaded by parents</li>
-                <li>Voice recordings uploaded for voice cloning (stored securely in cloud storage)</li>
-              </ul>
             </section>
 
             <section>
@@ -82,7 +76,6 @@ export default function PrivacyPage() {
                 <li>To generate personalised AI-powered lessons tailored to your child</li>
                 <li>To process payments and manage subscriptions</li>
                 <li>To provide analytics and progress reports on your parent dashboard</li>
-                <li>To improve our AI models and educational content quality</li>
                 <li>To prevent fraud and abuse of free trial periods</li>
                 <li>To send essential service communications (password resets, payment confirmations)</li>
               </ul>
@@ -94,8 +87,8 @@ export default function PrivacyPage() {
                 KokoLearn.org uses AI technology to generate educational content. When generating lessons:
               </p>
               <ul className="mt-2 list-disc pl-6 space-y-1">
-                <li>Only the uploaded material text, topic, and learning preferences are sent to the AI model</li>
-                <li>Your child&apos;s personal identity information is never shared with AI providers</li>
+                <li>Age, selected interests, subject, curriculum objective and lesson or chat text may be sent to the AI provider</li>
+                <li>The child&apos;s name is not included in lesson-generation requests; users should not type personal details into tutor chat</li>
                 <li>Generated content is stored in your account and accessible only to you and your child</li>
               </ul>
             </section>
@@ -108,7 +101,7 @@ export default function PrivacyPage() {
               <ul className="mt-2 list-disc pl-6 space-y-1">
                 <li><strong>Payment processor</strong> — for securely processing your purchase</li>
                 <li><strong>Cloud infrastructure providers</strong> — for secure data storage and delivery</li>
-                <li><strong>AI model providers</strong> — for generating educational content (no personal data shared)</li>
+                <li><strong>AI model providers</strong> — for generating educational content from the limited data described above</li>
                 <li><strong>Law enforcement</strong> — if required by applicable UK law</li>
               </ul>
             </section>
@@ -119,7 +112,6 @@ export default function PrivacyPage() {
                 <li>Account data: Retained until you request deletion</li>
                 <li>Payment records: Retained as required by UK financial regulations</li>
                 <li>Usage logs: Retained up to 180 days</li>
-                <li>Uploaded content: Retained until you delete it or your account</li>
               </ul>
             </section>
 
@@ -142,8 +134,7 @@ export default function PrivacyPage() {
                 KokoLearn.org is designed for parent/guardian-managed child profiles. We comply with applicable children&apos;s privacy laws including UK GDPR and COPPA guidelines.
               </p>
               <ul className="mt-2 list-disc pl-6 space-y-1">
-                <li>Parents create and manage all child accounts</li>
-                <li>Children access the platform only through parent-created PIN-protected profiles</li>
+                <li>Parents create and manage all child profiles</li>
                 <li>We do not collect data directly from children without parental consent</li>
                 <li>Parents may request deletion of their child&apos;s data at any time</li>
               </ul>

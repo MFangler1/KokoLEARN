@@ -12,12 +12,16 @@ import {
   AlignmentType,
   BorderStyle,
   ShadingType,
-  TabStopPosition,
-  TabStopType,
 } from "docx";
+import { initAuth } from "@/lib/auth/server";
+import { hasTrustedOrigin } from "@/lib/security/origin";
 
 export async function POST(request: NextRequest) {
   try {
+    if (!hasTrustedOrigin(request)) return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+    const auth = await initAuth();
+    const session = await auth.api.getSession({ headers: new Headers(request.headers) });
+    if (!session?.user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     const { child, filename } = await request.json();
 
     const today = new Date().toLocaleDateString("en-GB", {

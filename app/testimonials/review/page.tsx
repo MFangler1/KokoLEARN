@@ -32,7 +32,8 @@ export default function TestimonialsReview() {
   }, []);
 
   useEffect(() => {
-    void fetchTestimonials();
+    const timer = window.setTimeout(() => void fetchTestimonials(), 0);
+    return () => window.clearTimeout(timer);
   }, [fetchTestimonials]);
 
   const handleAction = async (id: string, action: "approve" | "reject") => {

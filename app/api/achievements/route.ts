@@ -8,6 +8,14 @@ import { achievements } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { ACHIEVEMENTS } from "@/lib/achievements";
 
+type EarnedAchievement = {
+  type: string;
+  label: string;
+  description: string;
+  icon: string;
+  earnedAt: Date;
+};
+
 export async function GET(req: Request) {
   try {
     const auth = await initAuth();
@@ -15,7 +23,7 @@ export async function GET(req: Request) {
     if (!session?.user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
     const db = await getDb();
-    let earned: any[] = [];
+    let earned: EarnedAchievement[] = [];
     if (db) {
       earned = await db
         .select()
@@ -25,7 +33,7 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({
-      earned: earned.map((a: any) => ({
+      earned: earned.map((a) => ({
         type: a.type,
         label: a.label,
         description: a.description,
@@ -35,7 +43,7 @@ export async function GET(req: Request) {
       available: Object.entries(ACHIEVEMENTS).map(([type, def]) => ({
         type,
         ...def,
-        earned: earned.some((a: any) => a.type === type),
+        earned: earned.some((a) => a.type === type),
       })),
     });
   } catch (err) {

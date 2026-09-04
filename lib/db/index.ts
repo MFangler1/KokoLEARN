@@ -4,7 +4,8 @@ import { schema } from "./schema";
 
 /**
  * Get the D1 database instance.
- * Falls back gracefully if D1 binding is not available.
+ * Returns null when D1 is unavailable. Security-sensitive callers must fail
+ * closed instead of substituting an in-memory store.
  */
 export async function getDb() {
   try {
@@ -12,8 +13,8 @@ export async function getDb() {
     if (env && typeof env === "object" && "DB" in env) {
       return drizzle(env.DB, { schema, logger: true });
     }
-  } catch {
-    // D1 binding not available — return null
+  } catch (error) {
+    console.error("D1 binding is unavailable", error);
   }
   return null;
 }

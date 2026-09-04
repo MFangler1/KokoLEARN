@@ -8,20 +8,21 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --import tsx --test tests/*.test.ts",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "auth:generate": "npx @better-auth/cli@latest generate --config ./lib/auth/server.ts --output ./lib/db/auth.schema.ts",
     "db:generate": "npx drizzle-kit generate",
-    "db:migrate:local": "npx wrangler d1 execute kokolearn-db --local --file=./drizzle/0000_sqlite.sql",
-    "db:migrate:prod": "npx wrangler d1 execute kokolearn-db --remote --file=./drizzle/0000_sqlite.sql",
+    "db:migrate:local": "wrangler d1 migrations apply kokolearn-db --local",
+    "db:migrate:prod": "wrangler d1 migrations apply kokolearn-db --remote",
     "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@better-auth/kysely-adapter": "^1.6.13",
     "@libsql/client": "^0.17.3",
-    "@opennextjs/cloudflare": "^1.19.11",
+    "@opennextjs/cloudflare": "^1.20.6",
     "@stripe/stripe-js": "^9.7.0",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.106.2",
@@ -31,9 +32,9 @@
     "drizzle-orm": "^0.45.2",
     "kysely": "^0.29.2",
     "lucide-react": "^1.17.0",
-    "next": "16.2.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "stripe": "^22.2.0"
   },
   "devDependencies": {
@@ -43,10 +44,10 @@
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.3.4",
     "patch-package": "^8.0.1",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "wrangler": "^4.97.0"
+    "wrangler": "^4.129.0"
   }
 }
