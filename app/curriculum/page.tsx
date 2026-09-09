@@ -101,6 +101,7 @@ export default function CurriculumPage() {
         </div>
         <div className="mx-auto max-w-5xl px-4 text-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} KokoLearn.org — Built by AiConsultancy.org.uk (Grimsby)</p>
+<div className="mt-4 text-center"><Link href="/admin" className="text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-4">
             <Link href="/" className="inline-flex items-center rounded-lg bg-primary px-2.5 py-1 text-xs font-semibold text-white hover:bg-primary-600 transition-all">Home</Link>
             <Link href="/legal/privacy" className="text-primary hover:underline">Privacy</Link>

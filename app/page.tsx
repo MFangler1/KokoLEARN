@@ -78,6 +78,7 @@ export default function Home() {
             <Link href="/curriculum" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Curriculum</Link>
             <Link href="/blog" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Blog</Link>
             <Link href="/for-organisations" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Institutions</Link>
+            <Link href="/dashboard" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">User Dashboard</Link>
             <Link href="/sign-in" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Sign In</Link>
             <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all">FREE TRIAL</Link>
           </nav>
@@ -94,6 +95,7 @@ export default function Home() {
               <Link href="/curriculum" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Curriculum</Link>
               <Link href="/blog" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Blog</Link>
               <Link href="/for-organisations" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Institutions</Link>
+              <Link href="/dashboard" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>User Dashboard</Link>
               <Link href="/sign-in" className="text-sm font-medium text-gray-600 py-2">Sign In</Link>
               <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-center text-sm font-semibold text-white">FREE TRIAL</Link>
             </nav>
@@ -105,12 +107,7 @@ export default function Home() {
          HERO — REPOSITIONED
          ═══════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none">
-            <Image src="/images/presenter-001.webp" alt="" width={140} height={140} className="object-contain opacity-90" />
-          </div>
-        </div>
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div className="animate-slide-up">
               <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -160,11 +157,9 @@ export default function Home() {
                   className="rounded-2xl shadow-2xl"
                   priority
                 />
-                <div className="absolute -top-4 -right-4 rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2 text-white shadow-lg animate-float">
-                  <div className="flex items-center gap-2">
-                    <Star className="h-4 w-4 fill-white" />
-                    <span className="text-sm font-bold">Trusted by UK Parents</span>
-                  </div>
+                <div className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2 text-white shadow-lg">
+                  <Star className="h-4 w-4 fill-white" />
+                  <span className="text-sm font-bold">Trusted by UK Parents</span>
                 </div>
               </div>
             </div>
@@ -373,7 +368,7 @@ export default function Home() {
          LEARNING ASSESSMENT WORKFLOW (was How It Works)
          ═══════════════════════════════════════════════════════ */}
       <section id="how-it-works" className="bg-white/50 py-12 relative scroll-mt-24">
-        <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
           <Image src="/images/presenter-002.webp" alt="" width={130} height={200} className="object-contain opacity-85" />
         </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -441,7 +436,7 @@ export default function Home() {
 
       {/* ── FEATURES ── */}
       <section id="features" className="bg-white/50 py-8 relative overflow-hidden scroll-mt-24">
-        <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none">
           <Image src="/images/presenter-003.webp" alt="" width={120} height={180} className="object-contain opacity-85" />
         </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -478,7 +473,7 @@ export default function Home() {
       {/* ── STATS ── */}
       <FadeInSection>
         <div className="bg-gradient-to-r from-primary to-secondary py-6 relative overflow-hidden">
-          <div className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none">
+          <div className="hidden xl:block absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none">
             <Image src="/images/presenter-004.webp" alt="" width={120} height={120} className="object-contain opacity-85" />
           </div>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -544,7 +539,7 @@ export default function Home() {
           </FadeInSection>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { name: "24 Hour Trial", price: "£0", period: "24 hours free", popular: false, features: ["3 personalised lessons", "Voice narration", "Basic progress tracking"] },
+              { name: "24 Hour Trial", price: "£0", period: "24 hours free", popular: false, features: ["2 personalised lessons", "Voice narration", "Basic progress tracking"] },
               { name: "Premium", price: "£9.99", period: "per month", popular: true, features: ["Unlimited lessons", "Voice narration", "Full progress reports", "1 child"] },
               { name: "Family", price: "£19.99", period: "per month", popular: false, features: ["Everything in Premium", "Up to 4 children", "Shared dashboard", "Priority support"] },
             ].map((plan) => (
@@ -684,6 +679,7 @@ export default function Home() {
           <div className="mt-4 border-t border-primary-100/50 pt-3 text-center">
             <div className="flex flex-wrap items-center justify-center gap-1 text-2xs text-gray-400">
               <span>&copy; {new Date().getFullYear()} KokoLearn.org. A PAD-CIC initiative. Operated by AiConsultancy.org.uk (Grimsby).</span>
+              <Link href="/admin" className="text-2xs text-gray-400 hover:text-primary transition-colors ml-2 underline">Admin</Link>
             </div>
           </div>
         </div>

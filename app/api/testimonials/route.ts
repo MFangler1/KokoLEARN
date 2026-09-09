@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     };
 
     // Store in KV
-    let { env } = await getCloudflareContext({ async: true });
+    const { env } = await getCloudflareContext({ async: true });
 
     // Get existing testimonials
     let existing = [];
@@ -125,7 +125,7 @@ export async function PATCH(req: Request) {
 
       // Add to approved list
       const approvedRaw = await env.KV.get("testimonials:approved", "text");
-      let approved = approvedRaw ? JSON.parse(approvedRaw) : [];
+      const approved = approvedRaw ? JSON.parse(approvedRaw) : [];
       approved.unshift(testimonial);
       await env.KV.put("testimonials:approved", JSON.stringify(approved));
     }

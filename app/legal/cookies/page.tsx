@@ -183,6 +183,7 @@ export default function CookiesPage() {
       <footer className="mt-auto border-t border-primary-100/30 bg-primary-50/30 py-8">
         <div className="mx-auto max-w-5xl px-4 text-center text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} KokoLearn.org — Built by AiConsultancy.org.uk (Grimsby)</p>
+<div className="mt-4 text-center"><Link href="/admin" className="text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-4">
             <Link href="/" className="inline-flex items-center rounded-lg bg-primary px-2.5 py-1 text-xs font-semibold text-white hover:bg-primary-600 transition-all">Home</Link>
             <Link href="/legal/privacy" className="text-primary hover:underline">Privacy Policy</Link>

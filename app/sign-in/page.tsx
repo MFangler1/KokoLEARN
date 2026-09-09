@@ -4,8 +4,26 @@ import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Brain, ArrowLeft, Loader2, Eye, EyeOff, Mail } from "lucide-react";
+import { Brain, ArrowLeft, Loader2, Eye, EyeOff, Mail, Home, LayoutDashboard, CheckCircle2, PlusCircle } from "lucide-react";
 import { signIn } from "@/lib/auth/client";
+
+// Where the user chose to land after signing in, remembered across sessions
+const DESTINATION_KEY = "kokolearn_signin_destination";
+type Destination = "home" | "dashboard" | "lesson";
+
+function destinationPath(destination: Destination) {
+    if (destination === "lesson") return "/lessons/new";
+    return destination === "dashboard" ? "/dashboard?welcome=1" : "/";
+}
+
+function readSavedDestination(): Destination | null {
+  try {
+    const saved = localStorage.getItem(DESTINATION_KEY);
+    return saved === "home" || saved === "dashboard" || saved === "lesson" ? saved : null;
+  } catch {
+    return null;
+  }
+}
 
 export default function SignIn() {
   return (
@@ -22,7 +40,7 @@ export default function SignIn() {
 function SignInContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectPath = searchParams.get("redirect") || "/dashboard";
+  const explicitRedirect = searchParams.get("redirect");
   const message = searchParams.get("message");
 
   const [email, setEmail] = useState("");
@@ -30,6 +48,10 @@ function SignInContent() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Post-sign-in destination chooser
+  const [showChooser, setShowChooser] = useState(false);
+  const [rememberChoice, setRememberChoice] = useState(false);
 
   // Forgot password state
   const [showForgot, setShowForgot] = useState(false);
@@ -44,14 +66,26 @@ function SignInContent() {
     setLoading(true);
 
     try {
-      await signIn.email({
-        email,
-        password,
-        callbackURL: redirectPath.startsWith("/") ? `${window.location.origin}${redirectPath}?welcome=1` : `${redirectPath}?welcome=1`,
-      });
+      const result = await signIn.email({ email, password });
+      if (result?.error) {
+        throw new Error(result.error.message || "Invalid email or password.");
+      }
 
-      router.push(redirectPath);
-      router.refresh();
+      // An explicit ?redirect= always wins — the user was sent here from a
+      // protected page and expects to land back on it.
+      if (explicitRedirect) {
+        router.push(explicitRedirect);
+        return;
+      }
+
+      // Otherwise honour a previously saved preference, or ask.
+      const saved = readSavedDestination();
+      if (saved) {
+        router.push(destinationPath(saved));
+        return;
+      }
+
+      setShowChooser(true);
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "Invalid email or password.";
@@ -59,6 +93,17 @@ function SignInContent() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const goToDestination = (destination: Destination) => {
+    if (rememberChoice) {
+      try {
+        localStorage.setItem(DESTINATION_KEY, destination);
+      } catch {
+        // Preference is a convenience only — ignore storage failures
+      }
+    }
+    router.push(destinationPath(destination));
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
@@ -100,33 +145,50 @@ function SignInContent() {
 
   return (
     <div className="flex min-h-screen flex-row bg-gradient-to-br from-white via-gray-50 to-primary-50/40">
-      {/* Left panel — Pixar imagery */}
-      <div className="hidden lg:flex lg:w-2/5 relative overflow-hidden bg-gradient-to-br from-secondary-200/70 to-primary-400/70">
-        <div className="absolute inset-0">
+      {/* Left panel — Pixar imagery (same style as the free trial page) */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-white">
+        <div className="relative z-10 mx-auto flex h-full max-w-md flex-col items-center justify-center px-8 text-center">
+          <div className="mb-3">
+            <Link href="/">
+              <Image
+                src="/images/kokolearn-logo.png"
+                alt="KokoLearn.org"
+                width={160}
+                height={48}
+                className="object-contain"
+              />
+            </Link>
+          </div>
           <Image
-            src="/images/howitworks-interest.webp"
+            src="/images/presenter-001.webp"
             alt=""
-            fill
-            className="object-cover opacity-15"
-          />
-        </div>
-        <div className="relative z-10 mx-auto flex h-full max-w-sm flex-col items-center justify-center px-8 text-center">
-          <Image
-            src="/images/presenter-003.webp"
-            alt=""
-            width={200}
-            height={200}
-            className="object-contain mb-6 drop-shadow-lg"
+            width={220}
+            height={220}
+            className="object-contain mb-5 drop-shadow-lg"
           />
           <h2 className="text-3xl font-bold text-gray-900">Welcome Back!</h2>
           <p className="mt-3 text-sm text-gray-700">
             Your child&apos;s personalised learning journey continues here.
           </p>
+          <div className="mt-6 flex items-center justify-center gap-x-5">
+            <div className="flex flex-col items-center text-center">
+              <Image src="/images/presenter-004.webp" alt="" width={90} height={90} className="object-contain" />
+              <p className="mt-1 text-xs font-semibold text-gray-900">Personalised</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Image src="/images/presenter-sitting-005.webp" alt="" width={110} height={165} className="object-contain" />
+              <p className="mt-1 text-xs font-semibold text-gray-900">Interactive</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Image src="/images/presenter-002.webp" alt="" width={90} height={135} className="object-contain" />
+              <p className="mt-1 text-xs font-semibold text-gray-900">Fun</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Right panel — Form */}
-      <div className="flex w-full lg:w-3/5 flex-col justify-center bg-gradient-to-br from-primary-50 via-white to-secondary-50 px-4 py-12 relative">
+      <div className="flex w-full lg:w-1/2 flex-col justify-center bg-gradient-to-br from-primary-50 via-white to-secondary-50 px-4 py-12 relative">
         <div className="mx-auto w-full max-w-lg">
           <div className="mb-6 flex justify-center">
             <Link href="/">
@@ -147,6 +209,55 @@ function SignInContent() {
             Back to home
           </Link>
 
+          {showChooser ? (
+            <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+              <div className="flex flex-col items-center text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50">
+                  <CheckCircle2 className="h-7 w-7 text-green-600" />
+                </div>
+                <h1 className="mt-4 text-2xl font-bold text-gray-900">
+                  You&apos;re signed in!
+                </h1>
+                <p className="mt-2 text-sm text-gray-600">
+                  Where would you like to go next?
+                </p>
+              </div>
+
+              <div className="mt-8 grid gap-3">
+                <button type="button" onClick={() => goToDestination("dashboard")} className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 text-left hover:border-primary/30 hover:bg-primary-50 hover:shadow-sm transition-all">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-secondary-50 text-secondary"><LayoutDashboard className="h-5 w-5" /></span>
+                  <span className="flex flex-col">
+                    <span className="text-sm font-semibold text-gray-900 group-hover:text-primary">Let&apos;s go to users dashboard</span>
+                    <span className="text-xs text-gray-500">Progress, reports &amp; lessons</span>
+                  </span>
+                </button>
+                <button type="button" onClick={() => goToDestination("lesson")} className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 text-left hover:border-primary/30 hover:bg-primary-50 hover:shadow-sm transition-all">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary"><PlusCircle className="h-5 w-5" /></span>
+                  <span className="flex flex-col">
+                    <span className="text-sm font-semibold text-gray-900 group-hover:text-primary">Let&apos;s create a brand new lesson</span>
+                    <span className="text-xs text-gray-500">Pick a subject and get started</span>
+                  </span>
+                </button>
+                <button type="button" onClick={() => goToDestination("home")} className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 text-left hover:border-primary/30 hover:bg-primary-50 hover:shadow-sm transition-all">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary"><Home className="h-5 w-5" /></span>
+                  <span className="flex flex-col">
+                    <span className="text-sm font-semibold text-gray-900 group-hover:text-primary">Let&apos;s go to HOME page</span>
+                    <span className="text-xs text-gray-500">Back to the KokoLearn home page</span>
+                  </span>
+                </button>
+              </div>
+              <p className="mt-4 text-center text-xs font-medium text-gray-500">Only 2 lesson trials in FREE 24 hour period</p>
+              <label className="mt-5 flex items-start gap-2.5 text-xs text-gray-500">
+                <input
+                  type="checkbox"
+                  checked={rememberChoice}
+                  onChange={(e) => setRememberChoice(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-primary focus:ring-2 focus:ring-primary/20"
+                />
+                Always take me there next time - future sign-ins will go straight to whichever option you pick.
+              </label>
+            </div>
+          ) : (
           <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm relative">
             <div className="flex flex-col items-center text-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
@@ -207,6 +318,7 @@ function SignInContent() {
                     placeholder="Enter your password"
                     className="block w-full rounded-lg border border-gray-200 px-4 py-3 pr-11 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
                   />
+                  <p className="mt-1 text-xs font-semibold text-amber-600">Please enter details - CASE SENSITIVE</p>
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -265,6 +377,7 @@ function SignInContent() {
               </Link>
             </p>
           </div>
+          )}
         </div>
       </div>
 

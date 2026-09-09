@@ -360,7 +360,7 @@ export default function DemoPage() {
                     <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Weekly focus: Maths &amp; English (KS1)</li>
                       <li>• Interest-driven: Dinosaur maths, space stories</li>
-                      <li>• 3 personalised lessons in the free trial</li>
+                      <li>• 2 personalised lessons in the free trial</li>
                     </ul>
                   </div>
                   <div className="flex gap-3 mt-4">
@@ -384,7 +384,7 @@ export default function DemoPage() {
             <div className="grid gap-6 lg:grid-cols-3">
               {[
                 { name: "24 Hour Trial", price: "£0", period: "24 hours", badge: "FREE", color: "bg-green-100 text-green-700",
-                  features: ["3 personalised lessons", "Voice narration", "Basic progress", "1 child"],
+                  features: ["2 personalised lessons", "Voice narration", "Basic progress", "1 child"],
                   popular: false, cta: "Try Free", href: "/sign-up" },
                 { name: "Premium", price: "£9.99", period: "per month", badge: "Most Popular", color: "bg-primary-100 text-primary",
                   features: ["Unlimited lessons", "PDF reports", "Full curriculum", "AI tutor chat", "1 child", "Email support"],

@@ -248,6 +248,15 @@ function TestimonialWelcome() {
 
 
 
+// ── Free Trial Usage (from /api/subscription/status) ──
+type TrialStatus = {
+  isPremium: boolean;
+  lessonsUsed: number;
+  lessonLimit: number | null;
+  lessonsRemaining: number | null;
+  limitReached: boolean;
+};
+
 // ── Lesson Helpers ──
 function getLessonEmoji(subject: string): string {
   const map: Record<string, string> = { Maths: "🔢", English: "📖", Science: "🔬", Geography: "🌍", History: "🏰", Art: "🎨", Computing: "💻", AI: "🤖" };
@@ -348,8 +357,9 @@ export default function Dashboard() {
   const [timeView, setTimeView] = useState<"weekly" | "monthly">("weekly");
   const [hasExtendedQuestions, setHasExtendedQuestions] = useState(false);
   const [questionCount, setQuestionCount] = useState(5);
+  const [trialStatus, setTrialStatus] = useState<TrialStatus | null>(null);
 
-  // Check subscription status for extended questions
+  // Check subscription status for extended questions and free trial usage
   useEffect(() => {
     if (!session?.user?.id) return;
     fetch("/api/subscription/status")
@@ -357,6 +367,13 @@ export default function Dashboard() {
       .then(data => {
         setHasExtendedQuestions(data.extendedQuestions);
         setQuestionCount(data.questionCount);
+        setTrialStatus({
+          isPremium: Boolean(data.isPremium),
+          lessonsUsed: data.lessonsUsed ?? 0,
+          lessonLimit: data.lessonLimit ?? null,
+          lessonsRemaining: data.lessonsRemaining ?? null,
+          limitReached: Boolean(data.limitReached),
+        });
       })
       .catch(() => {});
   }, [session]);
@@ -409,8 +426,10 @@ export default function Dashboard() {
       .slice(0, 2),
   };
 
-  const isPremium =
-    user.plan !== "free_trial" && user.subscription_status === "active";
+  const isPremium = trialStatus
+    ? trialStatus.isPremium
+    : user.plan !== "free_trial" && user.subscription_status === "active";
+  const trialLimitReached = !isPremium && Boolean(trialStatus?.limitReached);
 
   // ── Compute stats from real lesson data ──
   const completedLessons = realLessons?.filter((l: any) => l.completed) || [];
@@ -573,9 +592,16 @@ export default function Dashboard() {
             <h1 className="text-2xl font-bold text-gray-900">Welcome back, {user.name.split(" ")[0]}! 👋</h1>
             <p className="mt-1 text-sm text-gray-500">Here&apos;s {child.name}&apos;s learning overview.</p>
             {!isPremium && (
-              <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-xs font-medium text-amber-700">
+              <div className="mt-2 inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-xs font-medium text-amber-700">
                 <Crown className="h-3 w-3" />
-                Free Trial —{' '}
+                <span>
+                  {trialStatus?.lessonLimit
+                    ? trialLimitReached
+                      ? `Free Trial — all ${trialStatus.lessonLimit} lessons used`
+                      : `Free Trial — ${trialStatus.lessonsUsed} of ${trialStatus.lessonLimit} lessons used`
+                    : "Free Trial"}
+                  {" —"}
+                </span>
                 <button
                   onClick={() => handleUpgrade("premium")}
                   className="underline font-semibold hover:text-amber-800"
@@ -625,7 +651,7 @@ export default function Dashboard() {
           <div className="grid gap-3 sm:grid-cols-3">
             {(
               [
-                { icon: <Zap className="h-5 w-5" />, label: `Generate New Lesson${lessonCount > 0 ? ` (${lessonCount} completed)` : ""}`, desc: `${questionCount} questions per lesson`, href: "", color: "text-amber-600", bg: "bg-amber-50", onClick: () => setShowSubjectPicker(true) },
+                { icon: <Zap className="h-5 w-5" />, label: trialLimitReached ? "Free trial limit reached" : `Generate New Lesson${lessonCount > 0 ? ` (${lessonCount} completed)` : ""}`, desc: trialLimitReached ? `All ${trialStatus?.lessonLimit} free lessons used — subscribe for unlimited` : `${questionCount} questions per lesson`, href: "", color: trialLimitReached ? "text-primary" : "text-amber-600", bg: trialLimitReached ? "bg-primary-50" : "bg-amber-50", onClick: trialLimitReached ? () => handleUpgrade("premium") : () => setShowSubjectPicker(true) },
                 { icon: <BookOpen className="h-5 w-5" />, label: "Browse Curriculum", desc: "Full UK National Curriculum map", href: "/curriculum", color: "text-purple-600", bg: "bg-purple-50", onClick: undefined },
                 ...(isPremium
                   ? []

@@ -92,6 +92,7 @@ export default function OrganisationsPage() {
           <div className="flex items-center gap-3">
             <BackButton className="text-sm font-medium text-gray-600" />
             <HomeButton className="text-sm font-medium text-gray-600" />
+            <Link href="/dashboard" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">User Dashboard</Link>
             <Link href="/sign-in" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Sign In</Link>
             <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all">FREE TRIAL</Link>
           </div>
@@ -308,6 +309,7 @@ export default function OrganisationsPage() {
           </div>
           <div className="mt-8 border-t border-primary-100/30 pt-6 text-center">
             <p className="text-xs text-gray-400">&copy; {today} KokoLearn.org. A PAD-CIC initiative.</p>
+<div className="mt-4 text-center"><Link href="/admin" className="text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
           </div>
         </div>
       </footer>

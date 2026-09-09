@@ -73,6 +73,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
   const [showReward, setShowReward] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [generated, setGenerated] = useState(false);
+  const [trialLimit, setTrialLimit] = useState<{ lessonsUsed: number; lessonLimit: number | null } | null>(null);
   // ── Check if user has Extended Questions add-on ──
   const [questionCount, setQuestionCount] = useState(5);
 
@@ -120,6 +121,15 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
+        if (res.status === 403 && data.code === "free_trial_limit_reached") {
+          setTrialLimit({
+            lessonsUsed: data.lessonsUsed ?? 0,
+            lessonLimit: data.lessonLimit ?? null,
+          });
+          setError(data.error || "Free trial limit reached.");
+          setPhase("learning");
+          return;
+        }
         throw new Error(data.error || `Failed to generate lesson (${res.status})`);
       }
 
@@ -142,7 +152,22 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
     hasGenerated.current = false;
     setGenerated(false);
     setError(null);
+    setTrialLimit(null);
     void generateLesson();
+  };
+
+  const handleUpgrade = async () => {
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: "premium", interval: "monthly" }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch (err) {
+      console.error("Upgrade failed:", err);
+    }
   };
 
   useEffect(() => {
@@ -299,11 +324,43 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
           <div className="mx-auto mb-6">
             <SubjectImage subject={subject} size={160} className="opacity-80" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h1>
-          <p className="text-gray-500 mb-6">{error}</p>
-          <button onClick={retryGeneration} className="rounded-xl bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all">
-            Try Again
-          </button>
+          {trialLimit ? (
+            <>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                That&apos;s your free trial complete! 🎉
+              </h1>
+              <p className="text-gray-500 mb-2">
+                {trialLimit.lessonLimit
+                  ? `You've used all ${trialLimit.lessonLimit} of your free lessons.`
+                  : "You've used all of your free lessons."}
+              </p>
+              <p className="text-gray-500 mb-6">
+                Subscribe to Premium for unlimited personalised lessons, full progress reports, and the AI tutor chat.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={handleUpgrade}
+                  className="rounded-xl bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all"
+                >
+                  Subscribe to Premium
+                </button>
+                <Link
+                  href="/dashboard"
+                  className="rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-600 hover:border-primary/30 hover:text-primary transition-all"
+                >
+                  Back to dashboard
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h1>
+              <p className="text-gray-500 mb-6">{error}</p>
+              <button onClick={retryGeneration} className="rounded-xl bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all">
+                Try Again
+              </button>
+            </>
+          )}
         </div>
       </div>
     );

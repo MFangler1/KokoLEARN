@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { stripe, PRICE_IDS } from "@/lib/stripe/server";
+import { PRICE_IDS } from "@/lib/stripe/server";
+import { getStripe } from "@/lib/stripe/server";
 import type { PlanType, BillingInterval } from "@/lib/stripe/server";
 import { initAuth } from "@/lib/auth/server";
 
 export async function POST(req: Request) {
   try {
+    const stripe = getStripe();
     const auth = await initAuth();
     const session = await auth.api.getSession({
       headers: new Headers(req.headers),

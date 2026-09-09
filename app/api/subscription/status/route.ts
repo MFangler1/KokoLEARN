@@ -6,6 +6,7 @@ import { getDb } from "@/lib/db";
 import { subscriptions } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { initAuth } from "@/lib/auth/server";
+import { getTrialUsage } from "@/lib/trial";
 
 export async function GET(req: Request) {
   try {
@@ -37,9 +38,16 @@ export async function GET(req: Request) {
       }
     }
 
+    const trialUsage = await getTrialUsage(session.user.id);
+
     return NextResponse.json({
       extendedQuestions,
       questionCount: extendedQuestions ? 10 : 5,
+      isPremium: trialUsage.isPremium,
+      lessonsUsed: trialUsage.lessonsUsed,
+      lessonLimit: trialUsage.lessonLimit,
+      lessonsRemaining: trialUsage.lessonsRemaining,
+      limitReached: trialUsage.limitReached,
     });
   } catch (err) {
     console.error("Subscription status error:", err);

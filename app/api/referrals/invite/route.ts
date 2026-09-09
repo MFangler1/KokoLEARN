@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     const db = await getDb();
     if (!db) return NextResponse.json({ error: "Database unavailable" }, { status: 500 });
 
-    let existing = await db
+    const existing = await db
       .select()
       .from(referrals)
       .where(eq(referrals.referrerUserId, session.user.id))

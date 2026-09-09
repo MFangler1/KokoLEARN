@@ -10,7 +10,7 @@ const plans = [
     badge: "FREE",
     badgeColor: "bg-green-100 text-green-700",
     features: [
-      "3 personalised lessons",
+      "2 personalised lessons",
       "Voice narration (AI)",
       "Basic progress tracking",
       "1 child profile",
@@ -148,7 +148,7 @@ export default function PricingPage() {
           <div className="space-y-6">
             {[
               { q: "Can I cancel anytime?", a: "Yes. You can cancel your subscription at any time. Your access continues until the end of your billing period." },
-              { q: "Is there a free trial?", a: "Yes! You get 24 hours of full access with 3 free lessons — no credit card required." },
+              { q: "Is there a free trial?", a: "Yes! You get 24 hours of full access with 2 free lessons — no credit card required." },
               { q: "Can I switch plans?", a: "Absolutely. You can upgrade or downgrade at any time. Changes take effect on your next billing date." },
               { q: "Do you offer refunds?", a: "We offer a full refund within 14 days of purchase if you're not satisfied. See our Refund Policy for details." },
             ].map((faq) => (
@@ -181,6 +181,7 @@ export default function PricingPage() {
       <footer className="border-t border-gray-100 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
           <p className="text-sm text-gray-500">© 2026 KokoLearn. All rights reserved.</p>
+<div className="mt-4 text-center"><Link href="/admin" className="text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
           <div className="flex gap-4">
             <Link href="/legal/privacy" className="text-sm text-gray-500 hover:text-primary">Privacy</Link>
             <Link href="/legal/terms" className="text-sm text-gray-500 hover:text-primary">Terms</Link>

@@ -196,6 +196,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
           <div className="mt-8 border-t border-primary-100/30 pt-6 text-center">
             <p className="text-xs text-gray-400">&copy; {today} KokoLearn.org. A PAD-CIC initiative.</p>
+<div className="mt-4 text-center"><Link href="/admin" className="text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
           </div>
         </div>
       </footer>

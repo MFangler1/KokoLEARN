@@ -70,17 +70,8 @@ export default function SignUp() {
     <div className="flex min-h-screen justify-center bg-white">
       <div className="flex w-full max-w-6xl flex-row">
       {/* Left panel — Pixar imagery */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-primary-200/70 to-primary-400/70">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/howitworks-learn-explore.webp"
-            alt=""
-            fill
-            className="object-cover opacity-15"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-400/20 to-transparent" />
-        <div className="relative z-10 mx-auto flex h-full max-w-sm flex-col items-center justify-center px-8 text-center">
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-white">
+        <div className="relative z-10 mx-auto flex h-full max-w-md flex-col items-center justify-center px-8 text-center">
           <div className="mb-3">
             <Link href="/">
               <Image
@@ -95,9 +86,9 @@ export default function SignUp() {
           <Image
             src="/images/presenter-001.webp"
             alt=""
-            width={240}
-            height={240}
-            className="object-contain mb-6 drop-shadow-lg"
+            width={200}
+            height={200}
+            className="object-contain mb-4 drop-shadow-lg"
           />
           <h2 className="text-3xl font-bold text-gray-900">
             Start Learning Today
@@ -106,13 +97,13 @@ export default function SignUp() {
             Your child&apos;s interests become their lessons — personalised,
             engaging, and aligned to the UK National Curriculum.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-6">
+          <div className="mt-6 flex items-center justify-center gap-x-5">
             <div className="flex flex-col items-center text-center">
               <Image
                 src="/images/presenter-004.webp"
                 alt=""
-                width={120}
-                height={120}
+                width={100}
+                height={100}
                 className="object-contain"
               />
               <p className="mt-2 text-xs font-semibold text-gray-900">
@@ -123,8 +114,8 @@ export default function SignUp() {
               <Image
                 src="/images/presenter-sitting-005.webp"
                 alt=""
-                width={160}
-                height={240}
+                width={130}
+                height={195}
                 className="object-contain"
               />
               <p className="mt-2 text-xs font-semibold text-gray-900">
@@ -135,8 +126,8 @@ export default function SignUp() {
               <Image
                 src="/images/presenter-002.webp"
                 alt=""
-                width={120}
-                height={180}
+                width={100}
+                height={150}
                 className="object-contain"
               />
               <p className="mt-2 text-xs font-semibold text-gray-900">Fun</p>
@@ -183,8 +174,9 @@ export default function SignUp() {
                 Start Your FREE 24 Hour Trial
               </h1>
               <p className="mt-2 text-sm text-gray-600">
-                24 HOUR FREE TRIAL — No credit card required.
+                24 HOUR FREE TRIAL - No credit card required.
               </p>
+              <p className="mt-1 text-center text-xs font-semibold text-amber-600">Only 2 lesson trials in FREE 24 hour period</p>
             </div>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">
@@ -258,6 +250,7 @@ export default function SignUp() {
                   placeholder="Create a password (min. 8 characters)"
                   className="mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
                 />
+                  <p className="mt-1 text-xs font-semibold text-amber-600">Please enter details - CASE SENSITIVE</p>
               </div>
               <div>
                 <label
@@ -275,6 +268,7 @@ export default function SignUp() {
                   placeholder="Re-enter your password"
                   className="mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
                 />
+                  <p className="mt-1 text-xs font-semibold text-amber-600">Please enter details - CASE SENSITIVE</p>
               </div>
 
               {error && (

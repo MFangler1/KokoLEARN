@@ -6,6 +6,7 @@ import { getSupabase } from "@/lib/supabase/server";
 import { buildLessonPrompt, parseLessonResponse, type GeneratedLesson } from "@/lib/curriculum/prompts";
 import { getNextObjective, getKeyStage, type Subject } from "@/lib/curriculum/data";
 import { initAuth } from "@/lib/auth/server";
+import { getTrialUsage } from "@/lib/trial";
 
 function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: number): GeneratedLesson | null {
   if (!lesson.title || !lesson.subject || !lesson.objective || !lesson.explanation) return null;
@@ -68,6 +69,20 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { error: "Lesson storage is not configured. Please try again later." },
         { status: 503 }
+      );
+    }
+
+    // ── Free trial cap (account-wide, checked before any AI spend) ──
+    const trialUsage = await getTrialUsage(userId);
+    if (trialUsage.limitReached) {
+      return NextResponse.json(
+        {
+          error: `Free trial limit reached — ${trialUsage.lessonsUsed} lessons used. Upgrade to Premium for unlimited lessons.`,
+          code: "free_trial_limit_reached",
+          lessonsUsed: trialUsage.lessonsUsed,
+          lessonLimit: trialUsage.lessonLimit,
+        },
+        { status: 403 }
       );
     }
 
