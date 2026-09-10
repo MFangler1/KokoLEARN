@@ -4,21 +4,6 @@
   "updatedAt": "2026-09-10",
   "entries": [
     {
-      "key": "plumbing/demo-owl",
-      "subject": "Science",
-      "keyStages": [
-        "KS1",
-        "KS2"
-      ],
-      "topics": [
-        "PLUMBING TEST"
-      ],
-      "file": "plumbing/demo-owl.webp",
-      "alt": "Plumbing test image - a friendly KokoLearn character",
-      "approved": true,
-      "credit": "KokoLearn (plumbing test - replace with real library art)"
-    },
-    {
       "key": "english/castle-setting",
       "subject": "English",
       "keyStages": [
@@ -32,7 +17,7 @@
       ],
       "file": "english/castle-setting.jpg",
       "alt": "A cartoon castle on a hill with towers and a drawbridge",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -49,7 +34,7 @@
       ],
       "file": "english/character-explorer.jpg",
       "alt": "A cheerful cartoon child explorer with a map and a backpack",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -66,7 +51,7 @@
       ],
       "file": "english/forest-setting.jpg",
       "alt": "A friendly cartoon forest with tall trees and a winding path",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -83,7 +68,7 @@
       ],
       "file": "english/story-sequence.jpg",
       "alt": "A cartoon storyboard of three connected picture panels",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -99,7 +84,7 @@
       ],
       "file": "geography/coastline.jpg",
       "alt": "A cartoon coastline with a sandy beach, cliffs and a lighthouse",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -114,7 +99,7 @@
       ],
       "file": "geography/mountains.jpg",
       "alt": "Cartoon mountains with snow caps and a green valley below",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -130,7 +115,7 @@
       ],
       "file": "geography/rainforest.jpg",
       "alt": "A colourful cartoon rainforest with tall trees and broad leaves",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -145,7 +130,7 @@
       ],
       "file": "geography/river.jpg",
       "alt": "A cartoon river winding through green fields",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -160,7 +145,7 @@
       ],
       "file": "history/egyptian-pyramid.jpg",
       "alt": "A cartoon pyramid in the desert with palm trees and the River Nile",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -175,7 +160,7 @@
       ],
       "file": "history/roman-soldier.jpg",
       "alt": "A cartoon Roman soldier with a helmet and a shield",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -190,7 +175,7 @@
       ],
       "file": "history/stone-age-camp.jpg",
       "alt": "A cartoon Stone Age camp with round tents and a campfire",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -205,7 +190,7 @@
       ],
       "file": "history/viking-longship.jpg",
       "alt": "A cartoon Viking longship with a striped sail on the sea",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -219,7 +204,7 @@
       ],
       "file": "maths/2d-shapes.jpg",
       "alt": "Cartoon illustration for 2d shapes",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -233,7 +218,7 @@
       ],
       "file": "maths/3d-shapes.jpg",
       "alt": "Cartoon illustration for 3d shapes",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -249,7 +234,7 @@
       ],
       "file": "maths/clock.jpg",
       "alt": "A bright cartoon clock face showing the time",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -263,7 +248,7 @@
       ],
       "file": "maths/fractions-pizza.jpg",
       "alt": "Cartoon illustration for fractions pizza",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -278,7 +263,7 @@
       ],
       "file": "science/circuit.jpg",
       "alt": "A cartoon circuit with a battery, bulb and wires",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -293,7 +278,7 @@
       ],
       "file": "science/digestion.jpg",
       "alt": "A friendly cartoon diagram of the digestive system",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -308,7 +293,7 @@
       ],
       "file": "science/volcano.jpg",
       "alt": "A cartoon volcano with smoke and glowing lava",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -323,7 +308,7 @@
       ],
       "file": "science/food-chain.jpg",
       "alt": "A cartoon food chain with plants, a rabbit and a fox",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -338,7 +323,7 @@
       ],
       "file": "science/forces-magnets.jpg",
       "alt": "Cartoon magnets attracting metal objects",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -353,7 +338,7 @@
       ],
       "file": "science/light-shadows.jpg",
       "alt": "A cartoon scene showing light casting a shadow",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -368,7 +353,7 @@
       ],
       "file": "science/plant-lifecycle.jpg",
       "alt": "A cartoon plant growing from seed to flower",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -383,7 +368,7 @@
       ],
       "file": "science/rocks-fossils.jpg",
       "alt": "Cartoon rocks with a fossil imprint",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -398,7 +383,7 @@
       ],
       "file": "science/solar-system.jpg",
       "alt": "A cartoon solar system with planets around the sun",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -413,7 +398,7 @@
       ],
       "file": "science/states-of-matter.jpg",
       "alt": "Cartoon ice, water and steam showing three states",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     },
     {
@@ -428,7 +413,7 @@
       ],
       "file": "science/water-cycle.jpg",
       "alt": "A cartoon water cycle with clouds, rain and a river",
-      "approved": false,
+      "approved": true,
       "credit": "KokoLearn"
     }
   ]
