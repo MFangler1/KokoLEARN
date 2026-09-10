@@ -6,6 +6,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, Sparkles, CheckCircle, XCircle, Star, Home, Loader2, Clock } from "lucide-react";
 import { useSession } from "@/lib/auth/client";
 import type { Subject } from "@/lib/curriculum/data";
@@ -19,6 +20,9 @@ interface Question {
   question: string;
   options: string[];
   correctIndex: number;
+  imageKey?: string;
+  imagePath?: string;
+  imageAlt?: string;
   explanation: string;
 }
 
@@ -503,9 +507,23 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
 
           {/* Question card with audio */}
           <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+            {q.imagePath && (
+              <div className="mb-5 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+                <Image
+                  src={q.imagePath}
+                  alt={q.imageAlt || ""}
+                  width={900}
+                  height={500}
+                  className="h-auto w-full object-contain"
+                />
+                {q.imageAlt ? (
+                  <p className="border-t border-gray-100 px-3 py-2 text-xs text-gray-500">{q.imageAlt}</p>
+                ) : null}
+              </div>
+            )}
             <div className="flex items-start justify-between gap-4 mb-6">
               <h2 className="text-xl font-bold text-gray-900 flex-1">{q.question}</h2>
-              <SpeakButton text={q.question + ". Options: " + q.options.join(". ")} label="Read question" />
+              <SpeakButton text={(q.imageAlt ? "Look at the picture: " + q.imageAlt + ". " : "") + q.question + ". Options: " + q.options.join(". ")} label="Read question" />
               {!showExplanation && (
                 <button
                   onClick={handleShowAnswer}

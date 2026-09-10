@@ -18,6 +18,10 @@ export interface LessonQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /** Optional picture from the KokoLearn library (plumbing for image questions). */
+  imageKey?: string;
+  imagePath?: string;
+  imageAlt?: string;
 }
 
 export interface GeneratedLesson {

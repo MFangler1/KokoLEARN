@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "basePath": "/images/library",
+  "updatedAt": "2026-09-10",
+  "entries": [
+    {
+      "key": "plumbing/demo-owl",
+      "subject": "Science",
+      "keyStages": ["KS1", "KS2"],
+      "topics": ["PLUMBING TEST"],
+      "file": "plumbing/demo-owl.webp",
+      "alt": "Plumbing test image - a friendly KokoLearn character",
+      "approved": true,
+      "credit": "KokoLearn (plumbing test - replace with real library art)"
+    }
+  ]
+}

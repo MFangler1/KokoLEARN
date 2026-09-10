@@ -8,6 +8,8 @@ import { getNextObjective, getKeyStage, type Subject } from "@/lib/curriculum/da
 import { initAuth } from "@/lib/auth/server";
 import { getTrialUsage } from "@/lib/trial";
 import { recentSeenQuestions, recordSeenQuestions, normaliseQuestion, isNearDuplicate } from "@/lib/questionMemory";
+import { isAdminEmail } from "@/lib/entitlements";
+import { attachImagesToQuestions } from "@/lib/imageLibrary";
 
 function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: number): GeneratedLesson | null {
   if (!lesson.title || !lesson.subject || !lesson.objective || !lesson.explanation) return null;
@@ -84,7 +86,10 @@ export async function POST(req: Request) {
     }
 
     // ── Free trial cap (account-wide, checked before any AI spend) ──
-    const trialUsage = await getTrialUsage(userId);
+    // Staff / demo accounts are never capped.
+    const trialUsage = isAdminEmail(session.user.email)
+      ? { limitReached: false, lessonsUsed: 0, lessonLimit: null as number | null }
+      : await getTrialUsage(userId);
     if (trialUsage.limitReached) {
       return NextResponse.json(
         {
@@ -251,9 +256,15 @@ export async function POST(req: Request) {
     // Remember what this child has now seen, so future lessons differ.
     await recordSeenQuestions(userId, childName, subject, chosenLesson.questions.map((q) => q.question));
 
+    // Attach library pictures to a couple of questions when the library has suitable art.
+    const withImages = {
+      ...chosenLesson,
+      questions: attachImagesToQuestions(chosenLesson.questions, subject, interests, keyStage ?? undefined),
+    };
+
     // Add metadata
     const lessonData: GeneratedLesson & { objectiveId: string; keyStage: string } = {
-      ...chosenLesson,
+      ...withImages,
       objectiveId: objective.id,
       keyStage,
     };
