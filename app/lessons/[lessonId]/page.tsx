@@ -68,6 +68,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [assisted, setAssisted] = useState(false);
   const [stars, setStars] = useState(0);
   const [newAchievements, setNewAchievements] = useState<any[]>([]);
   const [showReward, setShowReward] = useState(false);
@@ -203,6 +204,19 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
     if (isCorrect) setCorrectCount(c => c + 1);
   };
 
+  // "Show me the answer" - reveals the answer and records it as assisted (not correct).
+  const handleShowAnswer = () => {
+    if (!lesson || selectedAnswer !== null || assisted) return;
+    setAssisted(true);
+    setShowExplanation(true);
+    setAnswers(prev => [...prev, {
+      questionIndex: currentQuestion,
+      selectedAnswer: -1,
+      correctAnswer: lesson.questions[currentQuestion].correctIndex,
+      isCorrect: false,
+    }]);
+  };
+
   // Go to next question
   const nextQuestion = () => {
     if (!lesson) return;
@@ -210,6 +224,7 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
       setCurrentQuestion(q => q + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
+      setAssisted(false);
     } else {
       finishLesson();
     }
@@ -491,6 +506,14 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
             <div className="flex items-start justify-between gap-4 mb-6">
               <h2 className="text-xl font-bold text-gray-900 flex-1">{q.question}</h2>
               <SpeakButton text={q.question + ". Options: " + q.options.join(". ")} label="Read question" />
+              {!showExplanation && (
+                <button
+                  onClick={handleShowAnswer}
+                  className="mt-3 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-600 hover:border-primary/30 hover:text-primary transition-all"
+                >
+                  Show me the answer
+                </button>
+              )}
             </div>
             <div className="space-y-3">
               {q.options.map((option, index) => {
@@ -597,6 +620,31 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
             {/* Progress ring visual */}
             <div className="h-3 w-full overflow-hidden rounded-full bg-gray-200">
               <div className="h-full rounded-full bg-gradient-to-r from-primary to-secondary transition-all" style={{ width: `${score}%` }} />
+            </div>
+          </div>
+
+          {/* Praise + encouragement */}
+          <div className="mb-8 rounded-2xl border border-primary-100 bg-primary-50/50 p-5 text-left">
+            <div className="flex items-start gap-3">
+              <SpeakButton
+                text={`Well done, ${childName}! You finished the whole lesson and got ${correctCount} out of ${lesson.questions.length} correct. I am really proud of your effort.`}
+                label="Celebrate"
+              />
+              <div>
+                <p className="text-sm font-bold text-gray-900">Brilliant effort, {childName}!</p>
+                <p className="mt-1 text-xs text-gray-600">
+                  You completed {lesson.questions.length} questions and got {correctCount} right. Every question makes your brain stronger.
+                </p>
+              </div>
+            </div>
+            <p className="mt-3 text-xs text-gray-500">Would you like to try another lesson, or take a well-earned break?</p>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+              <Link href={nextLink} className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-center text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all">
+                Try another lesson
+              </Link>
+              <Link href="/dashboard" className="rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-center text-sm font-semibold text-gray-700 hover:border-primary/30 hover:text-primary transition-all">
+                Take a break
+              </Link>
             </div>
           </div>
 

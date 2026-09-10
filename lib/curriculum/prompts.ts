@@ -9,6 +9,8 @@ export interface LessonGenerationInput {
   objectiveId: string;
   keyStage: string;
   questionCount?: number;
+  difficulty?: "normal" | "medium" | "advanced";
+  avoidQuestions?: string[];
 }
 
 export interface LessonQuestion {
@@ -63,6 +65,13 @@ STUDENT PROFILE:
 
 CURRICULUM OBJECTIVE:
 ${input.objective} (ID: ${input.objectiveId})
+
+DIFFICULTY LEVEL: ${(input.difficulty ?? "normal").toUpperCase()}
+${input.difficulty === "advanced" ? "- Stretch the child: multi-step reasoning, less scaffolding, richer vocabulary." : input.difficulty === "medium" ? "- Steady challenge: mix recall with reasoning; some multi-step questions." : "- Gentle start: clear, concrete, confidence-building questions."}
+${input.avoidQuestions && input.avoidQuestions.length ? `
+DO NOT REPEAT THESE PREVIOUSLY SEEN QUESTIONS (or close variants):
+${input.avoidQuestions.slice(0, 25).map((q) => `- ${q}`).join("\n")}
+` : ""}
 
 AGE-APPROPRIATE LANGUAGE GUIDELINES:
 ${getAgeGuidelines(input.childAge)}

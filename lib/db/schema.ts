@@ -1,7 +1,7 @@
 import * as authSchema from "./auth.schema";
 
 // Custom application schemas go here
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
 
 // Example: Custom user profile extensions
 export const profiles = sqliteTable("profiles", {
@@ -59,9 +59,24 @@ export const reportAddons = sqliteTable("report_addons", {
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });
 
+// ── Seen questions (per child + subject) so lessons don't repeat ──
+export const seenQuestions = sqliteTable(
+  "seen_questions",
+  {
+    userId: text("user_id").notNull(),
+    childId: text("child_id").notNull(),
+    subject: text("subject").notNull(),
+    questionKey: text("question_key").notNull(),
+    sample: text("sample"),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.childId, t.subject, t.questionKey] })]
+);
+
 // Combine all schemas for exports
 export const schema = {
   reportAddons,
+  seenQuestions,
   ...authSchema,
   subscriptions,
   achievements,

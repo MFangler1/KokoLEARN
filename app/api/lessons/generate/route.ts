@@ -7,6 +7,7 @@ import { buildLessonPrompt, parseLessonResponse, type GeneratedLesson } from "@/
 import { getNextObjective, getKeyStage, type Subject } from "@/lib/curriculum/data";
 import { initAuth } from "@/lib/auth/server";
 import { getTrialUsage } from "@/lib/trial";
+import { recentSeenQuestions, recordSeenQuestions, normaliseQuestion, isNearDuplicate } from "@/lib/questionMemory";
 
 function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: number): GeneratedLesson | null {
   if (!lesson.title || !lesson.subject || !lesson.objective || !lesson.explanation) return null;
@@ -63,6 +64,16 @@ export async function POST(req: Request) {
     const age = parseInt(childAge);
     const keyStage = getKeyStage(age);
 
+    // Difficulty: parent override wins, otherwise derive from age (three tiers).
+    const difficulty: "normal" | "medium" | "advanced" =
+      body.difficulty === "medium" || body.difficulty === "advanced" || body.difficulty === "normal"
+        ? body.difficulty
+        : age <= 7
+          ? "normal"
+          : age <= 9
+            ? "medium"
+            : "advanced";
+
     // Get the next uncompleted objective for this child
     const supabase = getSupabase() as any;
     if (!supabase) {
@@ -111,6 +122,9 @@ export async function POST(req: Request) {
       );
     }
 
+    // Previously seen questions for this child + subject (avoid repeats).
+    const seen = await recentSeenQuestions(userId, childName, subject);
+
     // Build the AI prompt
     const prompt = buildLessonPrompt({
       childName,
@@ -121,6 +135,8 @@ export async function POST(req: Request) {
       objectiveId: objective.id,
       keyStage,
       questionCount: questionCount || 5,
+      difficulty,
+      avoidQuestions: seen.samples,
     });
 
     // Call DeepSeek API
@@ -186,9 +202,58 @@ export async function POST(req: Request) {
       );
     }
 
+    // ── Duplicate avoidance (one retry with a stricter exclusion list) ──
+    let chosenLesson = lesson;
+    let chosenNormalised = chosenLesson.questions.map((q) => normaliseQuestion(q.question));
+    if (seen.keys.length && chosenNormalised.some((n) => isNearDuplicate(n, seen.keys))) {
+      try {
+        const retryPrompt = buildLessonPrompt({
+          childName,
+          childAge: age,
+          interests,
+          subject,
+          objective: objective.objective,
+          objectiveId: objective.id,
+          keyStage,
+          questionCount: questionCount || 5,
+          difficulty,
+          avoidQuestions: [...seen.samples, ...chosenLesson.questions.map((q) => q.question)],
+        });
+        const retryRes = await fetch("https://api.deepseek.com/v1/chat/completions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+          body: JSON.stringify({
+            model: "deepseek-chat",
+            messages: [
+              { role: "system", content: "You are an expert UK primary school teacher. You create personalised, curriculum-aligned lessons. Always respond with valid JSON only." },
+              { role: "user", content: retryPrompt },
+            ],
+            temperature: 0.8,
+            max_tokens: 4000,
+            response_format: { type: "json_object" },
+          }),
+        });
+        if (retryRes.ok) {
+          const retryData = await retryRes.json();
+          const retryRaw = retryData.choices?.[0]?.message?.content;
+          const retryParsed = retryRaw ? parseLessonResponse(retryRaw) : null;
+          const retryLesson = retryParsed && validateAndShuffleLesson(retryParsed, expectedQuestions);
+          if (retryLesson) {
+            chosenLesson = retryLesson;
+            chosenNormalised = retryLesson.questions.map((q) => normaliseQuestion(q.question));
+          }
+        }
+      } catch (err) {
+        console.error("Duplicate-avoidance retry failed:", err);
+      }
+    }
+
+    // Remember what this child has now seen, so future lessons differ.
+    await recordSeenQuestions(userId, childName, subject, chosenLesson.questions.map((q) => q.question));
+
     // Add metadata
     const lessonData: GeneratedLesson & { objectiveId: string; keyStage: string } = {
-      ...lesson,
+      ...chosenLesson,
       objectiveId: objective.id,
       keyStage,
     };
