@@ -5,6 +5,10 @@ import { NextResponse } from "next/server";
 import { allImages, libraryBasePath } from "@/lib/imageLibrary";
 import manifest from "@/public/images/library/manifest.json";
 
+// Always read the current manifest - never serve a cached copy.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: Request) {
   try {
     const includePending = new URL(req.url).searchParams.get("includePending") === "1";
