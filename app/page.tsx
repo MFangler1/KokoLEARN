@@ -74,6 +74,7 @@ export default function Home() {
           <nav className="hidden items-center gap-8 sm:flex">
             <Link href="#how-it-works" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">How It Works</Link>
             <Link href="#features" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Features</Link>
+            <Link href="/what-parents-see" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">For Parents</Link>
             <Link href="#pricing" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Pricing</Link>
             <Link href="/curriculum" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Curriculum</Link>
             <Link href="/blog" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Blog</Link>
@@ -91,6 +92,7 @@ export default function Home() {
             <nav className="flex flex-col gap-3">
               <Link href="#how-it-works" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>How It Works</Link>
               <Link href="#features" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Features</Link>
+              <Link href="/what-parents-see" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>For Parents</Link>
               <Link href="#pricing" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Pricing</Link>
               <Link href="/curriculum" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Curriculum</Link>
               <Link href="/blog" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Blog</Link>
