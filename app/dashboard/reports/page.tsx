@@ -483,7 +483,7 @@ export default function ReportPage() {
                 Skill Heatmap
               </h3>
               <p className="text-xs text-gray-500 mb-3">Darker = more progress. Hover for details.</p>
-              <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2">
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
                 {[
                   { skill: "Addition", lvl: 90 }, { skill: "Subtraction", lvl: 85 }, { skill: "Multiplication", lvl: 60 },
                   { skill: "Division", lvl: 45 }, { skill: "Reading", lvl: 75 }, { skill: "Writing", lvl: 65 },
@@ -496,11 +496,14 @@ export default function ReportPage() {
                   return (
                     <div
                       key={s.skill}
-                      className="group relative rounded-lg p-3 text-center cursor-help transition-transform hover:scale-105"
+                      title={`${s.skill}: ${s.lvl}% progress`}
+                      className="group relative flex min-h-[68px] flex-col items-center justify-center rounded-lg border border-orange-200/60 px-2 py-2.5 text-center cursor-help transition-transform hover:scale-105"
                       style={{ backgroundColor: `rgba(249, 115, 22, ${alpha})` }}
                     >
-                      <p className="text-xs font-semibold text-gray-800">{s.skill}</p>
-                      <p className="text-lg font-bold" style={{ color: s.lvl >= 70 ? "#F97316" : s.lvl >= 40 ? "#EA580C" : "#9A3412" }}>{s.lvl}%</p>
+                      <p className="w-full break-words text-[11px] font-semibold leading-tight text-[#111827]">
+                        {s.skill}
+                      </p>
+                      <p className="mt-0.5 text-base font-bold text-[#111827]">{s.lvl}%</p>
                     </div>
                   );
                 })}
