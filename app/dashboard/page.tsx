@@ -309,23 +309,72 @@ export default function Dashboard() {
   const [showSubjectPicker, setShowSubjectPicker] = useState(false);
   
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("kokolearn_children");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.length > 0) {
-          const mapped = parsed.map((c: any) => ({
-            ...childrenData[0],
-            id: c.id,
-            name: c.name,
-            age: c.age,
-            avatar: c.age <= 7 ? "👦" : "👧",
-          }));
-          setRealChildren(mapped);
-          setActiveChild({...childrenData[0], id: mapped[0].id, name: mapped[0].name, age: mapped[0].age});
-        }
+    const apply = (list: any[]) => {
+      if (!list.length) return;
+      const mapped = list.map((c: any) => ({
+        ...childrenData[0],
+        id: c.id,
+        name: c.name,
+        age: c.age,
+        avatar: c.age <= 7 ? "👦" : "👧",
+      }));
+      setRealChildren(mapped);
+      setActiveChild({ ...childrenData[0], id: mapped[0].id, name: mapped[0].name, age: mapped[0].age });
+    };
+
+    const readCache = (): any[] => {
+      try {
+        return JSON.parse(localStorage.getItem("kokolearn_children") || "[]");
+      } catch {
+        return [];
       }
-    } catch {}
+    };
+
+    (async () => {
+      try {
+        const res = await fetch("/api/children");
+        if (res.ok) {
+          const data = await res.json();
+          const children = Array.isArray(data.children) ? data.children : [];
+          if (children.length > 0) {
+            apply(children);
+            try {
+              localStorage.setItem("kokolearn_children", JSON.stringify(children));
+            } catch {}
+            return;
+          }
+          // Account has no children yet: import any locally cached ones (one-time migration).
+          const cached = readCache();
+          if (cached.length > 0) {
+            const imported: any[] = [];
+            for (const c of cached) {
+              try {
+                const r = await fetch("/api/children", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ name: c.name, age: c.age, interests: c.interests || [] }),
+                });
+                if (r.ok) {
+                  const j = await r.json();
+                  if (j.child) imported.push(j.child);
+                }
+              } catch {}
+            }
+            if (imported.length > 0) {
+              apply(imported);
+              try {
+                localStorage.setItem("kokolearn_children", JSON.stringify(imported));
+              } catch {}
+              return;
+            }
+          }
+        }
+      } catch {}
+
+      // Offline / storage unavailable: fall back to the local cache.
+      const cached = readCache();
+      if (cached.length > 0) apply(cached);
+    })();
   }, []);
   
   // Fetch real recent lessons from the API

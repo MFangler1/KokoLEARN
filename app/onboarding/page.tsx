@@ -279,17 +279,39 @@ export default function Onboarding() {
             </div>
 
             <button
-              onClick={() => {
-                // Save child data to localStorage
-                const existing = JSON.parse(localStorage.getItem("kokolearn_children") || "[]");
-                existing.push({
+              onClick={async () => {
+                const child = {
                   id: crypto.randomUUID(),
                   name: childName,
                   age: parseInt(childAge),
                   interests: selectedInterests,
                   createdAt: new Date().toISOString(),
-                });
-                localStorage.setItem("kokolearn_children", JSON.stringify(existing));
+                };
+
+                // Save to the account first (source of truth), then cache locally.
+                let savedToAccount = false;
+                try {
+                  const res = await fetch("/api/children", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      name: child.name,
+                      age: child.age,
+                      interests: child.interests,
+                    }),
+                  });
+                  savedToAccount = res.ok;
+                } catch {
+                  savedToAccount = false;
+                }
+
+                try {
+                  const existing = JSON.parse(localStorage.getItem("kokolearn_children") || "[]");
+                  existing.push(child);
+                  localStorage.setItem("kokolearn_children", JSON.stringify(existing));
+                  localStorage.setItem("kokolearn_children_account_synced", savedToAccount ? "1" : "0");
+                } catch {}
+
                 window.location.href = "/dashboard";
               }}
               className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl transition-all hover:-translate-y-0.5"
