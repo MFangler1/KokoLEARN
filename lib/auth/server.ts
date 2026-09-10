@@ -64,9 +64,6 @@ async function authBuilder() {
             "https://kokolearn.org",
             "https://kokolearn.mark-fenty.workers.dev",
           ],
-          advanced: {
-            disableCSRFCheck: true,
-          },
           rateLimit: {
             enabled: true,
             window: 60,
@@ -97,7 +94,7 @@ async function authBuilder() {
           db: dbInstance!,
           options: {
             usePlural: true,
-            debugLogs: true,
+            debugLogs: false,
           },
         },
       },
@@ -111,9 +108,6 @@ async function authBuilder() {
           "https://kokolearn.org",
           "https://kokolearn.mark-fenty.workers.dev",
         ],
-        advanced: {
-          disableCSRFCheck: true,
-        },
         rateLimit: {
           enabled: true,
           window: 60,

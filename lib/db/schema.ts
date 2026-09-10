@@ -50,10 +50,21 @@ export const referrals = sqliteTable("referrals", {
   rewardedAt: integer("rewarded_at", { mode: "timestamp" }),
 });
 
+// ── Professional Report add-on (per child) ──
+export const reportAddons = sqliteTable("report_addons", {
+  userId: text("user_id").notNull(),
+  childId: text("child_id").notNull(),
+  stripeSubscriptionId: text("stripe_subscription_id"),
+  status: text("status").notNull().default("active"),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
+});
+
 // Combine all schemas for exports
 export const schema = {
+  reportAddons,
   ...authSchema,
   subscriptions,
   achievements,
   referrals,
 } as const;
+

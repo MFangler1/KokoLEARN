@@ -10,7 +10,7 @@ export async function getDb() {
   try {
     const { env } = await getCloudflareContext({ async: true });
     if (env && typeof env === "object" && "DB" in env) {
-      return drizzle(env.DB, { schema, logger: true });
+      return drizzle(env.DB, { schema, logger: false });
     }
   } catch {
     // D1 binding not available — return null

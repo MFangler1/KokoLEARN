@@ -4,7 +4,7 @@
 import { NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe/server";
 import { getDb } from "@/lib/db";
-import { subscriptions } from "@/lib/db/schema";
+import { subscriptions, reportAddons } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 /**
@@ -88,6 +88,38 @@ export async function POST(req: Request) {
             .from(subscriptions)
             .where(eq(subscriptions.userId, userId))
             .get();
+
+          if (addon === "professional_report") {
+            const childId = session.metadata?.child_id;
+            if (!childId) {
+              console.error("Webhook: report add-on without child_id");
+              return NextResponse.json({ error: "Missing child_id" }, { status: 500 });
+            }
+            const existingAddon = await db
+              .select()
+              .from(reportAddons)
+              .where(eq(reportAddons.userId, userId))
+              .all();
+            const match = existingAddon.find((r) => r.childId === childId);
+            const subId =
+              typeof session.subscription === "string" ? session.subscription : null;
+            if (match) {
+              await db
+                .update(reportAddons)
+                .set({ status: "active", stripeSubscriptionId: subId, updatedAt: now })
+                .where(eq(reportAddons.userId, userId));
+            } else {
+              await db.insert(reportAddons).values({
+                userId,
+                childId,
+                stripeSubscriptionId: subId,
+                status: "active",
+                updatedAt: now,
+              });
+            }
+            console.log(`✅ Professional Report add-on active for child ${childId}`);
+            return NextResponse.json({ received: true });
+          }
 
           if (addon === "extended_questions") {
             if (existing) {
@@ -205,6 +237,27 @@ export async function POST(req: Request) {
             console.error("Webhook: add-on product check failed", err);
             return NextResponse.json({ error: "Add-on check failed" }, { status: 500 });
           }
+        }
+
+        // Professional Report add-on lifecycle
+        try {
+          const reportRow = await db
+            .select()
+            .from(reportAddons)
+            .where(eq(reportAddons.stripeSubscriptionId, stripeSubId))
+            .get();
+          if (reportRow) {
+            const keep = ["active", "trialing", "past_due", "unpaid"].includes(subscription.status);
+            await db
+              .update(reportAddons)
+              .set({ status: keep ? "active" : "canceled", updatedAt: new Date() })
+              .where(eq(reportAddons.stripeSubscriptionId, stripeSubId));
+            console.log(`📦 Report add-on ${stripeSubId} -> ${keep ? "active" : "canceled"}`);
+            return NextResponse.json({ received: true });
+          }
+        } catch (err) {
+          console.error("Webhook: report add-on update failed", err);
+          return NextResponse.json({ error: "Report add-on update failed" }, { status: 500 });
         }
 
         try {

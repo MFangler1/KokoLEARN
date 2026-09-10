@@ -3,6 +3,7 @@
 
 import { NextResponse } from "next/server";
 import { initAuth } from "@/lib/auth/server";
+import { canUsePremiumFeatures } from "@/lib/entitlements";
 
 const SYSTEM_PROMPT = `You are Professor Koko, a friendly cartoon owl who teaches children aged 5-11 in the UK. You are warm, encouraging, and make learning fun.
 
@@ -27,6 +28,15 @@ export async function POST(req: Request) {
 
     if (!session?.user) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+
+    // Tutor chat is a paid feature (free trial gets lessons, not unlimited chat).
+    const allowed = await canUsePremiumFeatures(session.user.id, session.user.email);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "The learning support chat is part of Premium. Upgrade to continue.", code: "premium_required" },
+        { status: 403 }
+      );
     }
 
     const body = await req.json();

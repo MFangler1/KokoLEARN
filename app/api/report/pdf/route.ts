@@ -4,6 +4,8 @@
 // generated from the same data.
 
 import { NextRequest, NextResponse } from "next/server";
+import { initAuth } from "@/lib/auth/server";
+import { canGenerateReport } from "@/lib/entitlements";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 const TEAL = rgb(0, 0.502, 0.502);
@@ -38,6 +40,27 @@ export async function POST(request: NextRequest) {
       child: ExportChild;
       filename?: string;
     };
+
+    // ── Entitlement check ──
+    const auth = await initAuth();
+    const session = await auth.api.getSession({ headers: new Headers(request.headers) });
+    if (!session?.user) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+    const entitlement = await canGenerateReport(
+      session.user.id,
+      session.user.email,
+      child?.id ?? null
+    );
+    if (!entitlement.allowed) {
+      return NextResponse.json(
+        {
+          error: "Professional report is not active for this child. Add it for £3/month to download.",
+          code: "report_addon_required",
+        },
+        { status: 403 }
+      );
+    }
 
     const pdf = await PDFDocument.create();
     const regular = await pdf.embedFont(StandardFonts.Helvetica);
@@ -76,7 +99,20 @@ export async function POST(request: NextRequest) {
     // ── Cover header with logo ──
     try {
       const base = process.env.NEXT_PUBLIC_SITE_URL || "https://kokolearn.org";
-      const logoRes = await fetch(`${base}/images/kokolearn-logo.png`);
+      let logoRes: Response | null = null;
+      try {
+        const { getCloudflareContext } = await import("@opennextjs/cloudflare");
+        const { env } = await getCloudflareContext({ async: true });
+        const assets = (env as unknown as { ASSETS?: { fetch: (u: URL | string) => Promise<Response> } }).ASSETS;
+        if (assets) {
+          logoRes = await assets.fetch(new URL("/images/kokolearn-logo-report.png", base));
+        }
+      } catch {
+        logoRes = null;
+      }
+      if (!logoRes || !logoRes.ok) {
+        logoRes = await fetch(`${base}/images/kokolearn-logo-report.png`);
+      }
       if (logoRes.ok) {
         const logoBytes = await logoRes.arrayBuffer();
         const logo = await pdf.embedPng(logoBytes);

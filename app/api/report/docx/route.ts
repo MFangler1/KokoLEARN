@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { initAuth } from "@/lib/auth/server";
+import { canGenerateReport } from "@/lib/entitlements";
 import {
   Document,
   Packer,
@@ -19,6 +21,27 @@ import {
 export async function POST(request: NextRequest) {
   try {
     const { child, filename } = await request.json();
+
+    // ── Entitlement check ──
+    const auth = await initAuth();
+    const session = await auth.api.getSession({ headers: new Headers(request.headers) });
+    if (!session?.user) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+    const entitlement = await canGenerateReport(
+      session.user.id,
+      session.user.email,
+      child?.id ?? null
+    );
+    if (!entitlement.allowed) {
+      return NextResponse.json(
+        {
+          error: "Professional report is not active for this child. Add it for £3/month to download.",
+          code: "report_addon_required",
+        },
+        { status: 403 }
+      );
+    }
 
     const today = new Date().toLocaleDateString("en-GB", {
       day: "numeric",
