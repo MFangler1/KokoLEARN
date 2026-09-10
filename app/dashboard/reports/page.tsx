@@ -132,17 +132,32 @@ export default function ReportPage() {
   };
 
   // ── PDF Export (browser print → Save as PDF) ──
-  const handlePdfExport = () => {
+  // ── PDF Export (professional generated PDF) ──
+  const handlePdfExport = async () => {
     setIsGenerating(true);
     setExportFormat("pdf");
-    // Small delay to let state update, then print
-    setTimeout(() => {
-      window.print();
-      setIsGenerating(false);
-      setExportFormat(null);
+    try {
+      const res = await fetch("/api/report/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ child, filename: customFilename }),
+      });
+      if (!res.ok) throw new Error("Generation failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${customFilename}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 4000);
-    }, 300);
+    } catch (err) {
+      alert("PDF generation failed. Please try the Word version instead.");
+    } finally {
+      setIsGenerating(false);
+      setExportFormat(null);
+    }
   };
 
   // ── DOCX Export ──
@@ -270,8 +285,8 @@ export default function ReportPage() {
                 )}
               </div>
               <div className="text-center">
-                <p className="font-bold text-gray-900">Save as PDF</p>
-                <p className="text-xs text-gray-500 mt-0.5">Opens print dialog → Save as PDF</p>
+                <p className="font-bold text-gray-900">Download .pdf</p>
+                <p className="text-xs text-gray-500 mt-0.5">Professional PDF report</p>
               </div>
             </button>
 

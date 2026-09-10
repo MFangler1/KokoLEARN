@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       styles: {
         default: {
           document: {
-            run: { font: "Calibri", size: 22 },
+            run: { font: "Arial", size: 22 },
           },
         },
       },
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
 
             // ── Overview ──
             new Paragraph({
-              text: "📊 Overview",
+              text: "Overview",
               heading: HeadingLevel.HEADING_2,
               spacing: { after: 200 },
               run: { color: primaryColor, bold: true, size: 28 },
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
 
             // ── Subject Breakdown ──
             new Paragraph({
-              text: "📚 Subject Breakdown",
+              text: "Subject breakdown",
               heading: HeadingLevel.HEADING_2,
               spacing: { after: 200 },
               run: { color: secondaryColor, bold: true, size: 28 },
@@ -111,10 +111,10 @@ export async function POST(request: NextRequest) {
                 new Paragraph({
                   spacing: { after: 100 },
                   children: [
-                    new TextRun({ text: s.subject.padEnd(18, " "), bold: true, size: 20, font: "Calibri" }),
+                    new TextRun({ text: s.subject.padEnd(18, " "), bold: true, size: 20, font: "Arial" }),
                     new TextRun({
                       text: `${"█".repeat(Math.round(s.progress / 5))}${"░".repeat(20 - Math.round(s.progress / 5))}`,
-                      color: s.color.replace("#", ""),
+                      color: (s.color || "#F97316").replace("#", ""),
                       size: 16,
                     }),
                     new TextRun({ text: `  ${s.progress}%`, bold: true, size: 20, color: s.color.replace("#", "") }),
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
 
             // ── Skill Heatmap ──
             new Paragraph({
-              text: "🔥 Skill Heatmap",
+              text: "Skill heatmap",
               heading: HeadingLevel.HEADING_2,
               spacing: { after: 200 },
               run: { color: "D97706", bold: true, size: 28 },
@@ -184,14 +184,14 @@ export async function POST(request: NextRequest) {
             }),
 
             new Paragraph({
-              text: "✅ Strengths",
+              text: "Strengths",
               heading: HeadingLevel.HEADING_3,
               spacing: { after: 100 },
               run: { color: "059669", bold: true, size: 24 },
             }),
-            new Paragraph({ spacing: { after: 80 }, text: `• Strong engagement with dinosaur-themed maths lessons — uses interest-driven learning effectively`, bullet: { level: 0 } }),
-            new Paragraph({ spacing: { after: 80 }, text: `• Maintains a ${child.stats.currentStreak}-day learning streak — shows consistent commitment`, bullet: { level: 0 } }),
-            new Paragraph({ spacing: { after: 200 }, text: `• Excels in creative subjects — Art & Design at ${child.subjectProgress.find((s: { subject: string }) => s.subject.includes("Art"))?.progress || 70}%`, bullet: { level: 0 } }),
+            new Paragraph({ spacing: { after: 80 }, text: `• Strong engagement with dinosaur-themed maths lessons - uses interest-driven learning effectively`, bullet: { level: 0 } }),
+            new Paragraph({ spacing: { after: 80 }, text: `• Maintains a ${child.stats.currentStreak}-day learning streak - shows consistent commitment`, bullet: { level: 0 } }),
+            new Paragraph({ spacing: { after: 200 }, text: `• Excels in creative subjects - Art & Design at ${child.subjectProgress.find((s: { subject: string }) => s.subject.includes("Art"))?.progress || 70}%`, bullet: { level: 0 } }),
 
             new Paragraph({
               text: "🎯 Areas to Focus",
@@ -199,13 +199,13 @@ export async function POST(request: NextRequest) {
               spacing: { after: 100 },
               run: { color: "D97706", bold: true, size: 24 },
             }),
-            new Paragraph({ spacing: { after: 80 }, text: "• History and Geography need more attention — try adventure-themed lessons", bullet: { level: 0 } }),
-            new Paragraph({ spacing: { after: 80 }, text: "• Science scores dip mid-week — consider shorter, more frequent sessions", bullet: { level: 0 } }),
-            new Paragraph({ spacing: { after: 200 }, text: "• Weekend engagement drops ~15% — gamified weekend challenges could help", bullet: { level: 0 } }),
+            new Paragraph({ spacing: { after: 80 }, text: "• History and Geography need more attention - try adventure-themed lessons", bullet: { level: 0 } }),
+            new Paragraph({ spacing: { after: 80 }, text: "• Science scores dip mid-week - consider shorter, more frequent sessions", bullet: { level: 0 } }),
+            new Paragraph({ spacing: { after: 200 }, text: "• Weekend engagement drops ~15% - gamified weekend challenges could help", bullet: { level: 0 } }),
 
             // ── Curriculum Coverage ──
             new Paragraph({
-              text: `📋 National Curriculum Coverage — ${child.id === "alex" ? "KS1" : "KS2"}`,
+              text: `National Curriculum Coverage - ${child.id === "alex" ? "KS1" : "KS2"}`,
               heading: HeadingLevel.HEADING_2,
               spacing: { after: 200 },
               run: { color: primaryColor, bold: true, size: 28 },
@@ -271,7 +271,7 @@ export async function POST(request: NextRequest) {
               spacing: { after: 80 },
               children: [
                 new TextRun({ text: "🦕  ", size: 20 }),
-                new TextRun({ text: "Continue dinosaur-themed maths — introduce multiplication through 'Dino Pack Counting'", size: 20 }),
+                new TextRun({ text: "Continue dinosaur-themed maths - introduce multiplication through 'Dino Pack Counting'", size: 20 }),
               ],
             }),
             new Paragraph({
@@ -285,7 +285,7 @@ export async function POST(request: NextRequest) {
               spacing: { after: 80 },
               children: [
                 new TextRun({ text: "🧪  ", size: 20 }),
-                new TextRun({ text: "Add 2 short science quizzes per week — aim for Tuesday and Thursday when engagement peaks", size: 20 }),
+                new TextRun({ text: "Add 2 short science quizzes per week - aim for Tuesday and Thursday when engagement peaks", size: 20 }),
               ],
             }),
 
@@ -297,7 +297,7 @@ export async function POST(request: NextRequest) {
               spacing: { before: 400, after: 100 },
             }),
             new Paragraph({
-              text: "Generated by KokoLearn.org — AI-powered tutoring aligned to the UK National Curriculum",
+              text: "Generated by KokoLearn.org - AI-powered tutoring aligned to the UK National Curriculum",
               alignment: AlignmentType.CENTER,
               run: { size: 16, color: "999999" },
             }),
