@@ -397,9 +397,9 @@
       {
         "question": "In the second picture, what is the child doing?",
         "options": [
-          "Pulling out the roots",
-          "Planting a seed",
-          "Cutting the stem",
+          "Pulling the roots out of the pot",
+          "Planting a seed in the pot",
+          "Cutting the stem of the plant",
           "Watering the young seedling"
         ],
         "correctIndex": 3,
@@ -544,9 +544,9 @@
         "question": "Which of these is a human-made feature in the picture?",
         "options": [
           "The lighthouse",
-          "The sea",
-          "The cliffs",
-          "The beach"
+          "The sea beyond the beach",
+          "The cliffs on one side",
+          "The beach beside the sea"
         ],
         "correctIndex": 0,
         "explanation": "Lighthouses are built by people, so they are human-made.",
@@ -2153,9 +2153,9 @@
       {
         "question": "Which organ comes last, after the small intestine?",
         "options": [
-          "The oesophagus",
-          "The stomach",
-          "The mouth",
+          "The mouth at the very start",
+          "The oesophagus in your throat",
+          "The stomach near the top",
           "The large intestine"
         ],
         "correctIndex": 3,
