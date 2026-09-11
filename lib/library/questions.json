@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "perImage": 10,
   "generatedAt": "2026-09-11T14:00:00Z",
   "questions": {
@@ -79,13 +79,13 @@
       {
         "question": "A story has a problem the characters must solve. Which problem fits this castle setting best?",
         "options": [
+          "The castle garden needs watering.",
           "The castle needs a new coat of paint.",
           "The castle has too many windows.",
-          "The castle garden needs watering.",
-          "The castle's flag has blown away in a storm."
+          "The drawbridge has broken and nobody can cross the moat."
         ],
         "correctIndex": 3,
-        "explanation": "A missing flag in a storm gives the characters a clear problem to solve.",
+        "explanation": "A broken drawbridge is a real problem for everyone trying to get into the castle.",
         "difficulty": "medium"
       },
       {
@@ -845,7 +845,7 @@
         "difficulty": "advanced"
       },
       {
-        "question": "Why are rainforests important for the animals shown in the picture?",
+        "question": "Why are rainforests important for the animals that live in them?",
         "options": [
           "They provide food and shelter",
           "They are too cold for animals",
@@ -967,11 +967,11 @@
         "difficulty": "advanced"
       },
       {
-        "question": "The river is shown winding through green fields. Which process slowly wears away the river banks over time?",
+        "question": "Which process slowly wears away river banks over time?",
         "options": [
-          "Condensation",
-          "Erosion",
           "Evaporation",
+          "Erosion",
+          "Condensation",
           "Freezing"
         ],
         "correctIndex": 1,
@@ -993,7 +993,7 @@
         "difficulty": "normal"
       },
       {
-        "question": "Which river is shown flowing near the pyramid?",
+        "question": "Which river flows past the pyramids of Ancient Egypt?",
         "options": [
           "The Amazon",
           "The Nile",
@@ -1297,11 +1297,11 @@
         "difficulty": "medium"
       },
       {
-        "question": "What does the picture suggest about how Stone Age people got their food?",
+        "question": "Stone Age people did not farm. How did they get their food?",
         "options": [
-          "They bought food from shops",
           "They ordered takeaways",
-          "They hunted animals and gathered plants",
+          "They bought food from shops",
+          "They hunted animals and gathered wild plants",
           "They grew crops in large farms"
         ],
         "correctIndex": 2,
@@ -1443,12 +1443,12 @@
         "difficulty": "medium"
       },
       {
-        "question": "How do we know that the ship in the picture is from the Viking Age?",
+        "question": "Which features in the picture show that this is a Viking longship?",
         "options": [
-          "It has a striped sail and a dragon head",
-          "It has a steam engine and a chimney",
-          "It has a cannon and a flag",
-          "It has a motor and a propeller"
+          "A striped sail and a dragon head at the prow",
+          "A steam engine and a chimney",
+          "A cannon and a flag",
+          "A motor and a propeller"
         ],
         "correctIndex": 0,
         "explanation": "The picture shows a striped sail and a dragon head, which are typical of Viking longships.",
@@ -2273,10 +2273,10 @@
         "difficulty": "medium"
       },
       {
-        "question": "The smoke in the picture contains tiny bits of rock and ash. What can happen to this ash when it falls?",
+        "question": "Volcanoes throw out tiny bits of rock and ash. What can happen when this ash falls?",
         "options": [
-          "It disappears completely",
           "It turns into water",
+          "It disappears completely",
           "It can cover towns and fields",
           "It becomes gold"
         ],
@@ -2285,7 +2285,7 @@
         "difficulty": "medium"
       },
       {
-        "question": "Look at the picture of the volcano. Which part of the Earth produces the melted rock inside a volcano?",
+        "question": "Deep inside the Earth, which part produces the melted rock that feeds a volcano?",
         "options": [
           "The clouds high above the volcano",
           "The mantle, deep below the crust",
@@ -2651,19 +2651,19 @@
         "difficulty": "medium"
       },
       {
-        "question": "Which of these would make the shadow in the picture change shape?",
+        "question": "Which of these would let light pass straight through, making no shadow at all?",
         "options": [
-          "Turning the light off",
-          "Turning the object around",
-          "Covering the light",
-          "Moving the object closer"
+          "A thick wooden block",
+          "A sheet of clear glass",
+          "A metal spoon",
+          "A closed book"
         ],
         "correctIndex": 1,
-        "explanation": "Turning the object changes the outline that blocks the light, so the shadow shape changes.",
+        "explanation": "Transparent materials such as clear glass let light through, so they cast no real shadow.",
         "difficulty": "advanced"
       },
       {
-        "question": "The picture shows a shadow on a wall. What is needed for a shadow to form?",
+        "question": "The picture shows a shadow on a table. What is needed for a shadow to form?",
         "options": [
           "A light source, an object and a surface",
           "Only a light source and a surface",
@@ -2701,15 +2701,15 @@
         "difficulty": "normal"
       },
       {
-        "question": "In the picture, what does the small shoot grow upwards towards?",
+        "question": "In the picture, what is growing up out of the soil?",
         "options": [
-          "The dark soil",
-          "The fallen seeds",
-          "The deep roots",
-          "The bright light"
+          "A flower pot",
+          "A stone",
+          "A seed packet",
+          "A small green shoot"
         ],
         "correctIndex": 3,
-        "explanation": "Shoots grow upwards towards the light so the plant can make its own food.",
+        "explanation": "After the seed germinates, a small green shoot grows up out of the soil.",
         "difficulty": "normal"
       },
       {
@@ -2785,7 +2785,7 @@
         "difficulty": "medium"
       },
       {
-        "question": "If the plant in the picture did not get enough water, what would most likely happen?",
+        "question": "If a plant like this one were not watered, what would most likely happen?",
         "options": [
           "It would grow much faster",
           "It would wilt and stop growing",
@@ -2816,10 +2816,10 @@
           "A crack in a rock",
           "A crystal growing on a rock",
           "A plant growing on a rock",
-          "A fossil imprint on a rock"
+          "Fossils in layers of rock"
         ],
         "correctIndex": 3,
-        "explanation": "The picture clearly shows a fossil imprint on a rock.",
+        "explanation": "The picture shows shell fossils buried inside bands of layered rock.",
         "difficulty": "normal"
       },
       {
