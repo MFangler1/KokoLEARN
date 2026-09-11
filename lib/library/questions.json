@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "perImage": 10,
   "generatedAt": "2026-09-11T14:00:00Z",
   "questions": {
@@ -67,13 +67,13 @@
       {
         "question": "Which point of view tells the story as if you are the knight inside the castle?",
         "options": [
-          "Fourth person, using 'they'",
+          "Second person, using 'you'",
           "First person, using 'I' and 'we'",
           "Third person, using 'he' and 'she'",
-          "Second person, using 'you'"
+          "Writing in the past tense, using 'was' and 'were'"
         ],
         "correctIndex": 1,
-        "explanation": "First person writing uses 'I' and 'we', so the knight tells his own story.",
+        "explanation": "First person narration uses 'I' or 'we', as though the knight is telling the story himself.",
         "difficulty": "medium"
       },
       {
@@ -115,13 +115,13 @@
       {
         "question": "Which sentence uses a fronted adverbial correctly to describe the castle?",
         "options": [
-          "The flag waved above the moat gently in the wind.",
+          "The wind made the flag above the moat wave.",
           "The flag above the moat waved gently in the wind.",
-          "Gently in the wind the flag above the moat waved.",
+          "The flag waved above the moat gently in the wind.",
           "Above the moat, the flag waved gently in the wind."
         ],
         "correctIndex": 3,
-        "explanation": "A fronted adverbial comes first and is followed by a comma, like 'Above the moat,'.",
+        "explanation": "A fronted adverbial comes at the start of the sentence and is followed by a comma.",
         "difficulty": "advanced"
       }
     ],
@@ -153,13 +153,13 @@
       {
         "question": "Which word best describes how the child is feeling?",
         "options": [
-          "Sad",
           "Angry",
-          "Excited",
-          "Tired"
+          "Sad",
+          "Happy",
+          "Frightened"
         ],
         "correctIndex": 2,
-        "explanation": "The child is smiling, which shows they are feeling excited and happy.",
+        "explanation": "The child is smiling, so happy is the best description.",
         "difficulty": "normal"
       },
       {
@@ -237,9 +237,9 @@
       {
         "question": "If the child wrote a diary entry, which first sentence would be most suitable?",
         "options": [
-          "I am a child who likes maps.",
-          "I have a backpack and a map.",
-          "Maps are useful for finding your way.",
+          "I have got a backpack and a map here.",
+          "I am a child who likes looking at maps.",
+          "Maps are very useful for finding your way.",
           "Today I found a magical map and set off on a quest."
         ],
         "correctIndex": 3,
@@ -347,10 +347,10 @@
       {
         "question": "Which of these is a simile that could describe the path in the picture?",
         "options": [
-          "The path went between the trees.",
-          "The path was long and brown.",
+          "The path was long and brown in the shade.",
+          "The path went between the tall green trees.",
           "The path wound like a ribbon through the trees.",
-          "The path was a ribbon of mud."
+          "The path was a ribbon of thick brown mud."
         ],
         "correctIndex": 2,
         "explanation": "A simile compares two things using 'like' or 'as'. The last option is a metaphor, not a simile.",
@@ -360,9 +360,9 @@
         "question": "Which sentence would make the best opening for a story set in this forest?",
         "options": [
           "The path curled away between the trees, and somewhere ahead a bird called.",
-          "There were some trees and a path in the forest.",
-          "The forest had lots of trees in it.",
-          "I like forests a lot."
+          "There were some trees and a path in the middle of the forest.",
+          "The forest had lots of trees in it and a path as well.",
+          "I like forests a lot because there are trees and paths."
         ],
         "correctIndex": 0,
         "explanation": "A good opening paints a picture and makes the reader want to know what happens next.",
@@ -457,9 +457,9 @@
       {
         "question": "What happens to the plant between the first and third pictures?",
         "options": [
-          "It stays exactly the same",
-          "It gets smaller each time",
-          "It turns into an animal",
+          "It stays exactly the same as before",
+          "It gets smaller and smaller each time",
+          "It turns into an animal instead",
           "It grows from a seed into a flowering plant"
         ],
         "correctIndex": 3,
@@ -529,15 +529,15 @@
         "difficulty": "normal"
       },
       {
-        "question": "What type of coastline is shown in the picture?",
+        "question": "The cliff in the picture shows bands of rock. What does this tell us?",
         "options": [
-          "An icy coastline",
-          "A rocky coastline",
-          "A muddy coastline",
-          "A sandy coastline"
+          "The rock was painted different colours",
+          "The rock was carved by people",
+          "The rock is made only of sand",
+          "The rock was laid down in layers over time"
         ],
         "correctIndex": 3,
-        "explanation": "The picture shows a sandy beach, so it is a sandy coastline.",
+        "explanation": "The stripes are layers of sediment that built up and hardened into rock.",
         "difficulty": "normal"
       },
       {
@@ -1044,9 +1044,9 @@
         "question": "Why was the River Nile so important to the Ancient Egyptians?",
         "options": [
           "It provided water and fertile soil for farming",
-          "It was used for swimming lessons",
-          "It was a place for fishing only",
-          "It was a source of gold"
+          "It was only used for swimming lessons",
+          "It was only good for catching fish",
+          "It was the main source of gold for Egypt"
         ],
         "correctIndex": 0,
         "explanation": "The Nile gave water and rich soil, which helped crops grow.",
@@ -1227,10 +1227,10 @@
       {
         "question": "What sort of place have the people set up camp in?",
         "options": [
-          "A busy city street",
+          "A busy street in a modern city centre",
           "A grassy clearing with trees nearby",
-          "The middle of the sea",
-          "The top of a snowy mountain"
+          "The middle of the sea, far from land",
+          "The very top of a snowy mountain"
         ],
         "correctIndex": 1,
         "explanation": "The camp sits in an open grassy clearing surrounded by trees.",
@@ -1567,9 +1567,9 @@
       {
         "question": "The picture shows a regular pentagon. What does 'regular' mean for a 2D shape?",
         "options": [
-          "It has curved sides.",
-          "It has five sides.",
-          "It is a large shape.",
+          "It is a very large shape indeed.",
+          "It has sides that are curved.",
+          "It has exactly five straight sides.",
           "All sides and angles are equal."
         ],
         "correctIndex": 3,
@@ -1983,25 +1983,25 @@
       {
         "question": "The wires in the picture connect the battery to the bulb. What do the wires do?",
         "options": [
-          "They store electricity",
+          "They store electricity for later use",
           "They let electricity flow around the circuit",
-          "They make the bulb brighter",
-          "They stop electricity from flowing"
+          "They make the bulb shine much brighter",
+          "They stop the electricity from flowing at all"
         ],
         "correctIndex": 1,
         "explanation": "Wires are like paths that let electricity travel around the circuit.",
         "difficulty": "normal"
       },
       {
-        "question": "If you add a switch to the circuit in the picture and turn it off, what will happen?",
+        "question": "If the switch in the picture were turned off, what would happen?",
         "options": [
-          "The bulb will get brighter",
-          "The bulb will go out",
-          "The battery will break",
-          "The wires will melt"
+          "The bulb would get brighter",
+          "The bulb would go out",
+          "The battery would break",
+          "The wires would melt"
         ],
         "correctIndex": 1,
-        "explanation": "A switch breaks the circuit, so the bulb will not light up.",
+        "explanation": "Turning the switch off breaks the circuit, so electricity stops flowing and the bulb goes out.",
         "difficulty": "normal"
       },
       {
@@ -2043,10 +2043,10 @@
       {
         "question": "In the picture, what does the battery do?",
         "options": [
-          "It makes the wires longer",
-          "It provides the power that pushes electricity round the circuit",
-          "It makes a loud noise",
-          "It stores water for the circuit"
+          "It makes the wires in the circuit longer",
+          "It pushes electricity round the circuit",
+          "It stores water for the circuit to use",
+          "It makes a loud humming noise as it works"
         ],
         "correctIndex": 1,
         "explanation": "The battery is the power source. Without it nothing in the circuit would work.",
@@ -2177,9 +2177,9 @@
       {
         "question": "The small intestine is drawn much longer and more coiled than the large intestine. Why is this useful?",
         "options": [
-          "It helps food cool down before leaving",
-          "It makes food travel through faster",
-          "It stores waste for longer",
+          "It stores waste in the body for longer",
+          "It helps the food cool down before it leaves",
+          "It makes the food travel through much faster",
           "It gives more time and surface to absorb nutrients"
         ],
         "correctIndex": 3,
@@ -2483,13 +2483,13 @@
       {
         "question": "Which of these objects would a magnet NOT attract?",
         "options": [
-          "A plastic ruler",
+          "A glass marble",
           "An iron nail",
           "A steel paperclip",
-          "A metal spoon"
+          "A wooden block"
         ],
         "correctIndex": 0,
-        "explanation": "Plastic is not magnetic, so a magnet will not attract it.",
+        "explanation": "Glass is not magnetic. Iron and steel are magnetic metals, so a magnet pulls them.",
         "difficulty": "normal"
       },
       {
@@ -2603,15 +2603,15 @@
         "difficulty": "medium"
       },
       {
-        "question": "Which material would let the most light pass through to make a very faint shadow?",
+        "question": "Which material would block the light and make a dark shadow?",
         "options": [
-          "A sheet of clear plastic",
           "A thick wooden block",
-          "A shiny metal spoon",
-          "A glass jar with a lid"
+          "A sheet of clear plastic",
+          "A sheet of clear glass",
+          "A paper lantern"
         ],
         "correctIndex": 0,
-        "explanation": "Clear plastic is transparent, so it lets most light through and makes a faint shadow.",
+        "explanation": "Opaque materials like wood block light and make a dark shadow. Clear plastic and glass let most light through.",
         "difficulty": "medium"
       },
       {
@@ -2945,15 +2945,15 @@
         "difficulty": "normal"
       },
       {
-        "question": "How many planets are shown orbiting the Sun in the picture?",
+        "question": "How many planets are there in our solar system?",
         "options": [
+          "Ten",
           "Seven",
           "Nine",
-          "Ten",
           "Eight"
         ],
         "correctIndex": 3,
-        "explanation": "There are eight planets in our solar system.",
+        "explanation": "There are eight planets in our solar system: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.",
         "difficulty": "normal"
       },
       {
@@ -3239,21 +3239,21 @@
       {
         "question": "Why do clouds form high in the sky?",
         "options": [
-          "Because warm air rises and cools, causing condensation.",
+          "Because warm air rises and then cools.",
           "Because the sky is cold all the time.",
-          "Because rain pulls water up.",
+          "Because rain pulls the water upwards.",
           "Because the wind blows them together."
         ],
         "correctIndex": 0,
-        "explanation": "Warm air rises, cools down, and the water vapour condenses into droplets.",
+        "explanation": "Warm air rises, cools as it goes higher, and the water vapour condenses into cloud droplets.",
         "difficulty": "medium"
       },
       {
         "question": "What would happen to the water cycle if the Sun stopped shining?",
         "options": [
-          "Condensation would happen faster.",
-          "Precipitation would increase.",
-          "Evaporation would stop and the cycle would slow down.",
+          "Precipitation would increase a lot.",
+          "Condensation would happen much faster.",
+          "Evaporation would stop and the cycle would slow.",
           "The rivers would fill up more quickly."
         ],
         "correctIndex": 2,
