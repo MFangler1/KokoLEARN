@@ -9,7 +9,7 @@ import { initAuth } from "@/lib/auth/server";
 import { getTrialUsage } from "@/lib/trial";
 import { recentSeenQuestions, recordSeenQuestions, normaliseQuestion, isNearDuplicate } from "@/lib/questionMemory";
 import { isAdminEmail } from "@/lib/entitlements";
-import { attachImagesToQuestions } from "@/lib/imageLibrary";
+import { attachImagesToQuestions, pickPictureQuestions } from "@/lib/imageLibrary";
 
 function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: number): GeneratedLesson | null {
   if (!lesson.title || !lesson.subject || !lesson.objective || !lesson.explanation) return null;
@@ -256,10 +256,47 @@ export async function POST(req: Request) {
     // Remember what this child has now seen, so future lessons differ.
     await recordSeenQuestions(userId, childName, subject, chosenLesson.questions.map((q) => q.question));
 
-    // Attach library pictures to a couple of questions when the library has suitable art.
+    // Swap the last couple of questions for ready-made PICTURE questions when the
+    // library has a good topical fit and the child has not seen that question yet.
+    const pictureCount = Math.min(2, Math.max(0, chosenLesson.questions.length - 1));
+    const aiNormalised = chosenLesson.questions.map((q) => normaliseQuestion(q.question));
+    const pictureQuestions = pickPictureQuestions({
+      subject,
+      interests,
+      objective: objective.objective,
+      keyStage: keyStage ?? undefined,
+      difficulty,
+      seenKeys: seen.keys,
+      count: pictureCount,
+    })
+      .filter((q) => !isNearDuplicate(normaliseQuestion(q.question), aiNormalised))
+      .slice(0, pictureCount);
+
+    let finalQuestions = chosenLesson.questions.map((q) => ({ ...q }));
+    if (pictureQuestions.length) {
+      const asLessonQuestions = pictureQuestions.map((q) => ({
+        question: q.question,
+        options: q.options.map((option, index) => `${String.fromCharCode(65 + index)}) ${option}`),
+        correctIndex: q.correctIndex,
+        explanation: q.explanation,
+        imageKey: q.imageKey,
+        imagePath: q.imagePath,
+        imageAlt: q.imageAlt,
+      }));
+      finalQuestions = [
+        ...chosenLesson.questions.slice(0, chosenLesson.questions.length - asLessonQuestions.length),
+        ...asLessonQuestions,
+      ];
+      // Picture questions count as seen too, so they do not come round again.
+      await recordSeenQuestions(userId, childName, subject, asLessonQuestions.map((q) => q.question));
+    } else {
+      // Fallback: library has no suitable question set for this topic yet.
+      finalQuestions = attachImagesToQuestions(chosenLesson.questions, subject, interests, keyStage ?? undefined);
+    }
+
     const withImages = {
       ...chosenLesson,
-      questions: attachImagesToQuestions(chosenLesson.questions, subject, interests, keyStage ?? undefined),
+      questions: finalQuestions,
     };
 
     // Add metadata

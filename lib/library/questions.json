@@ -1,0 +1,3301 @@
+{
+ "version": 1,
+ "perImage": 10,
+ "generatedAt": "2026-09-11T13:17:57Z",
+ "questions": {
+  "english/castle-setting": [
+   {
+    "question": "Look at the castle on the hill. Which word best describes its setting?",
+    "options": [
+     "A busy city street",
+     "A quiet countryside hill",
+     "A sandy beach",
+     "A dark cave"
+    ],
+    "correctIndex": 1,
+    "explanation": "The castle stands on a grassy hill, far away from busy streets or beaches.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The castle has a drawbridge over a moat. What is a drawbridge used for?",
+    "options": [
+     "Cooking food in the kitchen",
+     "Letting people cross into the castle",
+     "Growing flowers in the garden",
+     "Catching fish in the water"
+    ],
+    "correctIndex": 1,
+    "explanation": "A drawbridge can be lowered so people can cross the moat and enter the castle.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "You are writing a story set in this castle. Which opening sentence creates the most tension?",
+    "options": [
+     "The castle was quite nice and had some towers.",
+     "One stormy night, a loud knock echoed through the silent hall.",
+     "There were many bricks in the castle walls.",
+     "The weather was fine and everyone felt happy."
+    ],
+    "correctIndex": 1,
+    "explanation": "A stormy night and a sudden knock make the reader feel worried and excited.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which word is a synonym for 'castle'?",
+    "options": [
+     "Cottage",
+     "Fortress",
+     "Farmhouse",
+     "Campsite"
+    ],
+    "correctIndex": 1,
+    "explanation": "A fortress is a strong building like a castle, built for defence.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The castle sits high on a hill. Which sentence uses the best descriptive language?",
+    "options": [
+     "The castle is on a hill and it is big.",
+     "The castle stands tall on the hill.",
+     "The castle is a building on a hill.",
+     "The castle is up there on the hill."
+    ],
+    "correctIndex": 1,
+    "explanation": "'Stands tall' paints a clearer picture for the reader than plain words.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which point of view tells the story as if you are the knight inside the castle?",
+    "options": [
+     "First person, using 'I' and 'we'",
+     "Second person, using 'you'",
+     "Third person, using 'he' and 'she'",
+     "Fourth person, using 'they'"
+    ],
+    "correctIndex": 0,
+    "explanation": "First person writing uses 'I' and 'we', so the knight tells his own story.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "A story has a problem the characters must solve. Which problem fits this castle setting best?",
+    "options": [
+     "The castle's flag has blown away in a storm.",
+     "The castle needs a new coat of paint.",
+     "The castle garden needs watering.",
+     "The castle has too many windows."
+    ],
+    "correctIndex": 0,
+    "explanation": "A missing flag in a storm gives the characters a clear problem to solve.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which sentence uses a simile correctly to describe the castle?",
+    "options": [
+     "The castle was a tower of stone.",
+     "The castle stood like a giant on the hill.",
+     "The castle hill was very steep.",
+     "The castle had four tall towers."
+    ],
+    "correctIndex": 1,
+    "explanation": "A simile compares using 'like' or 'as', so 'like a giant' is a simile.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The writer wants the castle to feel mysterious. Which sentence is most effective?",
+    "options": [
+     "The castle had a door and some windows.",
+     "The castle was old and made of stone.",
+     "Shadows crept along the castle walls as the moon rose.",
+     "The castle was a large building on a hill."
+    ],
+    "correctIndex": 2,
+    "explanation": "Creeping shadows and moonlight create a spooky, mysterious mood.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which sentence uses a fronted adverbial correctly to describe the castle?",
+    "options": [
+     "Above the moat, the flag waved gently in the wind.",
+     "The flag above the moat waved gently in the wind.",
+     "The flag waved above the moat gently in the wind.",
+     "Gently in the wind the flag above the moat waved."
+    ],
+    "correctIndex": 0,
+    "explanation": "A fronted adverbial comes first and is followed by a comma, like 'Above the moat,'.",
+    "difficulty": "advanced"
+   }
+  ],
+  "english/character-explorer": [
+   {
+    "question": "What is the child holding in the picture?",
+    "options": [
+     "A map",
+     "A book",
+     "A compass",
+     "A torch"
+    ],
+    "correctIndex": 0,
+    "explanation": "The child is clearly holding a map to help with exploring.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the child wearing on their back?",
+    "options": [
+     "A coat",
+     "A backpack",
+     "A scarf",
+     "A hat"
+    ],
+    "correctIndex": 1,
+    "explanation": "You can see a backpack on the child's back, ready for an adventure.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which word best describes how the child is feeling?",
+    "options": [
+     "Sad",
+     "Angry",
+     "Excited",
+     "Tired"
+    ],
+    "correctIndex": 2,
+    "explanation": "The child is smiling, which shows they are feeling excited and happy.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What might the child be planning to do?",
+    "options": [
+     "Go to school",
+     "Visit a friend",
+     "Read a book",
+     "Go on an adventure"
+    ],
+    "correctIndex": 3,
+    "explanation": "With a map and backpack, the child is likely planning an adventure.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If you were writing a story about this child, what would be a good title?",
+    "options": [
+     "The Lost Map",
+     "The Great Explorer",
+     "The School Trip",
+     "The New Backpack"
+    ],
+    "correctIndex": 1,
+    "explanation": "The child looks like an explorer, so 'The Great Explorer' is a fitting title.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which sentence best describes the child's appearance?",
+    "options": [
+     "The child has short hair and wears a dress.",
+     "The child is wearing a hat and holding a map.",
+     "The child is wearing a backpack and holding a map.",
+     "The child is holding a backpack and wearing a map."
+    ],
+    "correctIndex": 2,
+    "explanation": "The child is wearing a backpack and holding a map, as shown in the picture.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What does the map suggest about the child?",
+    "options": [
+     "They are lost.",
+     "They are going on a journey.",
+     "They are at home.",
+     "They are at school."
+    ],
+    "correctIndex": 1,
+    "explanation": "A map is used for finding your way, so it suggests the child is going on a journey.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these is a simile to describe the child's smile?",
+    "options": [
+     "The child's smile was as bright as the sun.",
+     "The child's smile was a ray of sunshine.",
+     "The child smiled happily.",
+     "The child's smile was very big."
+    ],
+    "correctIndex": 0,
+    "explanation": "A simile uses 'like' or 'as' to compare, so 'as bright as the sun' is a simile.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What genre of story would this picture best fit?",
+    "options": [
+     "A mystery story",
+     "A science fiction story",
+     "An adventure story",
+     "A fairy tale"
+    ],
+    "correctIndex": 2,
+    "explanation": "The map and backpack suggest an adventure story, full of excitement and discovery.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "If the child wrote a diary entry, which first sentence would be most suitable?",
+    "options": [
+     "Today I found a magical map and set off on a quest.",
+     "I am a child who likes maps.",
+     "Maps are useful for finding your way.",
+     "I have a backpack and a map."
+    ],
+    "correctIndex": 0,
+    "explanation": "A diary entry often starts with what happened today, so the first sentence is the best choice.",
+    "difficulty": "advanced"
+   }
+  ],
+  "english/forest-setting": [
+   {
+    "question": "What type of setting is shown in the picture?",
+    "options": [
+     "A busy city street",
+     "A quiet forest",
+     "A sandy beach",
+     "A snowy mountain"
+    ],
+    "correctIndex": 1,
+    "explanation": "The picture shows tall trees and a winding path, which are typical of a forest.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which word best describes the path in the picture?",
+    "options": [
+     "Straight",
+     "Winding",
+     "Broken",
+     "Narrow"
+    ],
+    "correctIndex": 1,
+    "explanation": "The path curves and bends, so it is winding.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If you were writing a story set here, which sense would you use to describe the tall trees?",
+    "options": [
+     "Sight",
+     "Taste",
+     "Smell",
+     "Touch"
+    ],
+    "correctIndex": 0,
+    "explanation": "You can see the tall trees, so you would describe them using sight.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the main subject of the picture?",
+    "options": [
+     "A river",
+     "A forest",
+     "A castle",
+     "A village"
+    ],
+    "correctIndex": 1,
+    "explanation": "The picture is mostly filled with trees, making a forest the main subject.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which of these is a simile that could describe the tall trees?",
+    "options": [
+     "The trees were tall.",
+     "The trees stood like giants.",
+     "The trees are green.",
+     "The trees have leaves."
+    ],
+    "correctIndex": 1,
+    "explanation": "A simile compares using 'like' or 'as', so 'like giants' is a simile.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What might the winding path suggest in a story?",
+    "options": [
+     "A journey or adventure",
+     "A place to sleep",
+     "A hidden treasure",
+     "A dangerous animal"
+    ],
+    "correctIndex": 0,
+    "explanation": "A path often symbolises a journey or adventure in stories.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these is a metaphor for the forest?",
+    "options": [
+     "The forest was as green as emeralds.",
+     "The forest was a green ocean.",
+     "The forest was very green.",
+     "The forest had many green trees."
+    ],
+    "correctIndex": 1,
+    "explanation": "A metaphor says something is something else, so 'the forest was a green ocean' is a metaphor.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What atmosphere does the picture create?",
+    "options": [
+     "Peaceful and calm",
+     "Loud and busy",
+     "Scary and dark",
+     "Hot and dry"
+    ],
+    "correctIndex": 0,
+    "explanation": "The gentle colours and quiet scene make it feel peaceful and calm.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "In a story, what could the tall trees represent?",
+    "options": [
+     "Danger",
+     "Wisdom",
+     "Sadness",
+     "Excitement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tall trees often symbolise wisdom or strength because they are old and sturdy.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which narrative perspective would best describe this setting?",
+    "options": [
+     "First person",
+     "Second person",
+     "Third person",
+     "Fourth person"
+    ],
+    "correctIndex": 2,
+    "explanation": "Third person is common for describing settings, using 'he', 'she', or 'they'.",
+    "difficulty": "advanced"
+   }
+  ],
+  "english/story-sequence": [
+   {
+    "question": "Look at the three pictures. What is the correct order of events?",
+    "options": [
+     "The boy wakes up, he eats breakfast, he goes to school.",
+     "The boy goes to school, he wakes up, he eats breakfast.",
+     "The boy eats breakfast, he goes to school, he wakes up.",
+     "The boy wakes up, he goes to school, he eats breakfast."
+    ],
+    "correctIndex": 0,
+    "explanation": "The pictures show the boy waking up first, then eating breakfast, then going to school.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the second picture, what is the boy doing?",
+    "options": [
+     "He is sleeping in bed.",
+     "He is eating breakfast.",
+     "He is walking to school.",
+     "He is reading a book."
+    ],
+    "correctIndex": 1,
+    "explanation": "The second picture clearly shows the boy eating breakfast at a table.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which word best describes how the boy feels in the third picture?",
+    "options": [
+     "Sad",
+     "Angry",
+     "Happy",
+     "Tired"
+    ],
+    "correctIndex": 2,
+    "explanation": "In the third picture, the boy is smiling as he goes to school, so he feels happy.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the setting of the first picture?",
+    "options": [
+     "A kitchen",
+     "A bedroom",
+     "A classroom",
+     "A garden"
+    ],
+    "correctIndex": 1,
+    "explanation": "The first picture shows a bed and a bedroom, so that is the setting.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which of these sentences uses the correct punctuation?",
+    "options": [
+     "The boy is eating breakfast?",
+     "The boy is eating breakfast!",
+     "The boy is eating breakfast,",
+     "The boy is eating breakfast."
+    ],
+    "correctIndex": 3,
+    "explanation": "A telling sentence ends with a full stop, so 'The boy is eating breakfast.' is correct.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which word from the pictures is a verb?",
+    "options": [
+     "Breakfast",
+     "School",
+     "Eat",
+     "Bed"
+    ],
+    "correctIndex": 2,
+    "explanation": "'Eat' is an action word, so it is a verb.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these could be a title for the whole story?",
+    "options": [
+     "A Day at the Park",
+     "The Lost Toy",
+     "A Morning Routine",
+     "The Big Storm"
+    ],
+    "correctIndex": 2,
+    "explanation": "The pictures show a morning routine of waking up, eating, and going to school.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the boy likely to do next after the third picture?",
+    "options": [
+     "Go to sleep",
+     "Eat lunch",
+     "Play football",
+     "Start school lessons"
+    ],
+    "correctIndex": 3,
+    "explanation": "After going to school, the boy will start his school lessons.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which sentence uses the past tense correctly to describe the first picture?",
+    "options": [
+     "The boy wakes up.",
+     "The boy woke up.",
+     "The boy is waking up.",
+     "The boy will wake up."
+    ],
+    "correctIndex": 1,
+    "explanation": "'Woke' is the past tense of 'wake', so it describes what already happened.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which connective best joins these ideas? 'The boy woke up, ___ he ate breakfast.'",
+    "options": [
+     "but",
+     "so",
+     "then",
+     "because"
+    ],
+    "correctIndex": 2,
+    "explanation": "'Then' shows the order of events, which fits the story sequence.",
+    "difficulty": "advanced"
+   }
+  ],
+  "geography/coastline": [
+   {
+    "question": "In the picture, what is the name of the landform that is a high area of rock with a steep side, often found at the coast?",
+    "options": [
+     "A cliff",
+     "A beach",
+     "A bay",
+     "A cave"
+    ],
+    "correctIndex": 0,
+    "explanation": "A cliff is a high rock face, often seen at the coast.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the main purpose of the lighthouse shown in the picture?",
+    "options": [
+     "To warn ships of danger",
+     "To provide a home for birds",
+     "To store fishing nets",
+     "To measure the tide"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lighthouses warn ships about dangerous rocks or the coast.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which natural feature in the picture is made of sand and is found at the edge of the sea?",
+    "options": [
+     "The cliffs",
+     "The lighthouse",
+     "The beach",
+     "The sky"
+    ],
+    "correctIndex": 2,
+    "explanation": "A beach is a sandy or pebbly area next to the sea.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What type of coastline is shown in the picture?",
+    "options": [
+     "A rocky coastline",
+     "A sandy coastline",
+     "A muddy coastline",
+     "An icy coastline"
+    ],
+    "correctIndex": 1,
+    "explanation": "The picture shows a sandy beach, so it is a sandy coastline.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which of these is a human-made feature in the picture?",
+    "options": [
+     "The sea",
+     "The lighthouse",
+     "The cliffs",
+     "The beach"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lighthouses are built by people, so they are human-made.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the area where the land meets the sea called?",
+    "options": [
+     "The coast",
+     "The mountain",
+     "The forest",
+     "The river"
+    ],
+    "correctIndex": 0,
+    "explanation": "The coast is the land along the edge of the sea.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which process is most likely to have helped shape the cliffs in the picture?",
+    "options": [
+     "Erosion by the sea",
+     "Volcanic eruption",
+     "Earthquake",
+     "Human building"
+    ],
+    "correctIndex": 0,
+    "explanation": "The sea wears away the land, which is called erosion.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why might there be a lighthouse on this coastline?",
+    "options": [
+     "To help ships navigate safely",
+     "To attract tourists to the beach",
+     "To provide electricity to the town",
+     "To pump water from the sea"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lighthouses help ships find their way and avoid dangers.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these is a physical (natural) feature of the coastline shown?",
+    "options": [
+     "The lighthouse",
+     "The beach",
+     "The road",
+     "The houses"
+    ],
+    "correctIndex": 1,
+    "explanation": "A beach is a natural feature, not made by people.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "If you were standing on the beach, in which direction would you look to see the sea?",
+    "options": [
+     "Towards the cliffs",
+     "Towards the lighthouse",
+     "Towards the land",
+     "Towards the water"
+    ],
+    "correctIndex": 3,
+    "explanation": "The sea is the water, so you would look towards the water.",
+    "difficulty": "advanced"
+   }
+  ],
+  "geography/mountains": [
+   {
+    "question": "What is the name for a very high landform that rises steeply above the land around it, like the ones in the picture?",
+    "options": [
+     "A mountain",
+     "A valley",
+     "A river",
+     "A plain"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mountains are very high parts of the land that stand out from the areas around them.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, what is at the top of the mountains?",
+    "options": [
+     "Green grass",
+     "Snow",
+     "Trees",
+     "Water"
+    ],
+    "correctIndex": 1,
+    "explanation": "The picture shows white snow on the mountain tops.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the low land between the mountains in the picture called?",
+    "options": [
+     "A valley",
+     "A peak",
+     "A slope",
+     "A summit"
+    ],
+    "correctIndex": 0,
+    "explanation": "A valley is the low land between hills or mountains, like the green area in the picture.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "From the picture, why do you think the snow is only at the top of the mountains?",
+    "options": [
+     "Because it is colder at the top",
+     "Because it is hotter at the top",
+     "Because there is more rain at the top",
+     "Because the top is closer to the sun"
+    ],
+    "correctIndex": 0,
+    "explanation": "The higher you go, the colder it gets, so snow stays on the mountain tops.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What do we call the pointed top of a mountain?",
+    "options": [
+     "The summit",
+     "The base",
+     "The slope",
+     "The valley"
+    ],
+    "correctIndex": 0,
+    "explanation": "The summit is the highest point of a mountain.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If you were standing in the green valley, how would you describe the mountains around you?",
+    "options": [
+     "They are lower than the valley",
+     "They are the same height as the valley",
+     "They are higher than the valley",
+     "They are flat like the valley"
+    ],
+    "correctIndex": 2,
+    "explanation": "Mountains are much higher than the valley floor.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these is a mountain range in the UK?",
+    "options": [
+     "The Alps",
+     "The Rockies",
+     "The Himalayas",
+     "The Pennines"
+    ],
+    "correctIndex": 3,
+    "explanation": "The Pennines are a mountain range in northern England.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why is the valley in the picture green while the mountain tops are white?",
+    "options": [
+     "Because the valley is warmer and plants can grow",
+     "Because the valley is colder and plants cannot grow",
+     "Because the valley is higher than the mountains",
+     "Because the valley is covered in snow"
+    ],
+    "correctIndex": 0,
+    "explanation": "The valley is lower and warmer, so grass and plants grow there.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which of these might you find in a mountain area like the one in the picture?",
+    "options": [
+     "A coral reef",
+     "A glacier",
+     "A desert",
+     "A rainforest"
+    ],
+    "correctIndex": 1,
+    "explanation": "Glaciers are large masses of ice found in cold mountain areas.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "What is the main difference between the mountains and the valley in the picture?",
+    "options": [
+     "The mountains are lower than the valley",
+     "The mountains are higher than the valley",
+     "The mountains are flatter than the valley",
+     "The mountains are greener than the valley"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mountains are much higher than the valley below them.",
+    "difficulty": "normal"
+   }
+  ],
+  "geography/rainforest": [
+   {
+    "question": "What type of environment is shown in the picture?",
+    "options": [
+     "A desert",
+     "A rainforest",
+     "A polar region",
+     "A grassland"
+    ],
+    "correctIndex": 1,
+    "explanation": "The picture has tall trees and broad leaves, which are typical of a rainforest.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which of these animals would you most likely find in the rainforest shown?",
+    "options": [
+     "A polar bear",
+     "A camel",
+     "A monkey",
+     "A penguin"
+    ],
+    "correctIndex": 2,
+    "explanation": "Monkeys live in rainforests and climb the tall trees.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Why do the trees in the picture have broad leaves?",
+    "options": [
+     "To catch sunlight in the shaded forest",
+     "To store water for dry seasons",
+     "To protect themselves from snow",
+     "To attract more insects for pollination"
+    ],
+    "correctIndex": 0,
+    "explanation": "Broad leaves help plants capture sunlight in the dark, shady rainforest.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the weather likely to be like in this rainforest?",
+    "options": [
+     "Hot and dry",
+     "Cold and snowy",
+     "Warm and wet",
+     "Cool and windy"
+    ],
+    "correctIndex": 2,
+    "explanation": "Rainforests are warm and get lots of rain all year round.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which layer of the rainforest is shown by the tallest trees in the picture?",
+    "options": [
+     "The emergent layer",
+     "The canopy",
+     "The understorey",
+     "The forest floor"
+    ],
+    "correctIndex": 0,
+    "explanation": "The tallest trees stick out above the rest, forming the emergent layer.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What important job do rainforests do for our planet?",
+    "options": [
+     "They create deserts",
+     "They produce oxygen",
+     "They cause earthquakes",
+     "They make it snow"
+    ],
+    "correctIndex": 1,
+    "explanation": "Rainforests are often called the lungs of the Earth because they make oxygen.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Where in the world would you find a rainforest like the one in the picture?",
+    "options": [
+     "Near the North Pole",
+     "In the middle of a desert",
+     "Along the equator",
+     "On top of a mountain"
+    ],
+    "correctIndex": 2,
+    "explanation": "Most rainforests are located near the equator where it is hot and wet.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "How does the dense canopy affect the plants below?",
+    "options": [
+     "It makes the forest floor very dark",
+     "It makes the forest floor very bright",
+     "It makes the forest floor very dry",
+     "It makes the forest floor very cold"
+    ],
+    "correctIndex": 0,
+    "explanation": "The thick canopy blocks sunlight, so the forest floor is very dark.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these is a common plant adaptation in the rainforest?",
+    "options": [
+     "Growing very slowly",
+     "Having thin, needle-like leaves",
+     "Climbing other trees to reach light",
+     "Shedding leaves in winter"
+    ],
+    "correctIndex": 2,
+    "explanation": "Many rainforest plants climb up tall trees to reach the sunlight.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Why are rainforests important for the animals shown in the picture?",
+    "options": [
+     "They provide food and shelter",
+     "They are too cold for animals",
+     "They have no water for animals",
+     "They are made of sand"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rainforests give animals homes, food, and water to survive.",
+    "difficulty": "advanced"
+   }
+  ],
+  "geography/river": [
+   {
+    "question": "The river in the picture is shown as a winding line. What is a winding curve in a river called?",
+    "options": [
+     "A meander",
+     "A waterfall",
+     "A delta",
+     "A tributary"
+    ],
+    "correctIndex": 0,
+    "explanation": "A meander is a bend or curve in a river's course.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The river flows through green fields. What is the land on either side of a river called?",
+    "options": [
+     "The bank",
+     "The source",
+     "The mouth",
+     "The bed"
+    ],
+    "correctIndex": 0,
+    "explanation": "The land along the edge of a river is called the bank.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Look at the picture and think about the direction a river flows. Which way does a river always flow?",
+    "options": [
+     "Downhill",
+     "Uphill",
+     "Sideways only",
+     "In a circle"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rivers flow downhill because gravity pulls the water downwards.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The green fields beside the river are used by farmers. What is the flat land next to a river often called?",
+    "options": [
+     "A valley floor",
+     "A mountain top",
+     "A cliff edge",
+     "A desert dune"
+    ],
+    "correctIndex": 0,
+    "explanation": "The flat land beside a river, often in a valley, is the valley floor.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The picture shows a river in the countryside. Where does a river begin?",
+    "options": [
+     "At its source",
+     "At its mouth",
+     "At the sea",
+     "At a bridge"
+    ],
+    "correctIndex": 0,
+    "explanation": "A river starts at its source, often high up in hills or mountains.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If the river in the picture continues to the sea, what do we call the place where it meets the sea?",
+    "options": [
+     "The mouth",
+     "The source",
+     "The meander",
+     "The bank"
+    ],
+    "correctIndex": 0,
+    "explanation": "The mouth is where a river flows into the sea or a lake.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The river winds through the fields. Why might a river bend instead of flowing in a straight line?",
+    "options": [
+     "The land is not flat",
+     "The water is too warm",
+     "The fish push it",
+     "The sun pulls it"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rivers bend around obstacles and follow the shape of the land.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Water in the river moves continuously. What word describes the movement of water in a river?",
+    "options": [
+     "Current",
+     "Tide",
+     "Wave",
+     "Splash"
+    ],
+    "correctIndex": 0,
+    "explanation": "The steady flow of water in a river is called the current.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If heavy rain falls on the fields in the picture, what might happen to the river?",
+    "options": [
+     "It could flood",
+     "It would dry up",
+     "It would freeze",
+     "It would stop flowing"
+    ],
+    "correctIndex": 0,
+    "explanation": "Heavy rain can make river levels rise and cause flooding.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "The river is shown winding through green fields. Which process slowly wears away the river banks over time?",
+    "options": [
+     "Erosion",
+     "Evaporation",
+     "Condensation",
+     "Freezing"
+    ],
+    "correctIndex": 0,
+    "explanation": "Erosion is when water and weather wear away land and rocks.",
+    "difficulty": "advanced"
+   }
+  ],
+  "history/egyptian-pyramid": [
+   {
+    "question": "What shape is the large building shown in the picture?",
+    "options": [
+     "A pyramid",
+     "A cube",
+     "A cylinder",
+     "A sphere"
+    ],
+    "correctIndex": 0,
+    "explanation": "The picture clearly shows a pyramid, which has a square base and triangular sides.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which river is shown flowing near the pyramid?",
+    "options": [
+     "The Amazon",
+     "The Nile",
+     "The Thames",
+     "The Ganges"
+    ],
+    "correctIndex": 1,
+    "explanation": "The River Nile is the famous river that flows through Egypt.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What are the tall trees in the picture called?",
+    "options": [
+     "Oak trees",
+     "Pine trees",
+     "Palm trees",
+     "Willow trees"
+    ],
+    "correctIndex": 2,
+    "explanation": "Palm trees grow in hot, dry places like Egypt.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In which modern country would you find this pyramid?",
+    "options": [
+     "Greece",
+     "Italy",
+     "Mexico",
+     "Egypt"
+    ],
+    "correctIndex": 3,
+    "explanation": "The pyramids are in Egypt, in North Africa.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What was the main purpose of the pyramids in Ancient Egypt?",
+    "options": [
+     "To serve as tombs for pharaohs",
+     "To store grain for the people",
+     "To act as temples for gods",
+     "To provide homes for farmers"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pyramids were built as grand tombs for pharaohs.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why was the River Nile so important to the Ancient Egyptians?",
+    "options": [
+     "It was used for swimming lessons",
+     "It provided water and fertile soil for farming",
+     "It was a place for fishing only",
+     "It was a source of gold"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Nile gave water and rich soil, which helped crops grow.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these materials was most commonly used to build pyramids?",
+    "options": [
+     "Wood",
+     "Brick",
+     "Stone",
+     "Mud"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pyramids were built from huge stone blocks.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What does the desert background in the picture tell us about Egypt's climate?",
+    "options": [
+     "It is often cold and snowy",
+     "It is often rainy and wet",
+     "It is often foggy and cloudy",
+     "It is often hot and dry"
+    ],
+    "correctIndex": 3,
+    "explanation": "Deserts are known for being hot and dry.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which ancient civilisation built the pyramids shown in the picture?",
+    "options": [
+     "The Ancient Egyptians",
+     "The Ancient Greeks",
+     "The Ancient Romans",
+     "The Ancient Chinese"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Ancient Egyptians built the famous pyramids.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "What was the name of the writing system used by the Ancient Egyptians?",
+    "options": [
+     "Cuneiform",
+     "Hieroglyphics",
+     "The alphabet",
+     "Runes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hieroglyphics were picture symbols used by Ancient Egyptians.",
+    "difficulty": "advanced"
+   }
+  ],
+  "history/roman-soldier": [
+   {
+    "question": "What is the soldier in the picture holding?",
+    "options": [
+     "A shield",
+     "A sword",
+     "A spear",
+     "A helmet"
+    ],
+    "correctIndex": 0,
+    "explanation": "The soldier is clearly holding a shield in his hand.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is on the soldier's head?",
+    "options": [
+     "A crown",
+     "A helmet",
+     "A hat",
+     "A cap"
+    ],
+    "correctIndex": 1,
+    "explanation": "Roman soldiers wore helmets to protect their heads in battle.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The soldier's shield is large and curved. Why did Roman soldiers carry shields like this?",
+    "options": [
+     "To protect themselves from enemy weapons",
+     "To carry their food and water",
+     "To use as a sunshade",
+     "To help them swim"
+    ],
+    "correctIndex": 0,
+    "explanation": "A big shield helped block arrows and swords during fights.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The soldier is wearing armour. What was Roman armour often made from?",
+    "options": [
+     "Wood",
+     "Leather",
+     "Metal",
+     "Cloth"
+    ],
+    "correctIndex": 2,
+    "explanation": "Roman soldiers wore metal armour to stay safe in battle.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The soldier's helmet has cheek pieces. What were these for?",
+    "options": [
+     "To make the soldier look taller",
+     "To protect the sides of the face",
+     "To hold a feather",
+     "To keep the sun out of his eyes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cheek pieces guarded the soldier's face from enemy blows.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The soldier carries a shield. What could a Roman soldier also carry in his other hand?",
+    "options": [
+     "A sword",
+     "A flag",
+     "A map",
+     "A trumpet"
+    ],
+    "correctIndex": 0,
+    "explanation": "Roman soldiers used a sword for close fighting.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The soldier is shown standing. What does his pose suggest about Roman soldiers?",
+    "options": [
+     "They were ready for battle",
+     "They were always resting",
+     "They were afraid of fighting",
+     "They were farmers"
+    ],
+    "correctIndex": 0,
+    "explanation": "His stance shows he is alert and prepared to fight.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The soldier's shield is curved. What was one advantage of a curved shield?",
+    "options": [
+     "It could be used as a sled",
+     "It could deflect blows to the side",
+     "It could be thrown like a Frisbee",
+     "It could be used as a seat"
+    ],
+    "correctIndex": 1,
+    "explanation": "The curve helped slide enemy weapons away from the soldier.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The soldier's helmet has a crest on top. What might this crest have been used for?",
+    "options": [
+     "To make the soldier look taller and more frightening",
+     "To store water",
+     "To hold a lamp",
+     "To keep the soldier warm"
+    ],
+    "correctIndex": 0,
+    "explanation": "A crest made the soldier appear taller and more intimidating.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "The soldier is wearing a tunic under his armour. What was a Roman soldier's tunic usually made of?",
+    "options": [
+     "Wool",
+     "Silk",
+     "Cotton",
+     "Nylon"
+    ],
+    "correctIndex": 0,
+    "explanation": "Roman tunics were commonly made from wool, which was warm and hard-wearing.",
+    "difficulty": "advanced"
+   }
+  ],
+  "history/stone-age-camp": [
+   {
+    "question": "What is the large round tent in the picture called?",
+    "options": [
+     "A roundhouse",
+     "A teepee",
+     "An igloo",
+     "A castle"
+    ],
+    "correctIndex": 0,
+    "explanation": "The round tent is a roundhouse, which is a typical Stone Age home.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the fire in the middle of the camp used for?",
+    "options": [
+     "Cooking food and keeping warm",
+     "Fighting battles",
+     "Making music",
+     "Painting caves"
+    ],
+    "correctIndex": 0,
+    "explanation": "The campfire was used for cooking, warmth, and light.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What material are the round tents likely made from?",
+    "options": [
+     "Animal skins and wooden poles",
+     "Bricks and cement",
+     "Glass and steel",
+     "Plastic and metal"
+    ],
+    "correctIndex": 0,
+    "explanation": "Stone Age people used animal skins stretched over wooden poles.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What might Stone Age people have worn?",
+    "options": [
+     "Animal fur and leather",
+     "Denim jeans and t-shirts",
+     "Woollen jumpers and boots",
+     "Silk robes and sandals"
+    ],
+    "correctIndex": 0,
+    "explanation": "They wore clothes made from animal skins and fur to keep warm.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Why did Stone Age people choose to live in a camp like this?",
+    "options": [
+     "It was near a water source and hunting grounds",
+     "It was close to a supermarket",
+     "It had a good wifi signal",
+     "It was next to a busy road"
+    ],
+    "correctIndex": 0,
+    "explanation": "They needed water and animals for food, so they camped nearby.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What job might the person sitting by the fire be doing?",
+    "options": [
+     "Making tools from stone",
+     "Watching television",
+     "Reading a book",
+     "Playing video games"
+    ],
+    "correctIndex": 0,
+    "explanation": "Stone Age people made tools like arrows and scrapers by the fire.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What does the picture suggest about how Stone Age people got their food?",
+    "options": [
+     "They hunted animals and gathered plants",
+     "They bought food from shops",
+     "They ordered takeaways",
+     "They grew crops in large farms"
+    ],
+    "correctIndex": 0,
+    "explanation": "They were hunter-gatherers, finding food in the wild.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why is the campfire placed in the centre of the camp?",
+    "options": [
+     "To keep everyone warm and share stories",
+     "To mark the entrance to the camp",
+     "To cook food for the animals",
+     "To dry clothes in the sun"
+    ],
+    "correctIndex": 0,
+    "explanation": "The fire was a central meeting place for warmth and storytelling.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What can we learn about Stone Age technology from the picture?",
+    "options": [
+     "They used simple tools and natural materials",
+     "They had advanced machines and engines",
+     "They used electricity and computers",
+     "They built tall skyscrapers"
+    ],
+    "correctIndex": 0,
+    "explanation": "The picture shows simple shelters and fire, using natural resources.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "How might the Stone Age camp have changed if the people had learned to farm?",
+    "options": [
+     "They would have built permanent houses and stored crops",
+     "They would have stopped using fire",
+     "They would have moved to cities immediately",
+     "They would have invented the wheel straight away"
+    ],
+    "correctIndex": 0,
+    "explanation": "Farming led to settled communities and permanent homes.",
+    "difficulty": "advanced"
+   }
+  ],
+  "history/viking-longship": [
+   {
+    "question": "What type of ship is shown in the picture?",
+    "options": [
+     "A Roman galley",
+     "A Viking longship",
+     "A Greek trireme",
+     "An Egyptian barge"
+    ],
+    "correctIndex": 1,
+    "explanation": "The picture shows a Viking longship with a striped sail, which is a clue.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which group of people were famous for sailing ships like the one in the picture?",
+    "options": [
+     "The Vikings",
+     "The Romans",
+     "The Egyptians",
+     "The Greeks"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Vikings were Norse seafarers who used longships for travel and trade.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the large piece of cloth on the ship called?",
+    "options": [
+     "A flag",
+     "A sail",
+     "A tent",
+     "A net"
+    ],
+    "correctIndex": 1,
+    "explanation": "The sail catches the wind to push the ship forward.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the ship in the picture travelling on?",
+    "options": [
+     "A river",
+     "A lake",
+     "The sea",
+     "A canal"
+    ],
+    "correctIndex": 2,
+    "explanation": "The picture shows waves, so the ship is on the sea.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Why did the Vikings use longships for raiding and exploring?",
+    "options": [
+     "They were fast and could sail in shallow water",
+     "They were built for carrying large numbers of horses",
+     "They were designed to stay close to the shore",
+     "They were powered by steam engines"
+    ],
+    "correctIndex": 0,
+    "explanation": "Longships were light and could navigate rivers as well as the open sea.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What does the striped pattern on the sail suggest about Viking ships?",
+    "options": [
+     "They were painted in bright colours",
+     "They were made from animal skins",
+     "They had decorative sails",
+     "They were used only for fishing"
+    ],
+    "correctIndex": 2,
+    "explanation": "The stripes show that the sail was decorated, perhaps with different coloured cloth.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which part of the ship would the Vikings use to row when there was no wind?",
+    "options": [
+     "The sail",
+     "The oars",
+     "The rudder",
+     "The anchor"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oars are shown along the side of the ship for rowing.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What might the Vikings have used this ship for?",
+    "options": [
+     "Exploring new lands",
+     "Building houses",
+     "Farming crops",
+     "Mining for gold"
+    ],
+    "correctIndex": 0,
+    "explanation": "Vikings sailed to explore, trade, and settle in new places.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "How do we know that the ship in the picture is from the Viking Age?",
+    "options": [
+     "It has a striped sail and a dragon head",
+     "It has a steam engine and a chimney",
+     "It has a cannon and a flag",
+     "It has a motor and a propeller"
+    ],
+    "correctIndex": 0,
+    "explanation": "The picture shows a striped sail and a dragon head, which are typical of Viking longships.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "What does the dragon head on the front of the ship represent?",
+    "options": [
+     "A way to scare enemies and protect the crew",
+     "A symbol of peace and friendship",
+     "A decoration for a festival",
+     "A sign that the ship is a trading vessel"
+    ],
+    "correctIndex": 0,
+    "explanation": "Vikings believed dragon heads would frighten away evil spirits and enemies.",
+    "difficulty": "advanced"
+   }
+  ],
+  "maths/2d-shapes": [
+   {
+    "question": "Look at the picture. Which shape has three sides?",
+    "options": [
+     "triangle",
+     "square",
+     "rectangle",
+     "pentagon"
+    ],
+    "correctIndex": 0,
+    "explanation": "A triangle has three straight sides.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, which shape has four equal sides?",
+    "options": [
+     "rectangle",
+     "square",
+     "triangle",
+     "hexagon"
+    ],
+    "correctIndex": 1,
+    "explanation": "A square has four sides of the same length.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "How many sides does the hexagon in the picture have?",
+    "options": [
+     "four",
+     "five",
+     "six",
+     "eight"
+    ],
+    "correctIndex": 2,
+    "explanation": "A hexagon has six sides.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which shape in the picture has no straight sides?",
+    "options": [
+     "triangle",
+     "square",
+     "rectangle",
+     "circle"
+    ],
+    "correctIndex": 3,
+    "explanation": "A circle is a curved shape with no straight sides.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Look at the rectangle in the picture. Which of these is true?",
+    "options": [
+     "It has four equal sides.",
+     "It has three sides.",
+     "It has four sides but only opposite sides are equal.",
+     "It has five sides."
+    ],
+    "correctIndex": 2,
+    "explanation": "A rectangle has four sides, and opposite sides are equal.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "How many vertices does the triangle in the picture have?",
+    "options": [
+     "two",
+     "three",
+     "four",
+     "five"
+    ],
+    "correctIndex": 1,
+    "explanation": "A triangle has three corners, which are its vertices.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which shape in the picture has eight sides?",
+    "options": [
+     "octagon",
+     "hexagon",
+     "pentagon",
+     "heptagon"
+    ],
+    "correctIndex": 0,
+    "explanation": "An octagon has eight sides.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these shapes from the picture is a quadrilateral?",
+    "options": [
+     "triangle",
+     "circle",
+     "square",
+     "pentagon"
+    ],
+    "correctIndex": 2,
+    "explanation": "A quadrilateral has four sides, and a square is one.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The picture shows a regular pentagon. What does 'regular' mean for a 2D shape?",
+    "options": [
+     "All sides and angles are equal.",
+     "It has five sides.",
+     "It is a large shape.",
+     "It has curved sides."
+    ],
+    "correctIndex": 0,
+    "explanation": "A regular shape has all sides the same length and all angles equal.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which shape in the picture has exactly five lines of symmetry?",
+    "options": [
+     "square",
+     "regular pentagon",
+     "rectangle",
+     "circle"
+    ],
+    "correctIndex": 1,
+    "explanation": "A regular pentagon has five lines of symmetry.",
+    "difficulty": "advanced"
+   }
+  ],
+  "maths/3d-shapes": [
+   {
+    "question": "Which 3D shape is the red cube?",
+    "options": [
+     "The sphere",
+     "The cube",
+     "The cylinder",
+     "The cone"
+    ],
+    "correctIndex": 1,
+    "explanation": "The cube is the shape with six square faces, like a dice.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "How many faces does the cube have?",
+    "options": [
+     "4",
+     "6",
+     "8",
+     "12"
+    ],
+    "correctIndex": 1,
+    "explanation": "A cube has 6 flat faces, all squares.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which shape is the blue sphere?",
+    "options": [
+     "The shape that is round like a ball",
+     "The shape that is like a tin can",
+     "The shape that is like a party hat",
+     "The shape that is like a box"
+    ],
+    "correctIndex": 0,
+    "explanation": "A sphere is perfectly round, like a football.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "How many edges does the cube have?",
+    "options": [
+     "6",
+     "8",
+     "12",
+     "16"
+    ],
+    "correctIndex": 2,
+    "explanation": "A cube has 12 straight edges where two faces meet.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which 3D shape has a circular face at one end and a point at the other?",
+    "options": [
+     "The cylinder",
+     "The sphere",
+     "The cone",
+     "The cuboid"
+    ],
+    "correctIndex": 2,
+    "explanation": "A cone has a circular base and a point called the apex.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "How many vertices (corners) does the cube have?",
+    "options": [
+     "4",
+     "6",
+     "8",
+     "10"
+    ],
+    "correctIndex": 2,
+    "explanation": "A cube has 8 vertices where three edges meet.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which shape is the green cylinder?",
+    "options": [
+     "The shape with two circular faces and a curved surface",
+     "The shape with six square faces",
+     "The shape with one circular face and a point",
+     "The shape that is round like a ball"
+    ],
+    "correctIndex": 0,
+    "explanation": "A cylinder has two flat circular faces and one curved surface, like a tin of beans.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which 3D shape has no vertices?",
+    "options": [
+     "The cube",
+     "The cuboid",
+     "The sphere",
+     "The cone"
+    ],
+    "correctIndex": 2,
+    "explanation": "A sphere is smooth all over, so it has no corners (vertices).",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The yellow cuboid has how many faces?",
+    "options": [
+     "4",
+     "6",
+     "8",
+     "12"
+    ],
+    "correctIndex": 1,
+    "explanation": "A cuboid has 6 rectangular faces, just like a cube but with different sized rectangles.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "How many edges does the cylinder have?",
+    "options": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "correctIndex": 2,
+    "explanation": "A cylinder has two circular edges where the curved surface meets the flat faces.",
+    "difficulty": "advanced"
+   }
+  ],
+  "maths/clock": [
+   {
+    "question": "The clock face shows a time. What time is it?",
+    "options": [
+     "3 o'clock",
+     "6 o'clock",
+     "9 o'clock",
+     "12 o'clock"
+    ],
+    "correctIndex": 0,
+    "explanation": "The short hand points to 3 and the long hand points to 12, so it is 3 o'clock.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "How many numbers are shown around the edge of the clock face?",
+    "options": [
+     "10",
+     "11",
+     "12",
+     "24"
+    ],
+    "correctIndex": 2,
+    "explanation": "A clock face has the numbers 1 to 12 around the edge.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which hand on the clock face is the minute hand?",
+    "options": [
+     "The short thick hand",
+     "The long thin hand",
+     "The small red hand",
+     "The dotted hand"
+    ],
+    "correctIndex": 1,
+    "explanation": "The minute hand is the longer hand, and it points to 12 here.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The clock face is divided into equal spaces by the numbers. How many of these spaces are there in total?",
+    "options": [
+     "6",
+     "10",
+     "12",
+     "60"
+    ],
+    "correctIndex": 2,
+    "explanation": "The numbers 1 to 12 make 12 equal hour spaces around the clock.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If the minute hand moved to point at the number 6, how many minutes past the hour would it be?",
+    "options": [
+     "6 minutes",
+     "15 minutes",
+     "30 minutes",
+     "45 minutes"
+    ],
+    "correctIndex": 2,
+    "explanation": "When the minute hand points to 6 it is half past, which is 30 minutes past the hour.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "How many minutes does the minute hand take to travel all the way around the clock face once?",
+    "options": [
+     "30 minutes",
+     "45 minutes",
+     "60 minutes",
+     "100 minutes"
+    ],
+    "correctIndex": 2,
+    "explanation": "One full turn of the minute hand takes 60 minutes, which is one hour.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "When the minute hand points to 12 and the hour hand points to 3, what time is shown?",
+    "options": [
+     "Quarter past 3",
+     "Half past 3",
+     "Quarter to 3",
+     "3 o'clock"
+    ],
+    "correctIndex": 3,
+    "explanation": "With the minute hand at 12 and the hour hand at 3, the time is exactly 3 o'clock.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If the clock showed half past 3, where would the minute hand be pointing?",
+    "options": [
+     "At the number 3",
+     "At the number 6",
+     "At the number 9",
+     "At the number 12"
+    ],
+    "correctIndex": 1,
+    "explanation": "Half past means the minute hand points to 6.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The hour hand moves from the 3 to the 6. How many hours have passed?",
+    "options": [
+     "2 hours",
+     "3 hours",
+     "4 hours",
+     "6 hours"
+    ],
+    "correctIndex": 1,
+    "explanation": "Counting on from 3 to 6 gives 3 hours.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "How many degrees does the minute hand turn in 15 minutes?",
+    "options": [
+     "45 degrees",
+     "90 degrees",
+     "180 degrees",
+     "360 degrees"
+    ],
+    "correctIndex": 1,
+    "explanation": "A quarter turn of 360 degrees is 90 degrees, and 15 minutes is a quarter of an hour.",
+    "difficulty": "advanced"
+   }
+  ],
+  "maths/fractions-pizza": [
+   {
+    "question": "Look at the pizza on the left. It is cut into 8 equal slices. What fraction of the whole pizza is one slice?",
+    "options": [
+     "1/8",
+     "1/4",
+     "1/2",
+     "1/6"
+    ],
+    "correctIndex": 0,
+    "explanation": "One slice out of 8 equal slices is 1/8.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The pizza on the right has 4 equal slices, and 3 slices are left. What fraction of the pizza is left?",
+    "options": [
+     "1/4",
+     "2/4",
+     "3/4",
+     "4/4"
+    ],
+    "correctIndex": 2,
+    "explanation": "Three out of four equal slices are left, so that is 3/4.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which pizza shows half of the pizza eaten?",
+    "options": [
+     "The pizza with 8 slices and 2 slices eaten",
+     "The pizza with 8 slices and 4 slices eaten",
+     "The pizza with 8 slices and 6 slices eaten",
+     "The pizza with 8 slices and 8 slices eaten"
+    ],
+    "correctIndex": 1,
+    "explanation": "Half of 8 slices is 4 slices, so eating 4 slices means half is eaten.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which fraction is equivalent to 2/4?",
+    "options": [
+     "1/2",
+     "1/3",
+     "2/3",
+     "3/4"
+    ],
+    "correctIndex": 0,
+    "explanation": "2/4 simplifies to 1/2 because both numbers can be divided by 2.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If you eat 2 slices from the pizza cut into 8 equal slices, what fraction of the pizza have you eaten?",
+    "options": [
+     "1/8",
+     "2/8",
+     "3/8",
+     "4/8"
+    ],
+    "correctIndex": 1,
+    "explanation": "You have eaten 2 out of 8 equal slices, which is 2/8.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which two fractions are equivalent to each other?",
+    "options": [
+     "1/4 and 2/8",
+     "1/4 and 3/8",
+     "2/4 and 2/8",
+     "3/4 and 3/8"
+    ],
+    "correctIndex": 0,
+    "explanation": "1/4 is the same as 2/8 because if you double both the numerator and denominator of 1/4 you get 2/8.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If you have 3/4 of a pizza left and you eat 1/4 more, what fraction of the pizza is left?",
+    "options": [
+     "1/4",
+     "2/4",
+     "3/4",
+     "4/4"
+    ],
+    "correctIndex": 1,
+    "explanation": "3/4 minus 1/4 equals 2/4, so 2/4 of the pizza is left.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "On the pizza cut into 8 equal slices, what fraction of the pizza is 4 slices?",
+    "options": [
+     "1/8",
+     "2/8",
+     "3/8",
+     "4/8"
+    ],
+    "correctIndex": 3,
+    "explanation": "4 slices out of 8 equal slices is 4/8, which is also equal to 1/2.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If you have 1/2 of a pizza and you want to share it equally between 2 people, what fraction of the whole pizza does each person get?",
+    "options": [
+     "1/2",
+     "1/3",
+     "1/4",
+     "1/8"
+    ],
+    "correctIndex": 2,
+    "explanation": "Half of 1/2 is 1/4, so each person gets 1/4 of the whole pizza.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which fraction is the largest?",
+    "options": [
+     "1/8",
+     "1/4",
+     "1/2",
+     "1/3"
+    ],
+    "correctIndex": 2,
+    "explanation": "1/2 is the largest because when the whole is divided into fewer pieces, each piece is bigger.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/circuit": [
+   {
+    "question": "Look at the picture. What component is shown as a cylinder with + and - signs?",
+    "options": [
+     "A battery",
+     "A bulb",
+     "A switch",
+     "A wire"
+    ],
+    "correctIndex": 0,
+    "explanation": "The battery is the part with the plus and minus signs.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, what is the round object that gives out light called?",
+    "options": [
+     "A buzzer",
+     "A motor",
+     "A bulb",
+     "A cell"
+    ],
+    "correctIndex": 2,
+    "explanation": "The round object that lights up is the bulb.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The wires in the picture connect the battery to the bulb. What do the wires do?",
+    "options": [
+     "They store electricity",
+     "They let electricity flow around the circuit",
+     "They make the bulb brighter",
+     "They stop electricity from flowing"
+    ],
+    "correctIndex": 1,
+    "explanation": "Wires are like paths that let electricity travel around the circuit.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If you add a switch to the circuit in the picture and turn it off, what will happen?",
+    "options": [
+     "The bulb will get brighter",
+     "The bulb will go out",
+     "The battery will break",
+     "The wires will melt"
+    ],
+    "correctIndex": 1,
+    "explanation": "A switch breaks the circuit, so the bulb will not light up.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, the circuit is complete. What does this mean?",
+    "options": [
+     "There is a gap in the circuit",
+     "Electricity can flow all the way around",
+     "The battery is empty",
+     "The bulb is too old"
+    ],
+    "correctIndex": 1,
+    "explanation": "A complete circuit has no gaps, so electricity can flow.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Look at how the wires are connected to the bulb. What would happen if one wire came loose?",
+    "options": [
+     "The bulb would still light up",
+     "The bulb would shine more brightly",
+     "The bulb would not light up",
+     "The battery would catch fire"
+    ],
+    "correctIndex": 2,
+    "explanation": "If a wire is loose, the circuit is broken and the bulb will not light.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The picture shows one battery. What would happen if you added a second battery in the same way?",
+    "options": [
+     "The bulb would be dimmer",
+     "The bulb would be brighter",
+     "The bulb would change colour",
+     "The bulb would stay the same"
+    ],
+    "correctIndex": 1,
+    "explanation": "More batteries give more power, so the bulb shines more brightly.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What type of electricity is shown in this picture, with a battery and wires?",
+    "options": [
+     "Static electricity",
+     "Mains electricity",
+     "Circuit electricity",
+     "Solar electricity"
+    ],
+    "correctIndex": 2,
+    "explanation": "This is circuit electricity because it flows around a complete loop.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "In the picture, the battery has a + and a - sign. What do these signs show?",
+    "options": [
+     "The battery's positive and negative ends",
+     "The battery's age",
+     "The battery's colour",
+     "The battery's weight"
+    ],
+    "correctIndex": 0,
+    "explanation": "The + and - signs show the positive and negative terminals of the battery.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "The wires in the picture are made of metal. Why is metal used for wires?",
+    "options": [
+     "Metal is shiny",
+     "Metal is a good conductor of electricity",
+     "Metal is heavy",
+     "Metal is cheap"
+    ],
+    "correctIndex": 1,
+    "explanation": "Metal is a good conductor, so electricity can flow through it easily.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/digestion": [
+   {
+    "question": "Look at the diagram. Which body part is shown at the very start of the digestive system, where food enters?",
+    "options": [
+     "The mouth",
+     "The stomach",
+     "The small intestine",
+     "The large intestine"
+    ],
+    "correctIndex": 0,
+    "explanation": "Food begins its journey in the mouth, where it is chewed and mixed with saliva.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, food travels down a long tube to reach the stomach. What is this tube called?",
+    "options": [
+     "The windpipe",
+     "The oesophagus",
+     "The small intestine",
+     "The large intestine"
+    ],
+    "correctIndex": 1,
+    "explanation": "The oesophagus is the tube that carries food from your mouth down to your stomach.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The diagram shows a bag-like organ where food is churned and mixed. Which organ is this?",
+    "options": [
+     "The liver",
+     "The mouth",
+     "The stomach",
+     "The pancreas"
+    ],
+    "correctIndex": 2,
+    "explanation": "The stomach is a stretchy bag that mixes food with juices to break it down.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "According to the picture, which organ comes straight after the stomach in the digestive system?",
+    "options": [
+     "The large intestine",
+     "The mouth",
+     "The oesophagus",
+     "The small intestine"
+    ],
+    "correctIndex": 3,
+    "explanation": "After leaving the stomach, food travels into the small intestine.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The picture shows a long, coiled tube where nutrients pass into the blood. What is this tube called?",
+    "options": [
+     "The small intestine",
+     "The large intestine",
+     "The stomach",
+     "The oesophagus"
+    ],
+    "correctIndex": 0,
+    "explanation": "The small intestine is long and coiled, and it absorbs nutrients into the blood.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which part of the digestive system is shown as a wider tube that removes water and makes waste solid?",
+    "options": [
+     "The small intestine",
+     "The large intestine",
+     "The stomach",
+     "The mouth"
+    ],
+    "correctIndex": 1,
+    "explanation": "The large intestine takes water out of leftover food, turning it into solid waste.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The diagram labels an organ that makes a green liquid to help digest fats. Which organ is it?",
+    "options": [
+     "The stomach",
+     "The pancreas",
+     "The liver",
+     "The small intestine"
+    ],
+    "correctIndex": 2,
+    "explanation": "The liver makes bile, a green liquid that helps break down fats.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Food follows a clear order through the body. Which list matches the order shown in the picture?",
+    "options": [
+     "Mouth, stomach, oesophagus, small intestine",
+     "Stomach, mouth, small intestine, large intestine",
+     "Mouth, oesophagus, large intestine, small intestine",
+     "Mouth, oesophagus, stomach, small intestine"
+    ],
+    "correctIndex": 3,
+    "explanation": "Food goes mouth, oesophagus, stomach, then small intestine.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The small intestine is drawn much longer and more coiled than the large intestine. Why is this useful?",
+    "options": [
+     "It gives more time and surface to absorb nutrients",
+     "It makes food travel through faster",
+     "It stores waste for longer",
+     "It helps food cool down before leaving"
+    ],
+    "correctIndex": 0,
+    "explanation": "A long, coiled tube gives more surface area and time to absorb nutrients.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "The picture shows the digestive system as one long journey. What is the main job of the whole system?",
+    "options": [
+     "To pump blood around the body",
+     "To break down food so the body can use it",
+     "To help you breathe in and out",
+     "To send messages to the brain"
+    ],
+    "correctIndex": 1,
+    "explanation": "The digestive system breaks food down so nutrients can be used by the body.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/volcano": [
+   {
+    "question": "Look at the volcano picture. What is the hot, glowing liquid flowing down the side called?",
+    "options": [
+     "Lava",
+     "Rock",
+     "Water",
+     "Ice"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lava is the hot, melted rock that flows out of a volcano.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, what is rising from the top of the volcano?",
+    "options": [
+     "Smoke and ash",
+     "Rain and snow",
+     "Leaves and twigs",
+     "Sand and dust"
+    ],
+    "correctIndex": 0,
+    "explanation": "Volcanoes release smoke and ash into the sky when they erupt.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the name of the opening at the top of the volcano where the smoke comes out?",
+    "options": [
+     "Crater",
+     "Cave",
+     "Cliff",
+     "Canyon"
+    ],
+    "correctIndex": 0,
+    "explanation": "The crater is the bowl shaped opening at the top of a volcano.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The picture shows glowing orange lava. What makes the lava glow like that?",
+    "options": [
+     "It is very hot",
+     "It is very cold",
+     "It is made of glass",
+     "It is painted"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lava glows because it is extremely hot, melted rock.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The volcano in the picture is shaped like a mountain. What is a volcano made of?",
+    "options": [
+     "Layers of cooled rock and ash",
+     "Solid ice and snow",
+     "Wood and leaves",
+     "Sand and mud only"
+    ],
+    "correctIndex": 0,
+    "explanation": "Over time, layers of cooled lava and ash build up to form a volcano.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "In the picture, the lava flows downwards. What force pulls the lava down the slope?",
+    "options": [
+     "Gravity",
+     "Magnetism",
+     "Friction",
+     "Sound"
+    ],
+    "correctIndex": 0,
+    "explanation": "Gravity pulls everything downwards, including flowing lava.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The smoke in the picture contains tiny bits of rock and ash. What can happen to this ash when it falls?",
+    "options": [
+     "It can cover towns and fields",
+     "It turns into water",
+     "It disappears completely",
+     "It becomes gold"
+    ],
+    "correctIndex": 0,
+    "explanation": "Volcanic ash can fall like grey snow and cover the land.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Look at the picture of the volcano. Which part of the Earth produces the melted rock inside a volcano?",
+    "options": [
+     "The mantle below the crust",
+     "The clouds above",
+     "The oceans nearby",
+     "The Moon"
+    ],
+    "correctIndex": 0,
+    "explanation": "Melted rock comes from deep inside the Earth, in the mantle.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The lava in the picture cools and hardens. What type of rock does cooled lava become?",
+    "options": [
+     "Igneous rock",
+     "Sedimentary rock",
+     "Metamorphic rock",
+     "Crystal glass"
+    ],
+    "correctIndex": 0,
+    "explanation": "Igneous rock forms when melted rock cools and solidifies.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Why do scientists find volcanoes useful for studying the inside of the Earth?",
+    "options": [
+     "They bring up material from deep underground",
+     "They show what the weather will be",
+     "They tell us where fish live",
+     "They make the sky turn blue"
+    ],
+    "correctIndex": 0,
+    "explanation": "Eruptions bring rock from deep inside the Earth to the surface for study.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/food-chain": [
+   {
+    "question": "Look at the picture. Which living thing in the food chain is a producer?",
+    "options": [
+     "The green plant",
+     "The rabbit",
+     "The fox",
+     "The soil"
+    ],
+    "correctIndex": 0,
+    "explanation": "Green plants make their own food using sunlight, so they are producers.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the food chain shown, what does the rabbit eat?",
+    "options": [
+     "The fox",
+     "The green plant",
+     "Other rabbits",
+     "Nothing at all"
+    ],
+    "correctIndex": 1,
+    "explanation": "The arrow shows the rabbit eating the green plant.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which animal in the picture is the predator?",
+    "options": [
+     "The rabbit",
+     "The green plant",
+     "The fox",
+     "The grass"
+    ],
+    "correctIndex": 2,
+    "explanation": "A predator hunts other animals, and the fox hunts the rabbit.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What do the arrows in the food chain picture show?",
+    "options": [
+     "Where animals sleep",
+     "The direction of energy flow",
+     "How fast animals run",
+     "The size of each animal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Arrows show the direction that energy moves as one living thing eats another.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which of these is a consumer in the food chain?",
+    "options": [
+     "The green plant",
+     "The sunlight",
+     "The rabbit",
+     "The water"
+    ],
+    "correctIndex": 2,
+    "explanation": "A consumer eats other living things, and the rabbit eats the plant.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What would happen to the fox if all the rabbits disappeared?",
+    "options": [
+     "It would eat the plants instead",
+     "It would have less food and struggle",
+     "It would grow much bigger",
+     "It would turn into a plant"
+    ],
+    "correctIndex": 1,
+    "explanation": "The fox depends on rabbits for food, so losing them would make life hard.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which word best describes the green plant in this food chain?",
+    "options": [
+     "Predator",
+     "Producer",
+     "Consumer",
+     "Prey"
+    ],
+    "correctIndex": 1,
+    "explanation": "Plants are producers because they make their own food from sunlight.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The rabbit is prey. What does prey mean?",
+    "options": [
+     "An animal that hunts others",
+     "An animal that makes its own food",
+     "An animal that is hunted and eaten",
+     "An animal that lives underground"
+    ],
+    "correctIndex": 2,
+    "explanation": "Prey are animals that get hunted and eaten by predators.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which sequence correctly shows the food chain in the picture?",
+    "options": [
+     "Fox, rabbit, plant",
+     "Rabbit, plant, fox",
+     "Plant, fox, rabbit",
+     "Plant, rabbit, fox"
+    ],
+    "correctIndex": 3,
+    "explanation": "Energy starts with the plant, moves to the rabbit, then to the fox.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Why is the green plant always at the start of this food chain?",
+    "options": [
+     "It is the biggest living thing",
+     "It is the only thing that makes its own food",
+     "It can run the fastest",
+     "It eats the rabbit first"
+    ],
+    "correctIndex": 1,
+    "explanation": "Every food chain begins with a producer, which makes food from sunlight.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/forces-magnets": [
+   {
+    "question": "What are the magnets in the picture pulling towards them?",
+    "options": [
+     "Metal objects",
+     "Plastic toys",
+     "Wooden blocks",
+     "Glass marbles"
+    ],
+    "correctIndex": 0,
+    "explanation": "Magnets attract objects made of magnetic materials like iron and steel.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which part of a magnet pulls the paperclips?",
+    "options": [
+     "The middle",
+     "The poles",
+     "The sides",
+     "The string"
+    ],
+    "correctIndex": 1,
+    "explanation": "The magnetic force is strongest at the poles, which are the ends of the magnet.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If you bring two north poles together, what happens?",
+    "options": [
+     "They attract each other",
+     "They stick together",
+     "They push apart",
+     "They become one magnet"
+    ],
+    "correctIndex": 2,
+    "explanation": "Like poles repel, so two north poles push away from each other.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which of these objects would a magnet NOT attract?",
+    "options": [
+     "A steel paperclip",
+     "An iron nail",
+     "A plastic ruler",
+     "A metal spoon"
+    ],
+    "correctIndex": 2,
+    "explanation": "Plastic is not magnetic, so a magnet will not attract it.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What invisible force is shown by the magnets pulling the objects?",
+    "options": [
+     "Gravity",
+     "Magnetism",
+     "Friction",
+     "Air resistance"
+    ],
+    "correctIndex": 1,
+    "explanation": "Magnetism is the force that pulls magnetic materials towards a magnet.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If you cut a magnet in half, what will each piece have?",
+    "options": [
+     "Only a north pole",
+     "Only a south pole",
+     "Both a north and a south pole",
+     "No poles at all"
+    ],
+    "correctIndex": 2,
+    "explanation": "Every magnet, no matter how small, has both a north and a south pole.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these metals is NOT magnetic?",
+    "options": [
+     "Iron",
+     "Steel",
+     "Copper",
+     "Nickel"
+    ],
+    "correctIndex": 2,
+    "explanation": "Copper is not magnetic, but iron, steel and nickel are.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What happens to the magnetic force as the magnet gets closer to the paperclip?",
+    "options": [
+     "It gets weaker",
+     "It stays the same",
+     "It disappears",
+     "It gets stronger"
+    ],
+    "correctIndex": 3,
+    "explanation": "The closer the magnet, the stronger the magnetic force.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which statement about magnetic fields is true?",
+    "options": [
+     "Magnetic field lines go from north to south outside the magnet",
+     "Magnetic fields can be seen with the naked eye",
+     "Magnetic fields only exist inside the magnet",
+     "Magnetic fields are blocked by paper"
+    ],
+    "correctIndex": 0,
+    "explanation": "Outside a magnet, the magnetic field lines travel from the north pole to the south pole.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Why does a magnet attract a paperclip but not a plastic toy?",
+    "options": [
+     "Because the paperclip is heavier",
+     "Because the paperclip is made of magnetic material",
+     "Because the plastic toy is smaller",
+     "Because the magnet is stronger than the toy"
+    ],
+    "correctIndex": 1,
+    "explanation": "The paperclip contains iron, which is magnetic, while plastic is not.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/light-shadows": [
+   {
+    "question": "Look at the picture. What is making the light that creates the shadow?",
+    "options": [
+     "A lamp or torch",
+     "A mirror",
+     "A window",
+     "A candle"
+    ],
+    "correctIndex": 0,
+    "explanation": "The bright lamp or torch in the picture is the light source casting the shadow.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, how is the shadow formed?",
+    "options": [
+     "Light passes through the object",
+     "Light is blocked by the object",
+     "The object makes its own light",
+     "The object reflects the light"
+    ],
+    "correctIndex": 1,
+    "explanation": "A shadow forms when an object blocks the light from travelling past it.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What happens to the shadow if the light moves closer to the object?",
+    "options": [
+     "The shadow gets smaller",
+     "The shadow stays the same",
+     "The shadow gets bigger",
+     "The shadow disappears"
+    ],
+    "correctIndex": 2,
+    "explanation": "Moving the light closer makes the shadow larger because the object blocks more light.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which material would let the most light pass through to make a very faint shadow?",
+    "options": [
+     "A wooden block",
+     "A metal spoon",
+     "A glass jar",
+     "A clear plastic sheet"
+    ],
+    "correctIndex": 3,
+    "explanation": "Clear plastic is transparent, so it lets most light through and makes a faint shadow.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why is the shadow on the opposite side of the object from the light?",
+    "options": [
+     "Because light travels in straight lines",
+     "Because shadows like the dark",
+     "Because the object spins around",
+     "Because the light bends round it"
+    ],
+    "correctIndex": 0,
+    "explanation": "Light travels in straight lines, so the shadow appears on the far side of the object.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The picture shows a dark shadow. What does a darker shadow mean?",
+    "options": [
+     "More light is passing through",
+     "Less light is passing through",
+     "The object is glowing",
+     "The light has stopped working"
+    ],
+    "correctIndex": 1,
+    "explanation": "A darker shadow means less light reaches that area because the object blocks it.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "If the light source is moved to the left, where will the shadow move?",
+    "options": [
+     "To the left",
+     "Straight down",
+     "To the right",
+     "It will not move"
+    ],
+    "correctIndex": 2,
+    "explanation": "The shadow always appears opposite the light, so it moves to the right.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these would make the shadow in the picture change shape?",
+    "options": [
+     "Turning the object around",
+     "Turning the light off",
+     "Covering the light",
+     "Moving the object closer"
+    ],
+    "correctIndex": 0,
+    "explanation": "Turning the object changes the outline that blocks the light, so the shadow shape changes.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "The picture shows a shadow on a wall. What is needed for a shadow to form?",
+    "options": [
+     "A light source, an object and a surface",
+     "Only a light source and a surface",
+     "Only an object and a surface",
+     "A light source and a mirror"
+    ],
+    "correctIndex": 0,
+    "explanation": "You need a light source, something to block it and a surface for the shadow to fall on.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Why does the shadow in the picture have a blurry edge rather than a perfectly sharp line?",
+    "options": [
+     "The object is moving quickly",
+     "The light comes from more than one point",
+     "The wall is not flat enough",
+     "The object is too far away"
+    ],
+    "correctIndex": 1,
+    "explanation": "Light from different parts of the source makes the edge of the shadow slightly blurred.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/plant-lifecycle": [
+   {
+    "question": "Look at the picture. What is the very first stage of the plant's life cycle shown?",
+    "options": [
+     "The seed in the soil",
+     "The tall green stem",
+     "The open flower",
+     "The small green leaf"
+    ],
+    "correctIndex": 0,
+    "explanation": "Every plant life cycle begins with a seed, just like the one shown in the soil.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, what does the small shoot grow upwards towards?",
+    "options": [
+     "The dark soil",
+     "The bright light",
+     "The deep roots",
+     "The fallen seeds"
+    ],
+    "correctIndex": 1,
+    "explanation": "Shoots grow upwards towards the light so the plant can make its own food.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which part of the plant in the picture takes in water from the soil?",
+    "options": [
+     "The flower",
+     "The stem",
+     "The roots",
+     "The leaves"
+    ],
+    "correctIndex": 2,
+    "explanation": "Roots soak up water and nutrients from the soil to help the plant grow.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "According to the picture, what does the plant produce so that new plants can grow?",
+    "options": [
+     "More roots",
+     "New seeds",
+     "Extra stems",
+     "Bigger leaves"
+    ],
+    "correctIndex": 1,
+    "explanation": "The flower makes seeds, and those seeds can grow into brand new plants.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "The picture shows the plant growing taller over time. What is this process called?",
+    "options": [
+     "Germination",
+     "Pollination",
+     "Growth",
+     "Dormancy"
+    ],
+    "correctIndex": 2,
+    "explanation": "Growth is when a plant gets taller and bigger as it develops.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which stage in the picture comes straight after the seedling with two small leaves?",
+    "options": [
+     "The seed",
+     "The flowering plant",
+     "The young plant with a stem",
+     "The withered plant"
+    ],
+    "correctIndex": 2,
+    "explanation": "After the seedling stage, the plant grows a taller stem and more leaves.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why does the plant in the picture need leaves to survive?",
+    "options": [
+     "To attract bees with bright colours",
+     "To make food using sunlight",
+     "To store water for the winter",
+     "To hold the plant in the soil"
+    ],
+    "correctIndex": 1,
+    "explanation": "Leaves use sunlight to make food for the plant, which is called photosynthesis.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The picture shows a bee near the flower. What job is the bee most likely doing?",
+    "options": [
+     "Eating the plant's roots",
+     "Carrying seeds to the soil",
+     "Pollinating the flower",
+     "Pulling the plant upwards"
+    ],
+    "correctIndex": 2,
+    "explanation": "Bees move pollen between flowers, which helps the plant make seeds.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If the plant in the picture did not get enough water, what would most likely happen?",
+    "options": [
+     "It would grow much faster",
+     "It would turn into a seed again",
+     "It would wilt and stop growing",
+     "It would grow extra flowers"
+    ],
+    "correctIndex": 2,
+    "explanation": "Plants need water to stay healthy, so without it they wilt and stop growing.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "The picture shows one full life cycle. Which statement about this cycle is correct?",
+    "options": [
+     "The plant dies before making seeds",
+     "The cycle repeats when new seeds grow",
+     "The roots turn into flowers over time",
+     "The flower becomes a seed instantly"
+    ],
+    "correctIndex": 1,
+    "explanation": "A life cycle repeats itself, so new seeds grow into new plants and the cycle goes on.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/rocks-fossils": [
+   {
+    "question": "What is the main feature shown in the picture?",
+    "options": [
+     "A fossil imprint on a rock",
+     "A crystal growing on a rock",
+     "A plant growing on a rock",
+     "A crack in a rock"
+    ],
+    "correctIndex": 0,
+    "explanation": "The picture clearly shows a fossil imprint on a rock.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What type of rock is shown in the picture?",
+    "options": [
+     "A sedimentary rock",
+     "An igneous rock",
+     "A metamorphic rock",
+     "A volcanic rock"
+    ],
+    "correctIndex": 0,
+    "explanation": "Fossils are usually found in sedimentary rocks.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What might have made the fossil imprint in the picture?",
+    "options": [
+     "A dinosaur",
+     "A shell",
+     "A leaf",
+     "A bone"
+    ],
+    "correctIndex": 1,
+    "explanation": "The imprint looks like a shell, which is a common fossil.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "How do fossils usually form?",
+    "options": [
+     "When an animal or plant is buried in sediment",
+     "When a rock is melted by heat",
+     "When a rock is squeezed by pressure",
+     "When a rock is worn away by wind"
+    ],
+    "correctIndex": 0,
+    "explanation": "Fossils form when remains are buried and slowly turn to rock.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What can we learn from the fossil in the picture?",
+    "options": [
+     "What the weather was like",
+     "What the rock is made of",
+     "What the organism looked like",
+     "How the rock was formed"
+    ],
+    "correctIndex": 2,
+    "explanation": "Fossils show us what living things looked like long ago.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which of these is true about the fossil in the picture?",
+    "options": [
+     "It is a living organism",
+     "It is a mineral",
+     "It is a type of soil",
+     "It is a record of past life"
+    ],
+    "correctIndex": 3,
+    "explanation": "A fossil is a record of past life preserved in rock.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why are fossils often found in sedimentary rocks?",
+    "options": [
+     "Because sedimentary rocks are soft",
+     "Because sedimentary rocks form in layers",
+     "Because sedimentary rocks are hard",
+     "Because sedimentary rocks are colourful"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sedimentary rocks form in layers that can bury and preserve remains.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the process called when minerals replace the remains of an organism?",
+    "options": [
+     "Petrification",
+     "Erosion",
+     "Deposition",
+     "Compaction"
+    ],
+    "correctIndex": 0,
+    "explanation": "Petrification is when minerals slowly replace the original material.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "If the fossil in the picture is a shell, what type of environment was it likely in?",
+    "options": [
+     "A desert",
+     "A forest",
+     "A river",
+     "An ocean"
+    ],
+    "correctIndex": 3,
+    "explanation": "Shells are often found in ocean environments.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "How might the fossil in the picture have been exposed?",
+    "options": [
+     "By weathering and erosion",
+     "By volcanic eruption",
+     "By an earthquake",
+     "By human digging"
+    ],
+    "correctIndex": 0,
+    "explanation": "Weathering and erosion can wear away rock to reveal fossils.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/solar-system": [
+   {
+    "question": "In the picture, what is at the centre of the solar system?",
+    "options": [
+     "The Sun",
+     "The Earth",
+     "The Moon",
+     "Jupiter"
+    ],
+    "correctIndex": 0,
+    "explanation": "The Sun is the star at the centre of our solar system.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "How many planets are shown orbiting the Sun in the picture?",
+    "options": [
+     "Seven",
+     "Nine",
+     "Eight",
+     "Ten"
+    ],
+    "correctIndex": 2,
+    "explanation": "There are eight planets in our solar system.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which planet is closest to the Sun in the picture?",
+    "options": [
+     "Venus",
+     "Earth",
+     "Mercury",
+     "Mars"
+    ],
+    "correctIndex": 2,
+    "explanation": "Mercury is the closest planet to the Sun.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which planet is known as the Red Planet and is shown in the picture?",
+    "options": [
+     "Jupiter",
+     "Mars",
+     "Saturn",
+     "Neptune"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mars looks red because of iron oxide on its surface.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which planet in the picture is famous for its bright rings?",
+    "options": [
+     "Saturn",
+     "Uranus",
+     "Neptune",
+     "Earth"
+    ],
+    "correctIndex": 0,
+    "explanation": "Saturn has beautiful rings made of ice and rock.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which planet is the largest in our solar system and is shown in the picture?",
+    "options": [
+     "Saturn",
+     "Neptune",
+     "Uranus",
+     "Jupiter"
+    ],
+    "correctIndex": 3,
+    "explanation": "Jupiter is the biggest planet, with a giant storm called the Great Red Spot.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What force keeps the planets moving around the Sun in the picture?",
+    "options": [
+     "Magnetism",
+     "Gravity",
+     "Friction",
+     "Electricity"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gravity is the invisible pull that keeps planets in orbit.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which planet is seventh from the Sun and appears blue-green in the picture?",
+    "options": [
+     "Uranus",
+     "Neptune",
+     "Saturn",
+     "Jupiter"
+    ],
+    "correctIndex": 0,
+    "explanation": "Uranus is the seventh planet and looks blue-green because of gases in its atmosphere.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the Sun mainly made of?",
+    "options": [
+     "Rock and metal",
+     "Ice and dust",
+     "Hydrogen and helium",
+     "Water and air"
+    ],
+    "correctIndex": 2,
+    "explanation": "The Sun is a star made mostly of hydrogen and helium gases.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which of these planets takes the longest time to orbit the Sun?",
+    "options": [
+     "Mercury",
+     "Earth",
+     "Mars",
+     "Neptune"
+    ],
+    "correctIndex": 3,
+    "explanation": "Neptune is farthest from the Sun, so it takes the longest to complete one orbit.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/states-of-matter": [
+   {
+    "question": "Look at the picture. Which state of matter is shown as ice?",
+    "options": [
+     "Solid",
+     "Liquid",
+     "Gas",
+     "Plasma"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ice is a solid because it has a fixed shape and volume.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the picture, which state of matter is water?",
+    "options": [
+     "Solid",
+     "Liquid",
+     "Gas",
+     "Plasma"
+    ],
+    "correctIndex": 1,
+    "explanation": "Water is a liquid because it flows and takes the shape of its container.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "Which state of matter is steam in the picture?",
+    "options": [
+     "Solid",
+     "Liquid",
+     "Gas",
+     "Plasma"
+    ],
+    "correctIndex": 2,
+    "explanation": "Steam is a gas because it spreads out to fill the space around it.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What happens to ice when it is heated?",
+    "options": [
+     "It freezes",
+     "It melts",
+     "It condenses",
+     "It evaporates"
+    ],
+    "correctIndex": 1,
+    "explanation": "When ice is heated, it melts and turns into liquid water.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the process called when water turns into steam?",
+    "options": [
+     "Melting",
+     "Freezing",
+     "Evaporation",
+     "Condensation"
+    ],
+    "correctIndex": 2,
+    "explanation": "Evaporation happens when water is heated and turns into a gas called steam.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What happens when steam is cooled?",
+    "options": [
+     "It freezes into ice",
+     "It melts into water",
+     "It condenses into water",
+     "It stays as steam"
+    ],
+    "correctIndex": 2,
+    "explanation": "When steam cools, it condenses back into liquid water.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which statement about the particles in a solid is true?",
+    "options": [
+     "They are far apart and move quickly",
+     "They are close together and vibrate in place",
+     "They are close together and slide past each other",
+     "They are very far apart and do not move"
+    ],
+    "correctIndex": 1,
+    "explanation": "In a solid, particles are packed closely and vibrate but do not move around.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the change of state from liquid to solid called?",
+    "options": [
+     "Melting",
+     "Freezing",
+     "Evaporation",
+     "Condensation"
+    ],
+    "correctIndex": 1,
+    "explanation": "Freezing is when a liquid cools and becomes a solid, like water turning to ice.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "The picture shows ice, water and steam. What do they all have in common?",
+    "options": [
+     "They are all made of the same particles",
+     "They are all solids",
+     "They are all gases",
+     "They all have a fixed shape"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ice, water and steam are all made of water particles, just in different states.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "Which of these is an example of a gas?",
+    "options": [
+     "Ice cube",
+     "Water in a glass",
+     "Steam from a kettle",
+     "A rock"
+    ],
+    "correctIndex": 2,
+    "explanation": "Steam is a gas because it spreads out and fills the space around it.",
+    "difficulty": "advanced"
+   }
+  ],
+  "science/water-cycle": [
+   {
+    "question": "In the picture, what is happening when water falls from the clouds?",
+    "options": [
+     "Evaporation",
+     "Condensation",
+     "Precipitation",
+     "Collection"
+    ],
+    "correctIndex": 2,
+    "explanation": "Precipitation is when water falls as rain, snow, sleet or hail.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the river in the picture an example of?",
+    "options": [
+     "Collection",
+     "Evaporation",
+     "Condensation",
+     "Precipitation"
+    ],
+    "correctIndex": 0,
+    "explanation": "Collection is when water gathers in rivers, lakes and oceans.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What provides the energy that makes water evaporate from the sea?",
+    "options": [
+     "The Moon",
+     "The Sun",
+     "The wind",
+     "The clouds"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Sun heats the water and turns it into water vapour.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "What is the process called when water vapour turns back into liquid water droplets to form clouds?",
+    "options": [
+     "Evaporation",
+     "Precipitation",
+     "Collection",
+     "Condensation"
+    ],
+    "correctIndex": 3,
+    "explanation": "Condensation happens when water vapour cools and turns into tiny droplets.",
+    "difficulty": "normal"
+   },
+   {
+    "question": "In the water cycle, what happens to water after it falls as rain?",
+    "options": [
+     "It disappears completely.",
+     "It turns into snow.",
+     "It flows into rivers and collects.",
+     "It goes up into the sky immediately."
+    ],
+    "correctIndex": 2,
+    "explanation": "Rainwater flows over the ground and collects in rivers, lakes and oceans.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Why do clouds form high in the sky?",
+    "options": [
+     "Because warm air rises and cools, causing condensation.",
+     "Because the sky is cold all the time.",
+     "Because rain pulls water up.",
+     "Because the wind blows them together."
+    ],
+    "correctIndex": 0,
+    "explanation": "Warm air rises, cools down, and the water vapour condenses into droplets.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What would happen to the water cycle if the Sun stopped shining?",
+    "options": [
+     "Evaporation would stop and the cycle would slow down.",
+     "Precipitation would increase.",
+     "Condensation would happen faster.",
+     "The rivers would fill up more quickly."
+    ],
+    "correctIndex": 0,
+    "explanation": "Without the Sun's heat, water would not evaporate, so the cycle would slow down.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "What is the correct order of the water cycle?",
+    "options": [
+     "Condensation, evaporation, precipitation, collection",
+     "Precipitation, collection, evaporation, condensation",
+     "Evaporation, condensation, precipitation, collection",
+     "Collection, precipitation, condensation, evaporation"
+    ],
+    "correctIndex": 2,
+    "explanation": "Water evaporates, condenses into clouds, falls as precipitation, and collects.",
+    "difficulty": "medium"
+   },
+   {
+    "question": "Which part of the water cycle is missing from the picture?",
+    "options": [
+     "Evaporation from the sea",
+     "Condensation forming clouds",
+     "Water flowing in rivers",
+     "Water soaking into the ground"
+    ],
+    "correctIndex": 3,
+    "explanation": "The picture does not show water soaking into the ground, which is part of collection.",
+    "difficulty": "advanced"
+   },
+   {
+    "question": "How does the water cycle help living things?",
+    "options": [
+     "It creates new water all the time.",
+     "It moves water around so plants and animals can use it.",
+     "It stops water from ever freezing.",
+     "It makes the Sun shine brighter."
+    ],
+    "correctIndex": 1,
+    "explanation": "The water cycle moves water around the Earth, providing fresh water for living things.",
+    "difficulty": "advanced"
+   }
+  ]
+ }
+}
