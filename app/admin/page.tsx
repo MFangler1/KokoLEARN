@@ -18,7 +18,8 @@ function adminEmails(): string[] {
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
-  return [...BUILT_IN_ADMINS, ...fromEnv];
+  // De-duplicate: an address may appear in both the built-in list and ADMIN_EMAILS.
+  return [...new Set([...BUILT_IN_ADMINS.map((e) => e.trim().toLowerCase()), ...fromEnv])];
 }
 
 async function getAdminSession() {
