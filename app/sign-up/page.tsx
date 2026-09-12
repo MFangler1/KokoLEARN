@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Sparkles, ArrowLeft, Loader2 } from "lucide-react";
 import BackButton from "../components/BackButton";
 import HomeButton from "../components/HomeButton";
+import TurnstileWidget from "@/components/TurnstileWidget";
 import { signUp } from "@/lib/auth/client";
 
 export default function SignUp() {
@@ -20,6 +21,7 @@ export default function SignUp() {
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -38,6 +40,10 @@ export default function SignUp() {
       setError("Passwords do not match.");
       return;
     }
+    if (!captchaToken) {
+      setError("Please complete the quick verification just above the button.");
+      return;
+    }
 
     setLoading(true);
 
@@ -47,6 +53,9 @@ export default function SignUp() {
         password: form.password,
         name: `${form.firstName} ${form.lastName}`.trim(),
         callbackURL: "/onboarding",
+        fetchOptions: {
+          headers: { "x-captcha-response": captchaToken },
+        },
       });
 
       // Send welcome email (fire-and-forget)
@@ -276,6 +285,8 @@ export default function SignUp() {
                   {error}
                 </div>
               )}
+
+              <TurnstileWidget onToken={setCaptchaToken} className="flex justify-center" />
 
               <button
                 type="submit"

@@ -1,5 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { betterAuth } from "better-auth";
+import { captcha } from "better-auth/plugins";
 import { withCloudflare } from "better-auth-cloudflare";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { getDb } from "@/lib/db";
@@ -132,6 +133,17 @@ async function authBuilder() {
         await sendPasswordResetEmail(cfCtx.env, data.user.email, data.url);
       },
     },
+    // Bot protection on account creation only, so existing flows (sign-in,
+    // password reset) keep working untouched while we roll this out.
+    plugins: cfCtx.env.TURNSTILE_SECRET_KEY
+      ? [
+          captcha({
+            provider: "cloudflare-turnstile",
+            secretKey: cfCtx.env.TURNSTILE_SECRET_KEY as string,
+            endpoints: ["/sign-up/email"],
+          }),
+        ]
+      : [],
   });
 }
 
