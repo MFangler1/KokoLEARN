@@ -92,3 +92,23 @@ export function welcomeBackEmail(params: { name: string }): { subject: string; h
     `, "Welcome Back"),
   };
 }
+
+export function verifyEmailTemplate(params: { name?: string; url: string }): { subject: string; html: string } {
+  const who = params.name ? `, ${params.name}` : "";
+  return {
+    subject: "One quick click to start KokoLearn ✉️",
+    html: wrapper(`
+      <h1 style="margin:0 0 8px;font-size:24px;color:#1e293b">Confirm your email${who}</h1>
+      <p style="margin:0 0 20px;font-size:15px;color:#64748b;line-height:1.6">
+        Thanks for joining KokoLearn. Please confirm this is your email address and your
+        child's free 24-hour trial is ready to go.
+      </p>
+      <a href="${params.url}" style="display:inline-block;background:linear-gradient(135deg,${brandColor},#EA580C);color:#fff;text-decoration:none;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:600">
+        Confirm my email
+      </a>
+      <p style="margin:20px 0 0;font-size:13px;color:#94a3b8">
+        This link expires in 1 hour. If you didn't create a KokoLearn account, you can safely ignore this email.
+      </p>
+    `, "Confirm your KokoLearn email"),
+  };
+}

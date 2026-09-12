@@ -1,6 +1,8 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { betterAuth } from "better-auth";
 import { captcha } from "better-auth/plugins";
+import { sendEmail } from "@/lib/email/send";
+import { verifyEmailTemplate } from "@/lib/email/templates";
 import { withCloudflare } from "better-auth-cloudflare";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { getDb } from "@/lib/db";
@@ -129,8 +131,17 @@ async function authBuilder() {
     emailAndPassword: {
       enabled: true,
       autoSignIn: true,
+      requireEmailVerification: true,
       sendResetPassword: async (data) => {
         await sendPasswordResetEmail(cfCtx.env, data.user.email, data.url);
+      },
+    },
+    emailVerification: {
+      sendOnSignUp: true,
+      autoSignInAfterVerification: true,
+      sendVerificationEmail: async ({ user, url }) => {
+        const content = verifyEmailTemplate({ name: user.name ?? undefined, url });
+        await sendEmail({ to: user.email, ...content });
       },
     },
     // Bot protection on account creation and sign-in. Password reset is left

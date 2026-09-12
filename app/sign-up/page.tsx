@@ -22,6 +22,7 @@ export default function SignUp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
+  const [awaitingVerification, setAwaitingVerification] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -52,7 +53,7 @@ export default function SignUp() {
         email: form.email,
         password: form.password,
         name: `${form.firstName} ${form.lastName}`.trim(),
-        callbackURL: "/onboarding",
+        callbackURL: "/sign-in?message=verified",
         fetchOptions: {
           headers: { "x-captcha-response": captchaToken },
         },
@@ -65,7 +66,9 @@ export default function SignUp() {
         body: JSON.stringify({ email: form.email, name: form.firstName }),
       }).catch(() => {});
 
-      router.push("/onboarding");
+      // Confirming the email is required before the trial starts, so the account
+      // exists but there is no session yet — show the "check your inbox" panel.
+      setAwaitingVerification(true);
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "Something went wrong. Try again.";
@@ -74,6 +77,37 @@ export default function SignUp() {
       setLoading(false);
     }
   };
+
+  if (awaitingVerification) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-white px-4">
+        <div className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-8 text-center shadow-sm">
+          <Image
+            src="/images/kokolearn-brand-logo.png"
+            alt="KokoLearn.org"
+            width={120}
+            height={120}
+            className="mx-auto object-contain"
+          />
+          <h1 className="mt-4 text-2xl font-bold text-gray-900">Check your inbox</h1>
+          <p className="mt-3 text-sm leading-relaxed text-gray-600">
+            We&apos;ve sent a confirmation link to <strong>{form.email}</strong>. Click it and your
+            child&apos;s free 24-hour trial starts straight away.
+          </p>
+          <div className="mt-5 rounded-xl bg-amber-50 px-4 py-3 text-left text-xs text-amber-700">
+            Can&apos;t see it? Check your spam folder and mark it as <strong>Not spam</strong> so future
+            emails reach you. The link is valid for one hour.
+          </div>
+          <Link
+            href="/sign-in"
+            className="mt-6 inline-block rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:border-primary/30 hover:text-primary"
+          >
+            Already confirmed? Sign in
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen justify-center bg-white">
