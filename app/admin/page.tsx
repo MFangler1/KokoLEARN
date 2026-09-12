@@ -7,9 +7,10 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { initAuth } from "@/lib/auth/server";
 import { getDb } from "@/lib/db";
-import { users } from "@/lib/db/auth.schema";
+import { users, sessions } from "@/lib/db/auth.schema";
 import { subscriptions } from "@/lib/db/schema";
 import { getSupabase } from "@/lib/supabase/server";
+import { desc } from "drizzle-orm";
 
 const BUILT_IN_ADMINS = ["mark.fenty+admin@gmail.com"];
 
@@ -47,8 +48,32 @@ async function listUsers() {
   try {
     const db = await getDb();
     if (!db) return [];
-    const rows = await db.select().from(users).limit(50);
-    return rows as Array<{ email?: string; name?: string; createdAt?: Date }>;
+    const rows = await db.select().from(users).orderBy(desc(users.createdAt)).limit(50);
+    return rows as Array<{
+      id?: string;
+      email?: string;
+      name?: string;
+      emailVerified?: boolean;
+      createdAt?: Date;
+    }>;
+  } catch {
+    return [];
+  }
+}
+
+// Sign-in records, so staff can see where a new account came from.
+async function listSessions() {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const rows = await db.select().from(sessions).orderBy(desc(sessions.createdAt)).limit(500);
+    return rows as Array<{
+      userId?: string;
+      ipAddress?: string | null;
+      city?: string | null;
+      country?: string | null;
+      createdAt?: Date;
+    }>;
   } catch {
     return [];
   }
@@ -118,17 +143,32 @@ export default async function AdminPage() {
     );
   }
 
-  const [userCount, subCount, childrenCount, lessonCount, userList, subList] = await Promise.all([
+  const [userCount, subCount, childrenCount, lessonCount, userList, subList, sessionList] = await Promise.all([
     countRows("users"),
     countRows("subscriptions"),
     supabaseCount("children"),
     supabaseCount("lessons"),
     listUsers(),
     listSubs(),
+    listSessions(),
   ]);
+
+  // Most recent sign-in per account, for the monitoring list below.
+  const lastSession = new Map<string, { city?: string | null; country?: string | null; ipAddress?: string | null }>();
+  for (const s of sessionList) {
+    if (s.userId && !lastSession.has(s.userId)) lastSession.set(s.userId, s);
+  }
+
+  // Anyone with an active non-trial plan is a paying customer; everyone else is on the free trial.
+  const paidSubs = subList.filter(
+    (s) => (s.status ?? "active") === "active" && (s.plan ?? "free_trial") !== "free_trial"
+  ).length;
+  const freeTrialCount = Math.max(0, (userCount ?? 0) - paidSubs);
 
   const stats = [
     { label: "Registered accounts", value: userCount ?? "-" },
+    { label: "Free trials", value: freeTrialCount },
+    { label: "Paying customers", value: paidSubs },
     { label: "Subscriptions", value: subCount ?? "-" },
     { label: "Children", value: childrenCount ?? "-" },
     { label: "Lessons created", value: lessonCount ?? "-" },
@@ -165,17 +205,42 @@ export default async function AdminPage() {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h2 className="text-sm font-bold text-gray-900">Recent accounts</h2>
+            <h2 className="text-sm font-bold text-gray-900">Accounts to review</h2>
+            <p className="mt-1 text-xs text-gray-500">
+              Newest first, with sign-up date, last sign-in location and whether the email is verified.
+            </p>
             {userList.length === 0 ? (
               <p className="mt-2 text-xs text-gray-500">No accounts yet.</p>
             ) : (
-              <ul className="mt-3 space-y-2">
-                {userList.slice(0, 12).map((u, i) => (
-                  <li key={i} className="flex items-center justify-between gap-3 text-xs">
-                    <span className="text-gray-700">{u.email ?? "(no email)"}</span>
-                    <span className="text-gray-400">{u.name ?? ""}</span>
-                  </li>
-                ))}
+              <ul className="mt-3 divide-y divide-gray-100">
+                {userList.slice(0, 20).map((u, i) => {
+                  const s = u.id ? lastSession.get(u.id) : undefined;
+                  const where = s?.city
+                    ? `${s.city}, ${s.country ?? ""}`.trim().replace(/,$/, "")
+                    : s?.country ?? null;
+                  const when = u.createdAt
+                    ? new Date(u.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+                    : null;
+                  return (
+                    <li key={i} className="flex items-start justify-between gap-3 py-2 text-xs">
+                      <span className="min-w-0">
+                        <span className="block truncate font-medium text-gray-800">{u.email ?? "(no email)"}</span>
+                        <span className="block truncate text-gray-400">
+                          {[u.name, when ? `joined ${when}` : null, where, s?.ipAddress].filter(Boolean).join(" · ")}
+                        </span>
+                      </span>
+                      <span
+                        className={
+                          u.emailVerified
+                            ? "shrink-0 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700"
+                            : "shrink-0 rounded-full bg-amber-50 px-2 py-0.5 font-medium text-amber-700"
+                        }
+                      >
+                        {u.emailVerified ? "verified" : "unverified"}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>

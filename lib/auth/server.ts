@@ -68,6 +68,11 @@ async function authBuilder() {
             enabled: true,
             window: 60,
             max: 100,
+            customRules: {
+              "/sign-up/email": { window: 3600, max: 5 },
+              "/sign-in/email": { window: 300, max: 10 },
+              "/request-password-reset": { window: 900, max: 3 },
+            },
           },
         }
       ),
@@ -112,6 +117,11 @@ async function authBuilder() {
           enabled: true,
           window: 60,
           max: 100,
+          customRules: {
+            "/sign-up/email": { window: 3600, max: 5 },
+            "/sign-in/email": { window: 300, max: 10 },
+            "/request-password-reset": { window: 900, max: 3 },
+          },
         },
       }
     ),
