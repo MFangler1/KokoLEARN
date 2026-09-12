@@ -19,9 +19,9 @@ async function sendPasswordResetEmail(env: any, email: string, url: string) {
   if (env.SEND_EMAIL) {
     try {
       await env.SEND_EMAIL.send({
-        from: { name: "KokoLearn", email: "noreply@kokolearn.org" },
+        from: { name: "KokoLearn.org", email: "noreply@kokolearn.org" },
         to: [{ email }],
-        subject: "Reset Your KokoLearn Password 🔐",
+        subject: "Reset your KokoLearn.org password",
         html,
       });
       console.log("[AUTH] Password reset email sent via Cloudflare to", email);
@@ -36,7 +36,7 @@ async function sendPasswordResetEmail(env: any, email: string, url: string) {
     await fetch("https://email-relay.kokolearn.org", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: email, subject: "Reset Your KokoLearn Password 🔐", html }),
+      body: JSON.stringify({ to: email, subject: "Reset your KokoLearn.org password", html }),
       signal: AbortSignal.timeout(10000),
     });
   } catch (e) {
