@@ -90,7 +90,7 @@ export async function POST(req: Request) {
           message,
           status: "new",
           ipAddress: ip,
-          createdAt,
+          createdAt: new Date(createdAt),
         });
       }
     } catch (err) {
