@@ -59,6 +59,20 @@ export async function GET(req: Request) {
   }
 
   const dryRun = url.searchParams.get("dry") === "1";
+
+  // Preview mode: send one stage to a given address without touching any data.
+  // Used to review copy before it goes out: /api/cron/drip?preview=1&stage=1&to=you@example.com
+  const previewTo = url.searchParams.get("to");
+  if (previewTo && url.searchParams.get("preview") === "1") {
+    const stage = Number(url.searchParams.get("stage") ?? "1");
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kokolearn.org";
+    const secret = process.env.BETTER_AUTH_SECRET ?? process.env.CRON_SECRET ?? "";
+    const unsubscribeUrl = `${baseUrl}/api/email/unsubscribe?e=${encodeURIComponent(previewTo)}&t=${await signEmail(previewTo, secret)}`;
+    const content = templateFor(stage)({ name: "Preview", unsubscribeUrl });
+    const ok = await sendEmail({ to: previewTo, ...content });
+    return NextResponse.json({ ok, preview: true, stage, to: previewTo, sent: ok });
+  }
+
   const db = await getDb();
   if (!db) return NextResponse.json({ ok: false, error: "no database" }, { status: 500 });
 

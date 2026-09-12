@@ -2,7 +2,7 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { betterAuth } from "better-auth";
 import { captcha } from "better-auth/plugins";
 import { sendEmail } from "@/lib/email/send";
-import { verifyEmailTemplate } from "@/lib/email/templates";
+import { verifyEmailTemplate, passwordResetEmail } from "@/lib/email/templates";
 import { withCloudflare } from "better-auth-cloudflare";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { getDb } from "@/lib/db";
@@ -12,7 +12,8 @@ function buildResetEmail(url: string): string {
 }
 
 async function sendPasswordResetEmail(env: any, email: string, url: string) {
-  const html = buildResetEmail(url);
+  const content = passwordResetEmail({ url });
+  const html = content.html;
 
   // Try Cloudflare's send_email binding first
   if (env.SEND_EMAIL) {
