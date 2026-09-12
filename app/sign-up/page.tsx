@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, ArrowLeft, Loader2 } from "lucide-react";
+import { Sparkles, ArrowLeft, Loader2, Eye, EyeOff } from "lucide-react";
 import BackButton from "../components/BackButton";
 import HomeButton from "../components/HomeButton";
 import TurnstileWidget from "@/components/TurnstileWidget";
@@ -22,6 +22,8 @@ export default function SignUp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [awaitingVerification, setAwaitingVerification] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -283,16 +285,27 @@ export default function SignUp() {
                 >
                   Password
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={form.password}
-                  onChange={handleChange}
-                  required
-                  minLength={8}
-                  placeholder="Create a password (min. 8 characters)"
-                  className="mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
-                />
+                <div className="relative mt-1">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                    minLength={8}
+                    placeholder="Create a password (min. 8 characters)"
+                    className="block w-full rounded-lg border border-gray-200 px-4 py-3 pr-11 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-[22px] flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-all"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
                   <p className="mt-1 text-xs font-semibold text-amber-600">Please enter details - CASE SENSITIVE</p>
               </div>
               <div>
@@ -302,15 +315,26 @@ export default function SignUp() {
                 >
                   Repeat password
                 </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  value={form.confirmPassword}
-                  onChange={handleChange}
-                  required
-                  placeholder="Re-enter your password"
-                  className="mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
-                />
+                <div className="relative mt-1">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    required
+                    placeholder="Re-enter your password"
+                    className="block w-full rounded-lg border border-gray-200 px-4 py-3 pr-11 text-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-[22px] flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-all"
+                    aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                    tabIndex={-1}
+                  >
+                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
                   <p className="mt-1 text-xs font-semibold text-amber-600">Please enter details - CASE SENSITIVE</p>
               </div>
 
