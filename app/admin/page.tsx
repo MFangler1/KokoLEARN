@@ -160,16 +160,23 @@ export default async function AdminPage() {
   }
 
   // Anyone with an active non-trial plan is a paying customer; everyone else is on the free trial.
+  // Staff/admin accounts are excluded so the numbers reflect real members only.
+  const staff = new Set(adminEmails());
+  const members = userList.filter((u) => !staff.has((u.email ?? "").toLowerCase()));
+  const memberIds = new Set(members.map((u) => u.id));
   const paidSubs = subList.filter(
-    (s) => (s.status ?? "active") === "active" && (s.plan ?? "free_trial") !== "free_trial"
+    (s) =>
+      memberIds.has(s.userId ?? "") &&
+      (s.status ?? "active") === "active" &&
+      (s.plan ?? "free_trial") !== "free_trial"
   ).length;
-  const freeTrialCount = Math.max(0, (userCount ?? 0) - paidSubs);
+  const freeTrialCount = Math.max(0, members.length - paidSubs);
 
   const stats = [
-    { label: "Registered accounts", value: userCount ?? "-" },
+    { label: "Registered members", value: members.length },
     { label: "Free trials", value: freeTrialCount },
     { label: "Paying customers", value: paidSubs },
-    { label: "Subscriptions", value: subCount ?? "-" },
+    { label: "All accounts", value: userCount ?? "-" },
     { label: "Children", value: childrenCount ?? "-" },
     { label: "Lessons created", value: lessonCount ?? "-" },
   ];
