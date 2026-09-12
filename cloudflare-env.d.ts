@@ -25,4 +25,8 @@ interface CloudflareEnv {
   STRIPE_WEBHOOK_SECRET: string;
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
   NEXT_PUBLIC_SITE_URL: string;
+
+	// Bot protection (Cloudflare Turnstile)
+	TURNSTILE_SECRET_KEY?: string;
+	NEXT_PUBLIC_TURNSTILE_SITE_KEY?: string;
 }
