@@ -160,8 +160,9 @@ export default async function AdminPage() {
   }
 
   // Anyone with an active non-trial plan is a paying customer; everyone else is on the free trial.
-  // Staff/admin accounts are excluded so the numbers reflect real members only.
-  const staff = new Set(adminEmails());
+  // Staff/admin accounts and internal demo accounts are excluded so the numbers reflect real members only.
+  const STAFF_EMAILS = ["mark.fenty@gmail.com", "test-payment@kokolearn.org"];
+  const staff = new Set([...adminEmails(), ...STAFF_EMAILS.map((e) => e.toLowerCase())]);
   const members = userList.filter((u) => !staff.has((u.email ?? "").toLowerCase()));
   const memberIds = new Set(members.map((u) => u.id));
   const paidSubs = subList.filter(
