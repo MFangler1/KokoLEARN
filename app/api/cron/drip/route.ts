@@ -17,6 +17,9 @@ import {
   trialEndedEmail,
   feedbackRequestEmail,
   anotherTrialEmail,
+  verifyEmailTemplate,
+  welcomeEmail,
+  passwordResetEmail,
 } from "@/lib/email/templates";
 import { eq } from "drizzle-orm";
 import { signEmail } from "@/lib/email/token";
@@ -68,9 +71,22 @@ export async function GET(req: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kokolearn.org";
     const secret = process.env.BETTER_AUTH_SECRET ?? process.env.CRON_SECRET ?? "";
     const unsubscribeUrl = `${baseUrl}/api/email/unsubscribe?e=${encodeURIComponent(previewTo)}&t=${await signEmail(previewTo, secret)}`;
-    const content = templateFor(stage)({ name: "Preview", unsubscribeUrl });
+
+    // ?template=verify|welcome|password-reset  (omit for the lifecycle stages)
+    const tpl = (url.searchParams.get("template") ?? "").toLowerCase();
+    let content: { subject: string; html: string };
+    if (tpl === "verify") {
+      content = verifyEmailTemplate({ name: "Preview", url: `${baseUrl}/sign-in` });
+    } else if (tpl === "welcome") {
+      content = welcomeEmail({ name: "Preview" });
+    } else if (tpl === "password-reset") {
+      content = passwordResetEmail({ url: `${baseUrl}/sign-in` });
+    } else {
+      content = templateFor(stage)({ name: "Preview", unsubscribeUrl });
+    }
+
     const ok = await sendEmail({ to: previewTo, ...content });
-    return NextResponse.json({ ok, preview: true, stage, to: previewTo, sent: ok });
+    return NextResponse.json({ ok, preview: true, template: tpl || `stage-${stage}`, to: previewTo, sent: ok });
   }
 
   const db = await getDb();

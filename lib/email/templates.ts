@@ -181,12 +181,14 @@ export function verifyEmailTemplate(params: { name?: string; url: string }): { s
     subject: "Confirm your email to start KokoLearn.org",
     html: wrapper(
       `
-      ${h1(`Confirm your email${who}`)}
-      ${p(`One click and your child's free 24-hour trial on ${brand} is ready to go.`)}
-      ${button(params.url, "Confirm my email")}
-      ${p("This link expires in 1 hour. If you did not create an account, you can safely ignore this email.", true)}
+      ${h1(`Confirm your email address${who}`)}
+      ${p(`Thank you for signing up to ${brand}. There is just one step left before your child's free 24-hour trial begins.`)}
+      ${p("Please click the button below to confirm this is your email address. You will be taken straight to your account, ready to set up your child's learning profile.")}
+      ${button(params.url, "Confirm my email address")}
+      ${p("For your security, this link is valid for one hour. If it has expired, you can request a new one from the sign-in page.")}
+      ${p("If you did not create an account with us, no action is needed and you can safely ignore this email.", true)}
       `,
-      "Confirm your email",
+      "Confirm your email address",
       { preheader: "One click to start your child's free trial." }
     ),
   };
