@@ -133,14 +133,14 @@ async function authBuilder() {
         await sendPasswordResetEmail(cfCtx.env, data.user.email, data.url);
       },
     },
-    // Bot protection on account creation only, so existing flows (sign-in,
-    // password reset) keep working untouched while we roll this out.
+    // Bot protection on account creation and sign-in. Password reset is left
+    // out for now so a locked-out user can always recover.
     plugins: cfCtx.env.TURNSTILE_SECRET_KEY
       ? [
           captcha({
             provider: "cloudflare-turnstile",
             secretKey: cfCtx.env.TURNSTILE_SECRET_KEY as string,
-            endpoints: ["/sign-up/email"],
+            endpoints: ["/sign-up/email", "/sign-in/email"],
           }),
         ]
       : [],

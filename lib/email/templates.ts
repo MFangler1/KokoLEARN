@@ -11,8 +11,8 @@ function wrapper(content: string, title: string): string {
 <body style="margin:0;padding:0;background:${bgColor};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
 <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:40px 16px">
 <table width="480" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.05)">
-<tr><td style="background:linear-gradient(135deg,${brandColor},#EA580C);padding:32px;text-align:center">
-<img src="https://kokolearn.org/images/kokolearn-text-logo.webp" alt="KokoLearn" width="160" style="display:block;margin:0 auto" />
+<tr><td style="background:#ffffff;padding:28px 32px 18px;text-align:center;border-bottom:4px solid ${brandColor}">
+<img src="https://kokolearn.org/images/kokolearn-brand-logo.png" alt="KokoLearn.org" width="128" height="128" style="display:block;margin:0 auto;width:128px;height:128px" />
 </td></tr>
 <tr><td style="padding:32px">
 ${content}

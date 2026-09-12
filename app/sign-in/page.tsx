@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Brain, ArrowLeft, Loader2, Eye, EyeOff, Mail, Home, LayoutDashboard, CheckCircle2, PlusCircle } from "lucide-react";
 import { signIn } from "@/lib/auth/client";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 // Where the user chose to land after signing in, remembered across sessions
 const DESTINATION_KEY = "kokolearn_signin_destination";
@@ -48,6 +49,7 @@ function SignInContent() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
 
   // Post-sign-in destination chooser
   const [showChooser, setShowChooser] = useState(false);
@@ -63,10 +65,22 @@ function SignInContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!captchaToken) {
+      setError("Please complete the quick verification just above the button.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const result = await signIn.email({ email, password });
+      const result = await signIn.email({
+        email,
+        password,
+        fetchOptions: {
+          headers: { "x-captcha-response": captchaToken },
+        },
+      });
       if (result?.error) {
         throw new Error(result.error.message || "Invalid email or password.");
       }
@@ -350,6 +364,8 @@ function SignInContent() {
                   {error}
                 </div>
               )}
+
+              <TurnstileWidget onToken={setCaptchaToken} className="flex justify-center" />
 
               <button
                 type="submit"
