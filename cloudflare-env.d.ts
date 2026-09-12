@@ -29,4 +29,7 @@ interface CloudflareEnv {
 	// Bot protection (Cloudflare Turnstile)
 	TURNSTILE_SECRET_KEY?: string;
 	NEXT_PUBLIC_TURNSTILE_SITE_KEY?: string;
+
+	// Lifecycle email runner
+	CRON_SECRET?: string;
 }

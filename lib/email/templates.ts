@@ -112,3 +112,87 @@ export function verifyEmailTemplate(params: { name?: string; url: string }): { s
     `, "Confirm your KokoLearn email"),
   };
 }
+
+// ── Lifecycle (drip) emails ──
+// Sent by /api/cron/drip. Each one carries an unsubscribe link.
+
+function footerNote(unsubscribeUrl?: string): string {
+  if (!unsubscribeUrl) return "";
+  return `<p style="margin:20px 0 0;font-size:12px;color:#94a3b8">
+    You're receiving this because you started a KokoLearn trial.
+    <a href="${unsubscribeUrl}" style="color:#94a3b8;text-decoration:underline">Unsubscribe</a>
+  </p>`;
+}
+
+export function trialEndedEmail(params: { name?: string; unsubscribeUrl?: string }): { subject: string; html: string } {
+  const who = params.name ? `, ${params.name}` : "";
+  return {
+    subject: "Your child's KokoLearn trial has finished",
+    html: wrapper(`
+      <h1 style="margin:0 0 8px;font-size:24px;color:#1e293b">Your free trial has ended${who}</h1>
+      <p style="margin:0 0 20px;font-size:15px;color:#64748b;line-height:1.6">
+        We hope your child enjoyed their first lessons. To keep going — unlimited lessons,
+        progress reports and every subject — choose a plan below.
+      </p>
+      <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 22px">
+        <tr><td style="padding:12px 16px;border:1px solid #f1f5f9;border-radius:12px;font-size:14px;color:#475569">
+          <strong style="color:#1e293b">Monthly</strong> — learn at your own pace, cancel anytime
+        </td></tr>
+        <tr><td style="height:10px"></td></tr>
+        <tr><td style="padding:12px 16px;border:1px solid #f1f5f9;border-radius:12px;font-size:14px;color:#475569">
+          <strong style="color:#1e293b">Annual</strong> — our best value, two months free
+        </td></tr>
+      </table>
+      <a href="https://kokolearn.org/pricing" style="display:inline-block;background:linear-gradient(135deg,${brandColor},#EA580C);color:#fff;text-decoration:none;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:600">
+        See the plans
+      </a>
+      <p style="margin:20px 0 0;font-size:13px;color:#94a3b8">
+        Any questions? Just reply to this email — it reaches a real person.
+      </p>
+      ${footerNote(params.unsubscribeUrl)}
+    `, "Your KokoLearn trial has ended"),
+  };
+}
+
+export function feedbackRequestEmail(params: { name?: string; unsubscribeUrl?: string }): { subject: string; html: string } {
+  const who = params.name ? `Hi ${params.name}, ` : "Hi, ";
+  return {
+    subject: "How did your child get on with KokoLearn?",
+    html: wrapper(`
+      <h1 style="margin:0 0 8px;font-size:24px;color:#1e293b">We'd love your thoughts</h1>
+      <p style="margin:0 0 20px;font-size:15px;color:#64748b;line-height:1.6">
+        ${who}you tried KokoLearn a few days ago and we'd genuinely like to know how it went —
+        what worked, what didn't, and whether there's anything we could do better.
+      </p>
+      <p style="margin:0 0 20px;font-size:15px;color:#64748b;line-height:1.6">
+        Simply reply to this email with a sentence or two. Every reply is read, and it shapes
+        what we build next.
+      </p>
+      <a href="https://kokolearn.org/for-organisations#enquire" style="display:inline-block;background:linear-gradient(135deg,${brandColor},#EA580C);color:#fff;text-decoration:none;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:600">
+        Tell us how it went
+      </a>
+      ${footerNote(params.unsubscribeUrl)}
+    `, "How did it go?"),
+  };
+}
+
+export function anotherTrialEmail(params: { name?: string; unsubscribeUrl?: string }): { subject: string; html: string } {
+  const who = params.name ? `, ${params.name}` : "";
+  return {
+    subject: "A fresh week of KokoLearn — on us",
+    html: wrapper(`
+      <h1 style="margin:0 0 8px;font-size:24px;color:#1e293b">Come back for another week${who}</h1>
+      <p style="margin:0 0 20px;font-size:15px;color:#64748b;line-height:1.6">
+        Your child's progress was saved, so picking up again takes seconds. We've unlocked
+        another free trial so you can see how they get on with a full week of lessons.
+      </p>
+      <a href="https://kokolearn.org/sign-in" style="display:inline-block;background:linear-gradient(135deg,${brandColor},#EA580C);color:#fff;text-decoration:none;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:600">
+        Start your new trial
+      </a>
+      <p style="margin:20px 0 0;font-size:13px;color:#94a3b8">
+        If you'd rather not use it, no action is needed — your account stays exactly as it is.
+      </p>
+      ${footerNote(params.unsubscribeUrl)}
+    `, "Another week on us"),
+  };
+}

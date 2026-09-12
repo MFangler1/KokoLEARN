@@ -89,11 +89,30 @@ export const organisationEnquiries = sqliteTable("organisation_enquiries", {
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+// ── Lifecycle email sequence (in-house drip) ──
+export const emailSequence = sqliteTable(
+  "email_sequence",
+  {
+    userId: text("user_id").notNull(),
+    email: text("email").notNull(),
+    stage: integer("stage").notNull(),
+    sentAt: integer("sent_at").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.stage] })]
+);
+
+export const emailOptouts = sqliteTable("email_optouts", {
+  email: text("email").primaryKey(),
+  createdAt: integer("created_at").notNull(),
+});
+
 // Combine all schemas for exports
 export const schema = {
   reportAddons,
   seenQuestions,
   organisationEnquiries,
+  emailSequence,
+  emailOptouts,
   ...authSchema,
   subscriptions,
   achievements,
