@@ -9,6 +9,7 @@ import { initAuth } from "@/lib/auth/server";
 import { getDb } from "@/lib/db";
 import { users, sessions } from "@/lib/db/auth.schema";
 import { subscriptions } from "@/lib/db/schema";
+import { organisationEnquiries } from "@/lib/db/schema";
 import { getSupabase } from "@/lib/supabase/server";
 import { desc } from "drizzle-orm";
 
@@ -72,6 +73,30 @@ async function listSessions() {
       ipAddress?: string | null;
       city?: string | null;
       country?: string | null;
+      createdAt?: Date;
+    }>;
+  } catch {
+    return [];
+  }
+}
+
+async function listEnquiries() {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const rows = await db
+      .select()
+      .from(organisationEnquiries)
+      .orderBy(desc(organisationEnquiries.createdAt))
+      .limit(25);
+    return rows as Array<{
+      organisation?: string;
+      orgType?: string | null;
+      contactName?: string;
+      email?: string;
+      learners?: string | null;
+      message?: string | null;
+      status?: string;
       createdAt?: Date;
     }>;
   } catch {
@@ -143,7 +168,7 @@ export default async function AdminPage() {
     );
   }
 
-  const [userCount, subCount, childrenCount, lessonCount, userList, subList, sessionList] = await Promise.all([
+  const [userCount, subCount, childrenCount, lessonCount, userList, subList, sessionList, enquiryList] = await Promise.all([
     countRows("users"),
     countRows("subscriptions"),
     supabaseCount("children"),
@@ -151,6 +176,7 @@ export default async function AdminPage() {
     listUsers(),
     listSubs(),
     listSessions(),
+    listEnquiries(),
   ]);
 
   // Most recent sign-in per account, for the monitoring list below.
@@ -180,6 +206,7 @@ export default async function AdminPage() {
     { label: "All accounts", value: userCount ?? "-" },
     { label: "Children", value: childrenCount ?? "-" },
     { label: "Lessons created", value: lessonCount ?? "-" },
+    { label: "School enquiries", value: enquiryList.length },
   ];
 
   return (
@@ -270,6 +297,44 @@ export default async function AdminPage() {
               </ul>
             )}
           </div>
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <h2 className="text-sm font-bold text-gray-900">School &amp; organisation enquiries</h2>
+          <p className="mt-1 text-xs text-gray-500">
+            Submitted through the Institutions page. Reply to the email to reach the sender directly.
+          </p>
+          {enquiryList.length === 0 ? (
+            <p className="mt-2 text-xs text-gray-500">No enquiries yet.</p>
+          ) : (
+            <ul className="mt-3 divide-y divide-gray-100">
+              {enquiryList.map((q, i) => {
+                const when = q.createdAt
+                  ? new Date(q.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+                  : null;
+                return (
+                  <li key={i} className="py-3 text-xs">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="min-w-0">
+                        <span className="block truncate font-medium text-gray-800">{q.organisation ?? "(no organisation)"}</span>
+                        <span className="block truncate text-gray-400">
+                          {[q.orgType, q.contactName, q.email, q.learners ? `${q.learners} learners` : null, when]
+                            .filter(Boolean)
+                            .join(" · ")}
+                        </span>
+                      </span>
+                      <span className="shrink-0 rounded-full bg-primary-50 px-2 py-0.5 font-medium text-primary">
+                        {q.status ?? "new"}
+                      </span>
+                    </div>
+                    {q.message && (
+                      <p className="mt-1 line-clamp-2 text-gray-500">{q.message}</p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
 
         <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">

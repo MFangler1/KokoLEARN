@@ -73,10 +73,27 @@ export const seenQuestions = sqliteTable(
   (t) => [primaryKey({ columns: [t.userId, t.childId, t.subject, t.questionKey] })]
 );
 
+// ── Organisation / school enquiries ──
+export const organisationEnquiries = sqliteTable("organisation_enquiries", {
+  id: text("id").primaryKey(),
+  organisation: text("organisation").notNull(),
+  orgType: text("org_type"),
+  contactName: text("contact_name").notNull(),
+  role: text("role"),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  learners: text("learners"),
+  message: text("message"),
+  status: text("status").notNull().default("new"),
+  ipAddress: text("ip_address"),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+});
+
 // Combine all schemas for exports
 export const schema = {
   reportAddons,
   seenQuestions,
+  organisationEnquiries,
   ...authSchema,
   subscriptions,
   achievements,

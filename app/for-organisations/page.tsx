@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Building2, Heart, School, Users, Shield, BarChart3, Globe, CheckCircle, Sparkles } from "lucide-react";
 import BackButton from "../components/BackButton";
 import HomeButton from "../components/HomeButton";
+import OrganisationEnquiryForm from "@/components/OrganisationEnquiryForm";
 
 export const metadata = {
   title: "Institutions — KokoLearn.org",
@@ -202,7 +203,7 @@ export default function OrganisationsPage() {
                   ))}
                 </ul>
                 <Link
-                  href={plan.cta === "Contact Us" ? "mailto:Support@AiConsultancy.org.uk?subject=KokoLearn%20Enterprise%20Enquiry" : "/sign-up"}
+                  href={plan.cta === "Contact Us" ? "#enquire" : "/sign-up"}
                   className={`mt-8 block rounded-xl px-6 py-3 text-center font-semibold transition-all ${plan.popular || plan.cta === "Start FREE Trial" ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/25 hover:shadow-xl" : "border-2 border-primary text-primary hover:bg-primary-50"}`}
                 >
                   {plan.cta}
@@ -242,6 +243,38 @@ export default function OrganisationsPage() {
         </div>
       </section>
 
+      {/* ── ENQUIRY ── */}
+      <section id="enquire" className="bg-white py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <span className="text-sm font-semibold uppercase tracking-wider text-primary">Personal setup</span>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Talk to us about your setting
+              </h2>
+              <p className="mt-4 text-lg text-gray-600">
+                Schools, trusts, councils and care organisations get a personal route in — we&apos;ll map
+                KokoLearn to the pupils you have in mind before you commit to anything.
+              </p>
+              <ul className="mt-6 space-y-3 text-sm text-gray-700">
+                <li className="flex gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" /> A short walkthrough call, arranged around your timetable</li>
+                <li className="flex gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" /> A pilot group set up for you, so staff can see it working before term starts</li>
+                <li className="flex gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" /> Quote and purchase order paperwork — we&apos;re used to how schools buy</li>
+                <li className="flex gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" /> Named contact throughout, not a ticket queue</li>
+              </ul>
+              <p className="mt-6 text-sm text-gray-500">
+                Prefer to email? Write to{" "}
+                <a href="mailto:support@kokolearn.org?subject=KokoLearn%20Organisation%20Enquiry" className="text-primary hover:underline">
+                  support@kokolearn.org
+                </a>
+                .
+              </p>
+            </div>
+            <OrganisationEnquiryForm />
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="relative overflow-hidden bg-gradient-to-r from-primary to-secondary py-16 lg:py-20">
         <div className="absolute inset-0 pointer-events-none">
@@ -255,7 +288,7 @@ export default function OrganisationsPage() {
             <Link href="/sign-up" className="group inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-semibold text-primary shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all hover:-translate-y-0.5">
               Start FREE 24 Hour Trial <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link href="mailto:Support@AiConsultancy.org.uk?subject=KokoLearn%20Organisation%20Enquiry" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-8 py-4 font-semibold text-white hover:bg-white/10 transition-all">
+            <Link href="#enquire" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-8 py-4 font-semibold text-white hover:bg-white/10 transition-all">
               Talk to Our Team
             </Link>
           </div>
