@@ -1,7 +1,7 @@
 // ── Email Sender ──
-// 1. Tries Cloudflare's send_email binding (production)
-// 2. Falls back to the email relay (EMAIL_RELAY_URL secret)
-// 3. Falls back to console.log so nothing fails silently
+// Sends via Cloudflare's send_email binding — the only send path since
+// 13-09-2026, when the Gmail relay fallback was retired. Failures are logged
+// loudly instead of silently emailing from a personal address.
 
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
@@ -80,34 +80,9 @@ export async function sendEmail(payload: EmailPayload): Promise<boolean> {
     }
   }
 
-  // 2. Relay
-  const relay =
-    (env?.EMAIL_RELAY_URL as string | undefined) ||
-    process.env.EMAIL_RELAY_URL ||
-    "http://localhost:53820";
-  try {
-    const res = await fetch(relay, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        to: payload.to,
-        subject: payload.subject,
-        html: payload.html,
-        text,
-        from,
-      }),
-      signal: AbortSignal.timeout(8000),
-    });
-    if (res.ok) {
-      console.log(`[EMAIL] Sent via relay to ${payload.to}: ${payload.subject}`);
-      return true;
-    }
-    console.warn(`[EMAIL] Relay returned ${res.status} for ${payload.to}`);
-  } catch (err) {
-    console.warn(
-      `[EMAIL] Relay unreachable (${err instanceof Error ? err.message : err}) — email logged only`
-    );
-  }
+  // No relay fallback: the Gmail relay was retired 13-09-2026 so nothing can
+  // ever go out from a personal address again. A binding failure is loud here
+  // and visible in the worker logs.
 
   console.log(`[EMAIL] NOT SENT to ${payload.to}: ${payload.subject}`);
   return false;

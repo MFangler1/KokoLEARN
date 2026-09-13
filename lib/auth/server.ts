@@ -28,20 +28,8 @@ async function sendPasswordResetEmail(env: any, email: string, url: string) {
       console.log("[AUTH] Password reset email sent via Cloudflare to", email);
       return;
     } catch (e) {
-      console.error("[AUTH] Cloudflare email failed, trying relay:", e);
+      console.error("[AUTH] Cloudflare email failed for", email, e);
     }
-  }
-
-  // Fallback: try the local relay
-  try {
-    await fetch("https://email-relay.kokolearn.org", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: email, subject: "Reset your KokoLearn.org password", html, text: htmlToText(html) }),
-      signal: AbortSignal.timeout(10000),
-    });
-  } catch (e) {
-    console.error("[AUTH] Relay email also failed:", e);
   }
 }
 
