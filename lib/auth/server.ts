@@ -1,7 +1,7 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { betterAuth } from "better-auth";
 import { captcha } from "better-auth/plugins";
-import { sendEmail } from "@/lib/email/send";
+import { sendEmail, htmlToText } from "@/lib/email/send";
 import { verifyEmailTemplate, passwordResetEmail } from "@/lib/email/templates";
 import { withCloudflare } from "better-auth-cloudflare";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
@@ -20,9 +20,10 @@ async function sendPasswordResetEmail(env: any, email: string, url: string) {
     try {
       await env.SEND_EMAIL.send({
         from: { name: "KokoLearn.org", email: "noreply@kokolearn.org" },
-        to: [{ email }],
+        to: email,
         subject: "Reset your KokoLearn.org password",
         html,
+        text: htmlToText(html),
       });
       console.log("[AUTH] Password reset email sent via Cloudflare to", email);
       return;
@@ -36,7 +37,7 @@ async function sendPasswordResetEmail(env: any, email: string, url: string) {
     await fetch("https://email-relay.kokolearn.org", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: email, subject: "Reset your KokoLearn.org password", html }),
+      body: JSON.stringify({ to: email, subject: "Reset your KokoLearn.org password", html, text: htmlToText(html) }),
       signal: AbortSignal.timeout(10000),
     });
   } catch (e) {
