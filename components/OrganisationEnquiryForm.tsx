@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import TurnstileWidget from "@/components/TurnstileWidget";
 import { Loader2, Send, CheckCircle } from "lucide-react";
 
 const ORG_TYPES = [
@@ -32,6 +33,7 @@ export default function OrganisationEnquiryForm() {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const update = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -41,11 +43,15 @@ export default function OrganisationEnquiryForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    if (!captchaToken) {
+      setError("Please complete the quick verification just above the button.");
+      return;
+    }
     setStatus("sending");
     try {
       const res = await fetch("/api/organisations/enquiry", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-captcha-response": captchaToken },
         body: JSON.stringify(form),
       });
       const data = await res.json().catch(() => ({}));
@@ -191,6 +197,10 @@ export default function OrganisationEnquiryForm() {
           value={form.website}
           onChange={(e) => update("website", e.target.value)}
         />
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <TurnstileWidget onToken={setCaptchaToken} />
       </div>
 
       {error && <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}

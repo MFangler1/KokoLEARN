@@ -6,6 +6,8 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { getDb } from "@/lib/db";
+import { verifyTurnstile } from "@/lib/security/turnstile";
+import { rateLimit } from "@/lib/security/rate-limit";
 import { organisationEnquiries } from "@/lib/db/schema";
 import { sendEmail } from "@/lib/email/send";
 import { organisationEnquiryConfirmationEmail } from "@/lib/email/templates";
@@ -64,12 +66,41 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Please enter a valid email address." }, { status: 400 });
     }
 
+    // ── Abuse controls ──
+    // This endpoint sends two emails, so it must never be usable by a bot or a
+    // spammer. Order: cheap checks first, then rate limit, then human check.
     let ip = "";
     try {
       const h = await headers();
       ip = h.get("cf-connecting-ip") ?? h.get("x-forwarded-for") ?? "";
     } catch {
       // headers unavailable
+    }
+
+    const limit = await rateLimit("enquiry", ip || "unknown", 3, 3600);
+    if (!limit.ok) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "We've already received a few enquiries from this connection. Please email support@kokolearn.org and we'll pick it up from there.",
+        },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfter) } }
+      );
+    }
+
+    const token =
+      req.headers.get("x-captcha-response") ??
+      (typeof body.captchaToken === "string" ? body.captchaToken : "");
+    const captcha = await verifyTurnstile(token, ip);
+    if (!captcha.ok) {
+      if (captcha.unconfigured) {
+        console.error("[ENQUIRY] Turnstile secret key missing — refusing to send unverified mail");
+      }
+      return NextResponse.json(
+        { ok: false, error: "Please complete the quick verification just above the button and try again." },
+        { status: 400 }
+      );
     }
 
     const id = crypto.randomUUID();

@@ -3,6 +3,8 @@
 // If ElevenLabs fails we say so honestly; there is no silent fallback.
 
 import { NextResponse } from "next/server";
+import { initAuth } from "@/lib/auth/server";
+import { rateLimit } from "@/lib/security/rate-limit";
 
 // Professor Koko voice - "Drew" (British male, warm and encouraging)
 const ELEVENLABS_VOICE_ID = "pNInz6obpgDQGcFmaJgB";
@@ -19,8 +21,15 @@ function spokenText(input: string): string {
     .substring(0, 2500);
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   // Capability / usage probe for the dashboard + admin. Never returns the key.
+  // Signed-in only: it reveals account usage and costs a provider call.
+  const auth = await initAuth();
+  const session = await auth.api.getSession({ headers: new Headers(req.headers) });
+  if (!session?.user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
   const key = process.env.ELEVENLABS_API_KEY;
   if (!key) {
     return NextResponse.json({ provider: "elevenlabs", configured: false, ok: false });
@@ -66,6 +75,22 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    // Voice generation costs money per character — signed-in users only, and
+    // capped so a single account cannot burn the monthly allowance.
+    const auth = await initAuth();
+    const session = await auth.api.getSession({ headers: new Headers(req.headers) });
+    if (!session?.user) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+
+    const limit = await rateLimit("tts", session.user.id, 60, 3600);
+    if (!limit.ok) {
+      return NextResponse.json(
+        { error: "Too many voice requests — please try again shortly.", code: "rate_limited" },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfter) } }
+      );
+    }
+
     const body = await req.json();
     const cleanText = spokenText(typeof body?.text === "string" ? body.text : "");
 
