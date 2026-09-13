@@ -61,12 +61,8 @@ export default function SignUp() {
         },
       });
 
-      // Send welcome email (fire-and-forget)
-      fetch("/api/email/welcome", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: form.email, name: form.firstName }),
-      }).catch(() => {});
+      // The welcome email and staff notification are sent server-side by the
+      // auth database hook when the user row is created — no client call needed.
 
       // Confirming the email is required before the trial starts, so the account
       // exists but there is no session yet — show the "check your inbox" panel.

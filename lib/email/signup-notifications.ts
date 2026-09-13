@@ -1,9 +1,11 @@
-// ── Welcome Email API ──
-// Sends the welcome email to the new member, and a heads-up notification to
-// Support@kokolearn.org so staff can spot suspicious sign-ups early.
+// ── Sign-up notifications ──
+// Sends the welcome email to the new member and a heads-up to support@
+// so staff can spot suspicious sign-ups early.
+//
+// This deliberately lives on the server and is called from the auth
+// database hook when a user row is created — there is NO public HTTP
+// endpoint for it, so it cannot be used by anyone else to send mail.
 
-import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { sendEmail } from "@/lib/email/send";
 import { welcomeEmail } from "@/lib/email/templates";
 
@@ -15,31 +17,33 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-export async function POST(req: Request) {
+export interface SignupNotificationParams {
+  email: string;
+  name?: string;
+  ip?: string;
+  country?: string;
+  city?: string;
+}
+
+export async function sendSignupNotifications({
+  email,
+  name,
+  ip,
+  country,
+  city,
+}: SignupNotificationParams): Promise<void> {
+  if (!email) return;
+
+  // 1. Welcome email to the new member.
   try {
-    const body = await req.json();
-    const { email, name } = body;
-
-    if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
-    }
-
     const emailContent = welcomeEmail({ name: name || "there" });
-    const sent = await sendEmail({ to: email, ...emailContent });
+    await sendEmail({ to: email, ...emailContent });
+  } catch (err) {
+    console.error("[SIGNUP] Welcome email failed:", err);
+  }
 
-    // Staff notification — fire and forget, never blocks the sign-up.
-    let ip = "unknown";
-    let country = "unknown";
-    let city = "";
-    try {
-      const h = await headers();
-      ip = h.get("cf-connecting-ip") ?? h.get("x-forwarded-for") ?? "unknown";
-      country = h.get("cf-ipcountry") ?? "unknown";
-      city = h.get("cf-ipcity") ?? "";
-    } catch {
-      // headers unavailable — keep the placeholders
-    }
-
+  // 2. Staff notification — never allowed to affect the sign-up itself.
+  try {
     const when = new Date().toLocaleString("en-GB", { timeZone: "Europe/London" });
     const where = [city, country].filter(Boolean).join(", ") || "unknown";
     const notifyHtml = `
@@ -50,7 +54,7 @@ export async function POST(req: Request) {
           <tr><td style="padding:2px 12px 2px 0;color:#64748b">Email</td><td>${escapeHtml(String(email))}</td></tr>
           <tr><td style="padding:2px 12px 2px 0;color:#64748b">When</td><td>${escapeHtml(when)} (UK)</td></tr>
           <tr><td style="padding:2px 12px 2px 0;color:#64748b">Location</td><td>${escapeHtml(where)}</td></tr>
-          <tr><td style="padding:2px 12px 2px 0;color:#64748b">IP</td><td>${escapeHtml(String(ip))}</td></tr>
+          <tr><td style="padding:2px 12px 2px 0;color:#64748b">IP</td><td>${escapeHtml(String(ip || "unknown"))}</td></tr>
         </table>
         <p style="margin:16px 0 0;color:#64748b;font-size:12px">
           Review the full list in the admin panel: https://kokolearn.org/admin
@@ -63,10 +67,7 @@ export async function POST(req: Request) {
       html: notifyHtml,
       replyTo: { name: "Professor KokoLearn", email: "support@kokolearn.org" },
     });
-
-    return NextResponse.json({ sent });
   } catch (err) {
-    console.error("Welcome email error:", err);
-    return NextResponse.json({ sent: false });
+    console.error("[SIGNUP] Staff notification failed:", err);
   }
 }

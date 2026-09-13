@@ -3,6 +3,7 @@ import { betterAuth } from "better-auth";
 import { captcha } from "better-auth/plugins";
 import { sendEmail, htmlToText } from "@/lib/email/send";
 import { verifyEmailTemplate, passwordResetEmail } from "@/lib/email/templates";
+import { sendSignupNotifications } from "@/lib/email/signup-notifications";
 import { withCloudflare } from "better-auth-cloudflare";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { getDb } from "@/lib/db";
@@ -132,6 +133,41 @@ async function authBuilder() {
       sendVerificationEmail: async ({ user, url }) => {
         const content = verifyEmailTemplate({ name: user.name ?? undefined, url });
         await sendEmail({ to: user.email, ...content });
+      },
+    },
+    // Welcome email + staff heads-up, sent server-side when the user row is
+    // created. This replaces the old public /api/email/welcome endpoint, which
+    // anyone could call to send mail from this domain.
+    databaseHooks: {
+      user: {
+        create: {
+          after: async (user, ctx) => {
+            try {
+              const anyCtx = ctx as unknown as {
+                headers?: Headers;
+                request?: { headers?: Headers };
+                context?: { request?: { headers?: Headers } };
+              };
+              const hdrs =
+                anyCtx?.headers ??
+                anyCtx?.request?.headers ??
+                anyCtx?.context?.request?.headers;
+              const get = (k: string) =>
+                hdrs && typeof hdrs.get === "function" ? hdrs.get(k) ?? undefined : undefined;
+              const cf = (cfCtx.cf ?? {}) as { country?: string; city?: string };
+              await sendSignupNotifications({
+                email: user.email,
+                name: user.name ?? undefined,
+                ip: get("cf-connecting-ip") ?? get("x-forwarded-for"),
+                country: get("cf-ipcountry") ?? cf.country,
+                city: get("cf-ipcity") ?? cf.city,
+              });
+            } catch (err) {
+              // Never block or fail a sign-up because of a notification.
+              console.error("[AUTH] sign-up notification failed:", err);
+            }
+          },
+        },
       },
     },
     // Bot protection on account creation and sign-in. Password reset is left
