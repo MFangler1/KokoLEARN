@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -121,6 +121,17 @@ export default function ReportPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  // Professional Report add-on (£3/month per child)
+  const [needsAddon, setNeedsAddon] = useState(false);
+  const [buyingReport, setBuyingReport] = useState(false);
+  const [reportActivated, setReportActivated] = useState(false);
+
+  // Confirmation when Stripe sends us back after a successful add-on purchase.
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.search.includes("report=active")) {
+      setReportActivated(true);
+    }
+  }, []);
   const reportRef = useRef<HTMLDivElement>(null);
 
   const child = activeChild;
@@ -142,6 +153,10 @@ export default function ReportPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ child, filename: customFilename }),
       });
+      if (res.status === 403) {
+        setNeedsAddon(true);
+        return;
+      }
       if (!res.ok) throw new Error("Generation failed");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
@@ -170,6 +185,10 @@ export default function ReportPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ child, filename: customFilename }),
       });
+      if (res.status === 403) {
+        setNeedsAddon(true);
+        return;
+      }
       if (!res.ok) throw new Error("Generation failed");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
@@ -185,6 +204,28 @@ export default function ReportPage() {
     } finally {
       setIsGenerating(false);
       setExportFormat(null);
+    }
+  };
+
+  // ── Buy the Professional Report add-on (£3/month, per child) ──
+  const handleBuyReport = async () => {
+    setBuyingReport(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ addon: "professional_report", childId: child.id }),
+      });
+      const data = await res.json();
+      if (data?.url) {
+        window.location.href = data.url;
+        return;
+      }
+      alert(data?.error || "Could not start checkout. Please try again.");
+    } catch {
+      alert("Could not start checkout. Please try again.");
+    } finally {
+      setBuyingReport(false);
     }
   };
 
@@ -266,6 +307,46 @@ export default function ReportPage() {
                 className="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-900 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
               />
               <span className="text-sm text-gray-400 font-medium">.pdf / .docx</span>
+            </div>
+          </div>
+
+          {/* Professional Report add-on (£3/month per child) */}
+          {reportActivated && (
+            <div className="mb-6 rounded-2xl border-2 border-green-200 bg-green-50/60 p-4 text-sm text-green-800">
+              Professional Report is now active for {child.name}. You can download the PDF and Word versions below.
+            </div>
+          )}
+          <div
+            className={`mb-6 rounded-2xl border-2 p-6 ${
+              needsAddon ? "border-primary bg-primary-50/60" : "border-gray-200 bg-white"
+            }`}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-50">
+                  <FileText className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900">Professional Report — £3/month</p>
+                  <p className="text-sm text-gray-500">
+                    {needsAddon
+                      ? `Add the Professional Report for ${child.name} to download the full PDF and Word versions.`
+                      : `Unlock downloadable PDF and Word reports for ${child.name}. Cancel any time.`}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={handleBuyReport}
+                disabled={buyingReport}
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
+              >
+                {buyingReport ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4" />
+                )}
+                Add for {child.name} — £3/month
+              </button>
             </div>
           </div>
 

@@ -346,15 +346,16 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
           {trialLimit ? (
             <>
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                That&apos;s your free trial complete! 🎉
+                You&apos;ve finished your free lessons 🎉
               </h1>
               <p className="text-gray-500 mb-2">
                 {trialLimit.lessonLimit
-                  ? `You've used all ${trialLimit.lessonLimit} of your free lessons.`
-                  : "You've used all of your free lessons."}
+                  ? `That's all ${trialLimit.lessonLimit} free lessons — nicely done.`
+                  : "That's all your free lessons — nicely done."}
               </p>
               <p className="text-gray-500 mb-6">
-                Subscribe to Premium for unlimited personalised lessons, full progress reports, and the AI tutor chat.
+                Everything you&apos;ve learned is saved, so nothing is lost. Carry on with Premium for unlimited
+                personalised lessons, full progress reports, and the AI tutor chat.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <button
@@ -363,6 +364,12 @@ export default function LessonPage({ params }: { params: { lessonId: string } })
                 >
                   Subscribe to Premium
                 </button>
+                <Link
+                  href="/dashboard/reports"
+                  className="rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-600 hover:border-primary/30 hover:text-primary transition-all"
+                >
+                  See progress report
+                </Link>
                 <Link
                   href="/dashboard"
                   className="rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-600 hover:border-primary/30 hover:text-primary transition-all"
