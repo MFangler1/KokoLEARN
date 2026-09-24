@@ -227,10 +227,17 @@ export default function DemoPage() {
                 Start Learning Free →
               </button>
 
-              <div className="mt-6 rounded-xl bg-amber-50 border border-amber-200 p-4">
-                <p className="text-xs text-amber-800 font-medium">🔑 Demo account:</p>
-                <p className="text-sm text-amber-700 mt-1">Email: <strong>mark.fenty@gmail.com</strong><br />Password: <strong>KokoDemo24!</strong></p>
-                <Link href="/sign-in" className="mt-2 inline-block text-xs font-semibold text-primary underline">Try signing in now →</Link>
+              <div className="mt-6 rounded-xl bg-orange-50 border border-orange-200 p-4 text-center">
+                <p className="text-sm text-orange-800 font-semibold">Ready to try it properly?</p>
+                <p className="text-xs text-orange-700 mt-1">
+                  Create your own free 24-hour trial — no credit card, no demo login needed.
+                </p>
+                <Link
+                  href="/sign-up"
+                  className="mt-3 inline-block rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-xs font-semibold text-white shadow-sm"
+                >
+                  Start free trial →
+                </Link>
               </div>
             </div>
 

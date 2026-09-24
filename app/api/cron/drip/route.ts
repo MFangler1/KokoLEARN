@@ -23,6 +23,7 @@ import {
 } from "@/lib/email/templates";
 import { eq } from "drizzle-orm";
 import { signEmail } from "@/lib/email/token";
+import { demoEmails } from "@/lib/entitlements";
 
 const STAGES = [1, 3, 7] as const;
 const DAY_MS = 86400000;
@@ -38,6 +39,8 @@ function staffEmails(): string[] {
     ...new Set([
       ...BUILT_IN_ADMINS,
       ...fromEnv,
+      // Client demo logins are not real members - never send them lifecycle mail.
+      ...demoEmails(),
       "mark.fenty@gmail.com",
       "test-payment@kokolearn.org",
     ]),

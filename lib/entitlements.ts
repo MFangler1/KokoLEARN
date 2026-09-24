@@ -7,6 +7,10 @@ import { subscriptions, reportAddons } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
 
 const BUILT_IN_ADMINS = ["mark.fenty+admin@gmail.com"];
+// Client-facing demo logins: every feature is unlocked, but they never reach
+// the admin screens (see app/admin/page.tsx, which only ever reads the admin
+// list). Kept separate from ADMIN_EMAILS so a demo login can be handed out.
+const BUILT_IN_DEMOS = ["demo@kokolearn.org"];
 
 export function adminEmails(): string[] {
   const fromEnv = (process.env.ADMIN_EMAILS ?? "")
@@ -17,9 +21,31 @@ export function adminEmails(): string[] {
   return [...new Set([...BUILT_IN_ADMINS.map((e) => e.trim().toLowerCase()), ...fromEnv])];
 }
 
+export function demoEmails(): string[] {
+  const fromEnv = (process.env.DEMO_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return [...new Set([...BUILT_IN_DEMOS.map((e) => e.trim().toLowerCase()), ...fromEnv])];
+}
+
 export function isAdminEmail(email?: string | null): boolean {
   if (!email) return false;
   return adminEmails().includes(email.toLowerCase());
+}
+
+export function isDemoEmail(email?: string | null): boolean {
+  if (!email) return false;
+  return demoEmails().includes(email.toLowerCase());
+}
+
+/**
+ * Admin OR client demo: everything unlocked (unlimited lessons, reports, tutor
+ * chat), but only admins get the admin area. Use this for feature gating; use
+ * isAdminEmail for anything that shows other people's data.
+ */
+export function hasFullFeatureAccess(email?: string | null): boolean {
+  return isAdminEmail(email) || isDemoEmail(email);
 }
 
 /** Active paid subscription (any plan other than the free trial). */
@@ -60,7 +86,7 @@ export async function hasReportAddon(userId: string, childId: string): Promise<b
 
 /** Premium OR admin. Used for tutor chat and similar paid features. */
 export async function canUsePremiumFeatures(userId: string, email?: string | null): Promise<boolean> {
-  if (isAdminEmail(email)) return true;
+  if (hasFullFeatureAccess(email)) return true;
   return hasPremium(userId);
 }
 
@@ -69,8 +95,9 @@ export async function canGenerateReport(
   userId: string,
   email: string | null | undefined,
   childId: string | null | undefined
-): Promise<{ allowed: boolean; reason: "admin" | "premium" | "addon" | "none" }> {
+): Promise<{ allowed: boolean; reason: "admin" | "demo" | "premium" | "addon" | "none" }> {
   if (isAdminEmail(email)) return { allowed: true, reason: "admin" };
+  if (isDemoEmail(email)) return { allowed: true, reason: "demo" };
   if (await hasPremium(userId)) return { allowed: true, reason: "premium" };
   if (childId && (await hasReportAddon(userId, childId))) return { allowed: true, reason: "addon" };
   return { allowed: false, reason: "none" };

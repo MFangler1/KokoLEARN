@@ -8,7 +8,7 @@ import { getNextObjective, getKeyStage, type Subject } from "@/lib/curriculum/da
 import { initAuth } from "@/lib/auth/server";
 import { getTrialUsage } from "@/lib/trial";
 import { recentSeenQuestions, recordSeenQuestions, normaliseQuestion, isNearDuplicate } from "@/lib/questionMemory";
-import { isAdminEmail } from "@/lib/entitlements";
+import { hasFullFeatureAccess } from "@/lib/entitlements";
 import { attachImagesToQuestions, pickPictureQuestions } from "@/lib/imageLibrary";
 
 function validateAndShuffleLesson(lesson: GeneratedLesson, expectedQuestions: number): GeneratedLesson | null {
@@ -87,7 +87,7 @@ export async function POST(req: Request) {
 
     // ── Free trial cap (account-wide, checked before any AI spend) ──
     // Staff / demo accounts are never capped.
-    const trialUsage = isAdminEmail(session.user.email)
+    const trialUsage = hasFullFeatureAccess(session.user.email)
       ? { limitReached: false, lessonsUsed: 0, lessonLimit: null as number | null }
       : await getTrialUsage(userId);
     if (trialUsage.limitReached) {

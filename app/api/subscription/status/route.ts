@@ -7,6 +7,7 @@ import { subscriptions } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { initAuth } from "@/lib/auth/server";
 import { getTrialUsage } from "@/lib/trial";
+import { hasFullFeatureAccess } from "@/lib/entitlements";
 
 export async function GET(req: Request) {
   try {
@@ -38,7 +39,16 @@ export async function GET(req: Request) {
       }
     }
 
-    const trialUsage = await getTrialUsage(session.user.id);
+    // Staff and client demo logins are never capped by the free-trial limit.
+    const trialUsage = hasFullFeatureAccess(session.user.email)
+      ? {
+          isPremium: true,
+          lessonsUsed: 0,
+          lessonLimit: null as number | null,
+          lessonsRemaining: null as number | null,
+          limitReached: false,
+        }
+      : await getTrialUsage(session.user.id);
 
     return NextResponse.json({
       extendedQuestions,
