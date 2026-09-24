@@ -131,7 +131,7 @@ function SignInContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: forgotEmail,
-          redirectTo: `${window.location.origin}/sign-in`,
+          redirectTo: `${window.location.origin}/reset-password`,
         }),
       });
 
