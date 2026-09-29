@@ -71,34 +71,34 @@ export default function Home() {
           <Link href="/" className="flex items-center gap-2">
             <Image src="/images/kokolearn-full-logo-lg.webp" alt="KokoLearn.org" width={144} height={144} className="drop-shadow-md" />
           </Link>
-          <nav className="hidden items-center gap-8 sm:flex">
-            <Link href="#how-it-works" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">How It Works</Link>
-            <Link href="#features" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Features</Link>
-            <Link href="/what-parents-see" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">For Parents</Link>
-            <Link href="#pricing" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Pricing</Link>
-            <Link href="/curriculum" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Curriculum</Link>
-            <Link href="/blog" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Blog</Link>
-            <Link href="/for-organisations" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Institutions</Link>
-            <Link href="/dashboard" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">User Dashboard</Link>
-            <Link href="/sign-in" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Sign In</Link>
+          <nav className="hidden items-center gap-4 lg:flex">
+            <Link href="#how-it-works" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">How It Works</Link>
+            <Link href="#features" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Features</Link>
+            <Link href="/what-parents-see" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">For Parents</Link>
+            <Link href="#pricing" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Pricing</Link>
+            <Link href="/curriculum" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Curriculum</Link>
+            <Link href="/blog" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Blog</Link>
+            <Link href="/for-organisations" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Institutions</Link>
+            <Link href="/dashboard" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">User Dashboard</Link>
+            <Link href="/sign-in" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Sign In</Link>
             <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all">FREE TRIAL</Link>
           </nav>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="sm:hidden rounded-lg p-2 text-gray-600 hover:bg-gray-100">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden rounded-lg p-2.5 text-gray-600 hover:bg-gray-100">
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
         {mobileOpen && (
-          <div className="border-t border-primary-100/30 bg-white px-4 pb-6 pt-4 sm:hidden animate-fade-in">
+          <div className="border-t border-primary-100/30 bg-white px-4 pb-6 pt-4 lg:hidden animate-fade-in">
             <nav className="flex flex-col gap-3">
-              <Link href="#how-it-works" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>How It Works</Link>
-              <Link href="#features" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Features</Link>
-              <Link href="/what-parents-see" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>For Parents</Link>
-              <Link href="#pricing" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Pricing</Link>
-              <Link href="/curriculum" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Curriculum</Link>
-              <Link href="/blog" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Blog</Link>
-              <Link href="/for-organisations" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>Institutions</Link>
-              <Link href="/dashboard" className="text-sm font-medium text-gray-600 py-2" onClick={() => setMobileOpen(false)}>User Dashboard</Link>
-              <Link href="/sign-in" className="text-sm font-medium text-gray-600 py-2">Sign In</Link>
+              <Link href="#how-it-works" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>How It Works</Link>
+              <Link href="#features" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>Features</Link>
+              <Link href="/what-parents-see" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>For Parents</Link>
+              <Link href="#pricing" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>Pricing</Link>
+              <Link href="/curriculum" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>Curriculum</Link>
+              <Link href="/blog" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>Blog</Link>
+              <Link href="/for-organisations" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>Institutions</Link>
+              <Link href="/dashboard" className="text-sm font-medium text-gray-600 py-2.5" onClick={() => setMobileOpen(false)}>User Dashboard</Link>
+              <Link href="/sign-in" className="text-sm font-medium text-gray-600 py-2.5">Sign In</Link>
               <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-center text-sm font-semibold text-white">FREE TRIAL</Link>
             </nav>
           </div>
