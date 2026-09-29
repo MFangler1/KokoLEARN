@@ -1,0 +1,10 @@
+# KokoLearn — https://kokolearn.org
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /onboarding
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://kokolearn.org/sitemap.xml

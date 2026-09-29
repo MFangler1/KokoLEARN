@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/what-parents-see" },
   title: "What Parents See | KokoLearn",
   description:
     "See exactly what KokoLearn shows parents: your child's dashboard, progress tracking, lessons, achievements and printable reports.",

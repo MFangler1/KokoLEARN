@@ -15,7 +15,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return { title: "Post Not Found" };
-  return { title: `${post.title} — KokoLearn.org`, description: post.excerpt };
+  return {
+    title: `${post.title} — KokoLearn.org`,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${slug}` },
+  };
 }
 
 // @ts-nocheck

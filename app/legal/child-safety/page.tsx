@@ -4,6 +4,7 @@ import BackButton from "@/app/components/BackButton";
 import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/legal/child-safety" },
   title: "Child Safety Policy — KokoLearn.org",
   description: "KokoLearn.org is committed to providing a safe, secure online learning environment for children.",
 };

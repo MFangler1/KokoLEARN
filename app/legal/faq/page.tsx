@@ -4,6 +4,7 @@ import BackButton from "@/app/components/BackButton";
 import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/legal/faq" },
   title: "FAQ — KokoLearn.org",
   description: "Frequently asked questions about KokoLearn.org personalised learning platform for KS1, KS2 and SEND learners.",
 };

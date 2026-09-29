@@ -7,6 +7,7 @@ import BackButton from "../components/BackButton";
 import HomeButton from "../components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog — KokoLearn.org",
   description: "Tips, guidance, and insights for parents supporting their child's learning journey. Plus the latest from the education industry.",
 };

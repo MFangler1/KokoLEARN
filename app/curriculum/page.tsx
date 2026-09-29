@@ -5,6 +5,7 @@ import BackButton from "@/app/components/BackButton";
 import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/curriculum" },
   title: "UK National Curriculum — KokoLearn.org",
   description: "KokoLearn.org is fully aligned to the UK National Curriculum (KS1-KS2). Personalised learning across all core subjects for ages 5-11.",
 };

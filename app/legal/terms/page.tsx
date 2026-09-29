@@ -4,6 +4,7 @@ import BackButton from "@/app/components/BackButton";
 import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/legal/terms" },
   title: "Terms & Conditions — KokoLearn.org",
   description: "Terms and Conditions for using KokoLearn.org AI-powered tutoring platform.",
 };

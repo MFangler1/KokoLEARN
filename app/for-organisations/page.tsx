@@ -6,6 +6,7 @@ import HomeButton from "../components/HomeButton";
 import OrganisationEnquiryForm from "@/components/OrganisationEnquiryForm";
 
 export const metadata = {
+  alternates: { canonical: "/for-organisations" },
   title: "Institutions — KokoLearn.org",
   description: "Bulk pricing for schools, councils, SEND groups & mental health organisations. Personalised learning aligned to the UK National Curriculum, at scale.",
 };

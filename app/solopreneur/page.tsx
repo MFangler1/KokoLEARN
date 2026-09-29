@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle, Sparkles, TrendingUp, Users, DollarSign, Shield, Zap } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/solopreneur" },
   title: "Become a Solopreneur — KokoLearn.org",
   description: "Turn your network into recurring income. Become a KokoLearn Solopreneur and earn 35% commissions on every subscription you refer.",
 };

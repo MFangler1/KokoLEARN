@@ -4,6 +4,7 @@ import BackButton from "@/app/components/BackButton";
 import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/legal/refund" },
   title: "Refund Policy — KokoLearn.org",
   description: "Refund and cancellation policy for KokoLearn.org AI-powered tutoring platform.",
 };

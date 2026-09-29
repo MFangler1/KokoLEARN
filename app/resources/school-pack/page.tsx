@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
+  alternates: { canonical: "/resources/school-pack" },
   title: "KokoLearn for Schools & Organisations — Information Pack",
   description:
     "A printable information pack for schools, academy trusts, councils and SEND settings: how KokoLearn works, what it costs, and how to set up a pilot.",

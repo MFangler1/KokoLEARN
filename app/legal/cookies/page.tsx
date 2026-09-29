@@ -4,6 +4,7 @@ import BackButton from "@/app/components/BackButton";
 import HomeButton from "@/app/components/HomeButton";
 
 export const metadata = {
+  alternates: { canonical: "/legal/cookies" },
   title: "Cookies Policy — KokoLearn.org",
   description: "How KokoLearn.org uses cookies and similar tracking technologies.",
 };

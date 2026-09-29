@@ -1,0 +1,27 @@
+# KokoLearn
+
+> Personalised, curriculum-aligned learning for UK children aged 5-11, covering KS1, KS2 and SEND learners, with AI voice narration and progress tracking that parents can see.
+
+KokoLearn is a UK home-learning service. Children work through lessons that adapt to them, and parents get visibility of progress.
+
+## Key pages
+
+- [Home](https://kokolearn.org): what KokoLearn is and how it works
+- [Pricing](https://kokolearn.org/pricing): plans, including a 24 hour free trial
+- [Curriculum](https://kokolearn.org/curriculum): how lessons map to the UK national curriculum
+- [For organisations](https://kokolearn.org/for-organisations): schools, tutoring and other organisations
+- [What parents see](https://kokolearn.org/what-parents-see): the parent view of progress
+- [Blog](https://kokolearn.org/blog): articles on home learning
+- [FAQ](https://kokolearn.org/legal/faq)
+
+## Legal
+
+- [Privacy](https://kokolearn.org/legal/privacy)
+- [Terms](https://kokolearn.org/legal/terms)
+- [Cookies](https://kokolearn.org/legal/cookies)
+- [Refund policy](https://kokolearn.org/legal/refund)
+- [Child safety](https://kokolearn.org/legal/child-safety)
+
+## Contact
+
+support@kokolearn.org

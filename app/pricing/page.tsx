@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Check, Sparkles, Users, ArrowRight, Star } from "lucide-react";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/pricing" },
+  title: "Pricing — KokoLearn.org",
+  description:
+    "KokoLearn pricing, including the free 24 hour trial. Personalised, curriculum-aligned lessons for UK children aged 5-11.",
+};
 
 const plans = [
   {
