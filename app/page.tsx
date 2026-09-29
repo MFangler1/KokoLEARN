@@ -113,14 +113,14 @@ export default function Home() {
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div className="animate-slide-up">
               <div className="flex flex-wrap items-center gap-2 mb-4">
-                <Link href="/curriculum" className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5 text-sm font-medium text-primary hover:bg-primary-100 transition-all">
+                <Link href="/curriculum" className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2.5 text-sm font-medium text-primary hover:bg-primary-100 transition-all">
                   <Sparkles className="h-4 w-4" />
                   KS1 & KS2 Curriculum Aligned
                 </Link>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-sm font-medium text-emerald-700">
                   👶 Ages 5–11
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-purple-50 px-4 py-1.5 text-sm font-medium text-purple-700">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-purple-50 px-4 py-2.5 text-sm font-medium text-purple-700">
                   🌈 SEND Friendly
                 </span>
               </div>
@@ -269,7 +269,7 @@ export default function Home() {
             </div>
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-500">Covers KS1 and KS2 (ages 5-11). Future subjects can be added through platform expansion.</p>
-              <Link href="/curriculum" className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-secondary hover:text-primary transition-colors">
+              <Link href="/curriculum" className="mt-2 inline-flex items-center gap-1.5 py-2.5 text-sm font-medium text-secondary hover:text-primary transition-colors">
                 View full curriculum details <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
@@ -647,7 +647,7 @@ export default function Home() {
                 {["How it works", "Features", "Pricing", "Curriculum", "Institutions"].map((l) => {
                     const href = l === "Institutions" ? "/for-organisations" : l === "Curriculum" ? "/curriculum" : `#${l.toLowerCase().replace(/\s+/g, "-")}`;
                     return (
-                      <li key={l}><Link href={href} className="text-gray-500 hover:text-primary transition-colors">{l}</Link></li>
+                      <li key={l}><Link href={href} className="text-gray-500 hover:text-primary transition-colors inline-block py-3">{l}</Link></li>
                     );
                   })}
               </ul>
@@ -655,20 +655,20 @@ export default function Home() {
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-primary">Company</h4>
               <ul className="mt-2 space-y-1.5 text-xs">
-                <li><Link href="/blog" className="text-gray-600 hover:text-primary transition-colors">Blog</Link></li>
-                <li><Link href="/legal/faq" className="text-gray-600 hover:text-primary transition-colors">FAQ</Link></li>
-                <li><a href="mailto:Support@AiConsultancy.org.uk?subject=KokoLearn%20Enquiry" className="text-gray-600 hover:text-primary transition-colors">Contact</a></li>
+                <li><Link href="/blog" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Blog</Link></li>
+                <li><Link href="/legal/faq" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">FAQ</Link></li>
+                <li><a href="mailto:Support@AiConsultancy.org.uk?subject=KokoLearn%20Enquiry" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Contact</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-primary">Legal</h4>
               <ul className="mt-2 space-y-1.5 text-xs">
-                <li><Link href="/legal/privacy" className="text-gray-600 hover:text-primary transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/legal/terms" className="text-gray-600 hover:text-primary transition-colors">Terms &amp; Conditions</Link></li>
-                <li><Link href="/legal/child-safety" className="text-gray-600 hover:text-primary transition-colors">Child Safety Policy</Link></li>
-                <li><Link href="/legal/refund" className="text-gray-600 hover:text-primary transition-colors">Refund Policy</Link></li>
-                <li><Link href="/legal/cookies" className="text-gray-600 hover:text-primary transition-colors">Cookies Policy</Link></li>
-                <li><Link href="/legal/faq" className="text-gray-600 hover:text-primary transition-colors">FAQ</Link></li>
+                <li><Link href="/legal/privacy" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Privacy Policy</Link></li>
+                <li><Link href="/legal/terms" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Terms &amp; Conditions</Link></li>
+                <li><Link href="/legal/child-safety" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Child Safety Policy</Link></li>
+                <li><Link href="/legal/refund" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Refund Policy</Link></li>
+                <li><Link href="/legal/cookies" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">Cookies Policy</Link></li>
+                <li><Link href="/legal/faq" className="text-gray-600 hover:text-primary transition-colors inline-block py-3">FAQ</Link></li>
               </ul>
               <div className="mt-4 pt-3 border-t border-primary-100">
                 <Link href="https://AiConsultancy.org.uk" target="_blank" className="text-xs font-medium text-secondary hover:text-primary transition-colors flex items-center gap-1">
