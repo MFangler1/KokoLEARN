@@ -87,18 +87,18 @@ export default function WhatParentsSeePage() {
             <Image src="/images/kokolearn-logo.png" alt="KokoLearn.org" width={140} height={42} className="object-contain" />
           </Link>
           <nav className="hidden items-center gap-6 lg:flex">
-            <Link href="/#how-it-works" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">How It Works</Link>
-            <Link href="/#features" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Features</Link>
-            <Link href="/pricing" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Pricing</Link>
-            <Link href="/what-parents-see" className="text-sm font-semibold text-primary">For Parents</Link>
-            <Link href="/curriculum" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Curriculum</Link>
-            <Link href="/dashboard" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">User Dashboard</Link>
-            <Link href="/sign-in" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Sign In</Link>
+            <Link href="/#how-it-works" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">How It Works</Link>
+            <Link href="/#features" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Features</Link>
+            <Link href="/pricing" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Pricing</Link>
+            <Link href="/what-parents-see" className="py-2.5 text-sm font-semibold text-primary">For Parents</Link>
+            <Link href="/curriculum" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Curriculum</Link>
+            <Link href="/dashboard" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">User Dashboard</Link>
+            <Link href="/sign-in" className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors">Sign In</Link>
             <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl transition-all">
               FREE TRIAL
             </Link>
           </nav>
-          <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2 text-sm font-semibold text-white lg:hidden">
+          <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2.5 text-sm font-semibold text-white lg:hidden">
             FREE TRIAL
           </Link>
         </div>
@@ -213,7 +213,7 @@ export default function WhatParentsSeePage() {
                 <p className="text-xs text-gray-600">A professional report for your child - download as PDF or Word.</p>
               </div>
             </div>
-            <Link href="/dashboard/reports" className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-primary shadow-sm hover:shadow-md transition-all">
+            <Link href="/dashboard/reports" className="rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm hover:shadow-md transition-all">
               Preview report
             </Link>
           </div>
@@ -348,17 +348,17 @@ export default function WhatParentsSeePage() {
               <p className="mt-2 text-xs text-gray-500">Helping UK families and institutions adopt personalised learning.</p>
             </div>
             <div className="flex flex-wrap gap-6 text-xs text-gray-600">
-              <Link href="/" className="hover:text-primary">Home</Link>
-              <Link href="/pricing" className="hover:text-primary">Pricing</Link>
-              <Link href="/curriculum" className="hover:text-primary">Curriculum</Link>
-              <Link href="/for-organisations" className="hover:text-primary">Institutions</Link>
-              <Link href="/legal/privacy" className="hover:text-primary">Privacy</Link>
-              <Link href="/legal/terms" className="hover:text-primary">Terms</Link>
+              <Link href="/" className="inline-block py-3 hover:text-primary">Home</Link>
+              <Link href="/pricing" className="inline-block py-3 hover:text-primary">Pricing</Link>
+              <Link href="/curriculum" className="inline-block py-3 hover:text-primary">Curriculum</Link>
+              <Link href="/for-organisations" className="inline-block py-3 hover:text-primary">Institutions</Link>
+              <Link href="/legal/privacy" className="inline-block py-3 hover:text-primary">Privacy</Link>
+              <Link href="/legal/terms" className="inline-block py-3 hover:text-primary">Terms</Link>
             </div>
           </div>
           <div className="mt-6 border-t border-primary-100/50 pt-4 text-center text-2xs text-gray-400">
             <span>&copy; {new Date().getFullYear()} KokoLearn.org. A PAD-CIC initiative. Operated by AiConsultancy.org.uk (Grimsby).</span>
-            <Link href="/admin" className="ml-2 text-2xs text-gray-400 underline hover:text-primary transition-colors">Admin</Link>
+            <Link href="/admin" className="ml-2 inline-block py-3 text-2xs text-gray-400 underline hover:text-primary transition-colors">Admin</Link>
           </div>
         </div>
       </footer>

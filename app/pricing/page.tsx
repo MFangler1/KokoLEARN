@@ -74,7 +74,7 @@ export default function PricingPage() {
           <Link href="/" className="flex items-center gap-2">
             <Image src="/images/kokolearn-logo.png" alt="KokoLearn" width={44} height={44} className="drop-shadow-sm" />
           </Link>
-          <Link href="/sign-in" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl transition-all">
+          <Link href="/sign-in" className="rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-xl transition-all">
             Sign In
           </Link>
         </div>
@@ -189,10 +189,10 @@ export default function PricingPage() {
       <footer className="border-t border-gray-100 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
           <p className="text-sm text-gray-500">© 2026 KokoLearn. All rights reserved.</p>
-<div className="mt-4 text-center"><Link href="/admin" className="text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
+<div className="mt-4 text-center"><Link href="/admin" className="inline-block py-3 text-xs text-gray-400 hover:text-primary transition-colors">Admin</Link></div>
           <div className="flex gap-4">
-            <Link href="/legal/privacy" className="text-sm text-gray-500 hover:text-primary">Privacy</Link>
-            <Link href="/legal/terms" className="text-sm text-gray-500 hover:text-primary">Terms</Link>
+            <Link href="/legal/privacy" className="py-2.5 text-sm text-gray-500 hover:text-primary">Privacy</Link>
+            <Link href="/legal/terms" className="py-2.5 text-sm text-gray-500 hover:text-primary">Terms</Link>
           </div>
         </div>
       </footer>
