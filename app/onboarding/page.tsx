@@ -25,9 +25,9 @@ const interests = [
 ];
 
 const learningPaths = [
-  { id: "ks1", title: "KS1 Child (Ages 5-7)", desc: "Early primary — building foundational skills in reading, writing, and maths.", icon: "🌱", color: "from-emerald-400 to-emerald-600" },
-  { id: "ks2", title: "KS2 Child (Ages 7-11)", desc: "Upper primary — deepening knowledge across all curriculum subjects.", icon: "🌳", color: "from-primary to-secondary" },
-  { id: "send", title: "SEND Learner", desc: "Personalised pathways that adapt to individual learning needs, pace and interests.", icon: "🌈", color: "from-purple-400 to-purple-600" },
+  { id: "ks1", title: "KS1 Child (Ages 5-7, Years 1-2)", desc: "Early primary — building foundational skills in reading, writing, and maths.", icon: "🌱", color: "from-emerald-400 to-emerald-600" },
+  { id: "ks2", title: "KS2 Child (Ages 7-11, Years 3-6)", desc: "Upper primary — deepening knowledge across all curriculum subjects.", icon: "🌳", color: "from-primary to-secondary" },
+  { id: "send", title: "All Ages", desc: "For any age 5-11, including SEND learners. Personalised pathways that adapt to individual learning needs, pace and interests.", icon: "🌈", color: "from-purple-400 to-purple-600" },
 ];
 
 export default function Onboarding() {
@@ -95,6 +95,7 @@ export default function Onboarding() {
                   key={path.id}
                   onClick={() => {
                     setLearningPath(path.id);
+                    setChildAge(path.id === "ks1" ? "6" : path.id === "ks2" ? "9" : "8");
                     setStep(1);
                   }}
                   className={`group w-full rounded-2xl border-2 p-6 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${
@@ -118,7 +119,7 @@ export default function Onboarding() {
             </div>
             <div className="mt-8 rounded-xl border border-purple-100 bg-purple-50 p-4">
               <p className="text-sm text-purple-700">
-                <strong>SEND:</strong> KokoLearn adapts to individual learning needs. This is an educational support platform, not a medical or diagnostic service.
+                <strong>All ages:</strong> KokoLearn suits every child aged 5-11 and adapts to individual learning needs, including SEND. This is an educational support platform, not a medical or diagnostic service.
               </p>
             </div>
           </div>

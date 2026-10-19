@@ -158,6 +158,8 @@ The curriculum broadens significantly. Multiplication tables, fractions, and dec
 
 **Key Stage 3 (Ages 11-14, Years 7-9)**
 
+*KokoLearn covers Key Stages 1 and 2 only, ages 5-11. Key Stage 3 is included here for context.*
+
 Secondary school begins. Subjects deepen and specialise. Your child will study maths, English, science, history, geography, a modern foreign language, design & technology, art, music, PE, computing, and citizenship.
 
 *What you can do at home*: Talk about what they're learning. Help them organise their time. Don't worry about knowing the content — showing interest is what matters.
