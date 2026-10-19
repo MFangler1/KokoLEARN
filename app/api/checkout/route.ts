@@ -36,6 +36,7 @@ export async function POST(req: Request) {
       const checkout = await stripe.checkout.sessions.create({
         mode: "subscription",
         payment_method_types: ["card"],
+        branding_settings: { display_name: "AiConsultancy.org.uk (Mark Fenty)" },
         line_items: [{ price: priceId, quantity: 1 }],
         customer_email: session.user.email,
         metadata: {
@@ -60,6 +61,7 @@ export async function POST(req: Request) {
       const checkout = await stripe.checkout.sessions.create({
         mode: "subscription",
         payment_method_types: ["card"],
+        branding_settings: { display_name: "AiConsultancy.org.uk (Mark Fenty)" },
         line_items: [{ price: priceId, quantity: 1 }],
         metadata: {
           user_id: session.user.id,
@@ -90,6 +92,7 @@ export async function POST(req: Request) {
     const stripeSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
+      branding_settings: { display_name: "AiConsultancy.org.uk (Mark Fenty)" },
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: session.user.email,
       metadata: {
