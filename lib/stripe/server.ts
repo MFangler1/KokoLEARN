@@ -22,15 +22,15 @@ export function getStripe(): Stripe {
 }
 
 /** Price IDs for each plan */
-// TEST MODE prices — switch to LIVE prices when Mark approves
+// LIVE prices (switched 19-10-2026)
 export const PRICE_IDS = {
   premium: {
-    monthly: "price_1ThnviBNbAfrXFszkm1edI5j",     // TEST £9.99/mo
-    annual: "price_1ThnviBNbAfrXFszyY4KGH9E",         // TEST £79.99/yr
+    monthly: "price_1TbekLBNbAfrXFsz827b7qeL",     // LIVE £9.99/mo
+    annual: "price_1TbggoBNbAfrXFszDkOe61rL",         // LIVE £79.99/yr
   },
   family: {
-    monthly: "price_1ThnvjBNbAfrXFszfrBtH0yx",        // TEST £19.99/mo
-    annual: "price_1ThnvjBNbAfrXFszvFW391vs",          // TEST £159.99/yr
+    monthly: "price_1TbggpBNbAfrXFszr94y4NCg",        // LIVE £19.99/mo
+    annual: "price_1TbggqBNbAfrXFszD4Z1ZLro",          // LIVE £159.99/yr
   },
 } as const;
 
