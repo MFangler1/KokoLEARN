@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "ai-transforming-home-learning",
     title: "How AI is Transforming Home Learning in 2026",
-    excerpt: "Discover how artificial intelligence is revolutionising the way children learn at home — from personalised lesson plans to real-time feedback and adaptive learning paths.",
+    excerpt: "How AI is changing home learning, from personalised lesson plans to real-time feedback and adaptive learning paths.",
     date: "2026-05-28",
     author: "Mark Fenty",
     authorRole: "Founder, KokoLearn.org",
@@ -55,7 +55,7 @@ AI tutoring isn't a gimmick — it's the most significant advance in home learni
   },
   {
     slug: "5-tips-homework-stress",
-    title: "5 Tips for Helping Your Child with Homework Stress",
+    title: "Helping Your Child with Homework Stress",
     excerpt: "Homework doesn't have to be a battle. Simple, practical strategies to turn stress into success — for both you and your child.",
     date: "2026-05-25",
     author: "Prof. Koko",
@@ -95,7 +95,7 @@ Homework stress usually isn't about the work — it's about pressure, fatigue, a
   },
   {
     slug: "interest-led-learning-works",
-    title: "Why Interest-Led Learning Works: The Science Behind Engagement",
+    title: "Why Interest-Led Learning Works",
     excerpt: "When children learn through their passions, something remarkable happens. Here's the neuroscience behind why interest-led learning is so effective.",
     date: "2026-05-20",
     author: "Mark Fenty",
@@ -131,7 +131,7 @@ You don't need to be a neuroscientist to apply this. Just ask your child: "What 
   },
   {
     slug: "understanding-national-curriculum-at-home",
-    title: "Understanding the National Curriculum at Home: A Parent's Guide",
+    title: "National Curriculum at Home: Parent Guide",
     excerpt: "KS1, KS2, KS3 — what does it all mean? A straightforward guide to the UK National Curriculum and how to support your child through each stage.",
     date: "2026-05-15",
     author: "Prof. Koko",

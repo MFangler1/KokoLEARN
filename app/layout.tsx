@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "KokoLearn — Personalised Learning for UK Children (Ages 5-11)",
   description:
-    "Helping children thrive through personalised learning. Curriculum-aligned lessons for KS1, KS2 and SEND learners that adapt to every child's unique learning journey.",
+    "Helping children thrive through personalised learning. Curriculum-aligned lessons for KS1, KS2 and SEND learners that adapt to every child.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "KokoLearn — Personalised Learning for Ages 5-11",
